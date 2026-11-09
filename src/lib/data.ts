@@ -7,6 +7,7 @@ import unitsRaw from "@/data/units.json";
 import emblemsRaw from "@/data/emblems.json";
 import materialsRaw from "@/data/materials.json";
 import craftingRaw from "@/data/crafting.json";
+import effectsRaw from "@/data/effects.json";
 import type { Edge, MaterialLite, PlannerData, Recipe, UnitLite } from "./types";
 import { RANKUP_MOLD } from "./plan";
 
@@ -36,9 +37,14 @@ const raceImg = (n: number | null | undefined) => {
   const f = [`${n}.gif`, `${n}.png`].find((x) => raceImgs.has(x));
   return f ? `${BASE}/img/races/${f}` : null;
 };
-const unitImg = (id: number, race: number | null | undefined) => {
+const spriteFaces = listDir("sprite-face");
+// Archived portrait if there is one; otherwise the unit's own battle sprite (idle
+// frame); the race icon only as a last resort.
+const unitImg = (id: number, slug: string, race: number | null | undefined) => {
   const f = `face${String(id).padStart(3, "0")}.gif`;
-  return unitImgs.has(f) ? `${BASE}/img/units/${f}` : (raceImg(race) ?? `${BASE}/img/placeholder.svg`);
+  if (unitImgs.has(f)) return `${BASE}/img/units/${f}`;
+  if (spriteFaces.has(`${slug}.png`)) return `${BASE}/img/sprite-face/${slug}.png`;
+  return raceImg(race) ?? `${BASE}/img/placeholder.svg`;
 };
 const categoryIcon: Record<string, string> = {
   Jewels: "jewels.gif",
@@ -92,13 +98,55 @@ export interface CraftRecipe {
   item1: string;
   item2: string;
   result: string;
+  /** Proper effect name(s), from the effect ids (the source chart's text has typos). */
   effect: string;
+  /** What the effect does in game (reverse-engineered by the compendium project). */
+  effectInfo: string;
   success: number;
 }
 
+// ---- effects ----
+// Names as the game shows them on materials; ids from the compendium's effect table.
+const tier = (base: string, first: number, n = 3) =>
+  Object.fromEntries(Array.from({ length: n }, (_, i) => [first + i, `${base} ${i + 1}`]));
+const EFFECT_NAMES: Record<number, string> = {
+  0: "ATK Up", 1: "ATK Down", 2: "DEF Up", 3: "DEF Down", 4: "AGI Up", 5: "AGI Down",
+  6: "DEX Up", 7: "DEX Down", 8: "INT Up", 9: "INT Down", 10: "WIS Up", 11: "WIS Down",
+  12: "Sleep", 13: "Deep Sleep", 14: "Sleep Resistance", 15: "Paralysis", 16: "Severe Paralysis",
+  17: "Paralysis Resistance", 18: "Poison", 19: "Deadly Poison", 20: "Poison Resistance",
+  21: "Silence", 22: "Strong Silence", 23: "Silence Resistance",
+  ...tier("Auto HP Restore", 24), ...tier("HP Absorption", 27, 2), ...tier("Critical", 29),
+  ...tier("Counter", 32), ...tier("Physical Reduction", 35),
+  38: "Magic Reduction", 39: "Magic Reflection", 40: "Proof of Contract", 41: "Warrior's Spirit",
+  42: "Mage's Spirit", 43: "Hero's Spirit", 44: "Self Destruct", 45: "Regenerate", 46: "Multiply",
+  47: "Revive", 48: "Item Recovery", ...tier("Gold Recovery Up", 49),
+};
+const effectInfo = new Map((effectsRaw as { id: number; behavior: string }[]).map((e) => [e.id, e.behavior]));
+
+// Item names the source chart misspells.
+const ITEM_NAME_FIX: Record<string, string> = {
+  "Fairy Cloack": "Fairy Cloak",
+  ForestMace: "Forest Mace",
+  NinjaBlade: "Ninja Blade",
+  "Shinning Mace": "Shining Mace",
+  "Shinning Robe": "Shining Robe",
+  "Goliat Sling": "Goliath Sling",
+  "Black Anis Claw": "Black Annis Claw",
+};
+
 const rawUnits = unitsRaw as unknown as RawUnit[];
-export const rawMaterials = materialsRaw as unknown as RawMaterial[];
-export const crafting = craftingRaw as unknown as CraftRecipe[];
+export const rawMaterials = (materialsRaw as unknown as RawMaterial[]).map((m) => ({
+  ...m,
+  effect: m.effect === "-" ? "" : m.effect, // "-" means none in the source
+}));
+export const crafting: CraftRecipe[] = (
+  craftingRaw as unknown as (Omit<CraftRecipe, "effectInfo"> & { effect_ids: number[] })[]
+).map(({ effect_ids, ...c }) => ({
+  ...c,
+  result: ITEM_NAME_FIX[c.result] ?? c.result,
+  effect: effect_ids.map((id) => EFFECT_NAMES[id] ?? c.effect).join(" + "),
+  effectInfo: effect_ids.map((id) => effectInfo.get(id)).filter(Boolean).join(" · "),
+}));
 
 // ---- materials ----
 const materials: Record<string, MaterialLite> = {};
@@ -165,7 +213,7 @@ const units: UnitLite[] = rawUnits.map((u) => {
     wis: u.wis,
     int: u.int,
     hit: u.hit,
-    img: unitImg(u.id, u.race_icon),
+    img: unitImg(u.id, slugify(u.name), u.race_icon),
     raceImg: raceImg(u.race_icon),
     next: u.advances.map((a) => a.id),
     prev: incoming.map((e) => e.from),

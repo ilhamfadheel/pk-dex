@@ -1,0 +1,262 @@
+[
+  {
+    "id": 0,
+    "name": "atk up",
+    "behavior": "Battle start: wearer ATK +25% (ATK + ATK/4)"
+  },
+  {
+    "id": 1,
+    "name": "atk down",
+    "behavior": "Attack proc: wearer's own ATK -INT(target)/4 (target unaffected)"
+  },
+  {
+    "id": 2,
+    "name": "def up",
+    "behavior": "Battle start: wearer DEF +25% (DEF + DEF/4)"
+  },
+  {
+    "id": 3,
+    "name": "def down",
+    "behavior": "Attack proc: wearer's own DEF -INT(target)/4 (target unaffected)"
+  },
+  {
+    "id": 4,
+    "name": "agi up",
+    "behavior": "Battle start: wearer AGI +25% (AGI + AGI/4)"
+  },
+  {
+    "id": 5,
+    "name": "agi down",
+    "behavior": "Attack proc: wearer's DEF -INT(target)/4 (bug: AGI never changes)"
+  },
+  {
+    "id": 6,
+    "name": "dex up",
+    "behavior": "Battle start: wearer DEX +25% (DEX + DEX/4)"
+  },
+  {
+    "id": 7,
+    "name": "dex down",
+    "behavior": "Attack proc: wearer's DEF -INT(target)/4 (bug: DEX never changes)"
+  },
+  {
+    "id": 8,
+    "name": "int up",
+    "behavior": "Battle start: wearer INT +25% (INT + INT/4)"
+  },
+  {
+    "id": 9,
+    "name": "int down",
+    "behavior": "Attack proc: wearer's DEF -INT(target)/4 (bug: INT never changes)"
+  },
+  {
+    "id": 10,
+    "name": "wis up",
+    "behavior": "Battle start: wearer WIS +25% (WIS + WIS/4)"
+  },
+  {
+    "id": 11,
+    "name": "wis down",
+    "behavior": "Attack proc: wearer's DEF -INT(target)/4 (bug: WIS never changes)"
+  },
+  {
+    "id": 12,
+    "name": "sleep",
+    "behavior": "On a connecting hit: inflicts Sleep (WIS/2 % cure per action); blocked by Sleep Resistance"
+  },
+  {
+    "id": 13,
+    "name": "deep sleep",
+    "behavior": "Always inflicts Sleep, even on a miss (WIS/2 % cure per action); blocked by Sleep Resistance"
+  },
+  {
+    "id": 14,
+    "name": "sleep resistance",
+    "behavior": "Battle start: immune to Sleep"
+  },
+  {
+    "id": 15,
+    "name": "paralysis",
+    "behavior": "On a connecting hit: inflicts Paralysis (INT/2 % cure per action); blocked by Paralysis Resistance"
+  },
+  {
+    "id": 16,
+    "name": "severe paralysis",
+    "behavior": "Always inflicts Paralysis, even on a miss (INT/2 % cure per action); blocked by Paralysis Resistance"
+  },
+  {
+    "id": 17,
+    "name": "paralysis resistance",
+    "behavior": "Battle start: immune to Paralysis"
+  },
+  {
+    "id": 18,
+    "name": "poison",
+    "behavior": "Always inflicts Poison; the 5 HP/action tick appears unreachable in code (wrong timer cell) \u2014 not measured in-game"
+  },
+  {
+    "id": 19,
+    "name": "severe poison",
+    "behavior": "Always inflicts Severe Poison; the 10 HP/action tick appears unreachable in code (wrong timer cell) \u2014 not measured in-game"
+  },
+  {
+    "id": 20,
+    "name": "poison resistance",
+    "behavior": "Battle start: immune to Poison and Deadly Poison"
+  },
+  {
+    "id": 21,
+    "name": "silence",
+    "behavior": "On a connecting hit: inflicts Silence (blocks magic abilities; INT/2 % cure per action)"
+  },
+  {
+    "id": 22,
+    "name": "severe silence",
+    "behavior": "Always inflicts Silence, even on a miss (blocks magic; INT/2 % cure per action)"
+  },
+  {
+    "id": 23,
+    "name": "silence resistance",
+    "behavior": "Battle start: immune to Silence"
+  },
+  {
+    "id": 24,
+    "name": "auto hp restore 1",
+    "behavior": "Every 33 action ticks: heal 2 HP (clamped to max)"
+  },
+  {
+    "id": 25,
+    "name": "auto hp restore 2",
+    "behavior": "Every 33 action ticks: heal 5 HP (clamped to max)"
+  },
+  {
+    "id": 26,
+    "name": "auto hp restore 3",
+    "behavior": "Every 33 action ticks: heal 10 HP (clamped to max; highest tier wins)"
+  },
+  {
+    "id": 27,
+    "name": "hp absorp 1",
+    "behavior": "Attack proc: drain ATK-DEF (min 3) from the target, wielder heals 1/3 of it"
+  },
+  {
+    "id": 28,
+    "name": "hp absorp 2",
+    "behavior": "Attack proc: drain ATK-DEF (min 3) from the target, wielder heals 2/3 of it"
+  },
+  {
+    "id": 29,
+    "name": "critical 1",
+    "behavior": "10% chance on hit: marks the target with the x2 damage flag (not the wielder)"
+  },
+  {
+    "id": 30,
+    "name": "critical 2",
+    "behavior": "20% chance on hit: marks the target with the x2 damage flag (not the wielder)"
+  },
+  {
+    "id": 31,
+    "name": "critical 3",
+    "behavior": "30% chance on hit: marks the target with the x2 damage flag (not the wielder)"
+  },
+  {
+    "id": 32,
+    "name": "counter 1",
+    "behavior": "20% chance to counter a melee hit (attacker within 40px front / 8px back)"
+  },
+  {
+    "id": 33,
+    "name": "counter 2",
+    "behavior": "40% chance to counter a melee hit (attacker within 40px front / 8px back)"
+  },
+  {
+    "id": 34,
+    "name": "counter 3",
+    "behavior": "60% chance to counter a melee hit (attacker within 40px front / 8px back)"
+  },
+  {
+    "id": 35,
+    "name": "phy reduc 1",
+    "behavior": "Physical damage taken x0.8 (-20%); highest tier only"
+  },
+  {
+    "id": 36,
+    "name": "phy reduc 2",
+    "behavior": "Physical damage taken x0.6 (-40%); highest tier only"
+  },
+  {
+    "id": 37,
+    "name": "phy reduc 3",
+    "behavior": "Physical damage taken x0.5 (-50%); highest tier only"
+  },
+  {
+    "id": 38,
+    "name": "magic reduction",
+    "behavior": "Magic damage taken x0.75 (-25%)"
+  },
+  {
+    "id": 39,
+    "name": "magic reflection",
+    "behavior": "Magic damage taken x0.75 (-25%); same handler as 38 (no separate reflect code)"
+  },
+  {
+    "id": 40,
+    "name": "proof of contract",
+    "behavior": "INT +50% (x1.5)"
+  },
+  {
+    "id": 41,
+    "name": "warrior spirit",
+    "behavior": "ATK & DEF +30% (x1.3)"
+  },
+  {
+    "id": 42,
+    "name": "mage spirit",
+    "behavior": "INT & WIS +30% (x1.3)"
+  },
+  {
+    "id": 43,
+    "name": "hero spirit",
+    "behavior": "ATK/DEF/AGI/DEX/WIS/INT +30% (x1.3)"
+  },
+  {
+    "id": 44,
+    "name": "self destruct",
+    "behavior": "On death: 59px blast, damage = HP - target DEF (min 1)"
+  },
+  {
+    "id": 45,
+    "name": "regenerate",
+    "behavior": "10% per action: heal 50% max HP"
+  },
+  {
+    "id": 46,
+    "name": "multiply",
+    "behavior": "10% per action: clone into an empty slot 4/5"
+  },
+  {
+    "id": 47,
+    "name": "revive",
+    "behavior": "On death: revive once at 50% max HP (consumed)"
+  },
+  {
+    "id": 48,
+    "name": "item recovery",
+    "behavior": "Battle end: a surviving carrier gives each fallen ally a 50% chance to keep its equipped item (kept unequipped; otherwise destroyed)"
+  },
+  {
+    "id": 49,
+    "name": "loot recovery up 1",
+    "behavior": "Battle end: battle gold x1.2 (highest tier only)"
+  },
+  {
+    "id": 50,
+    "name": "loot recovery up 2",
+    "behavior": "Battle end: battle gold x1.5 (highest tier only)"
+  },
+  {
+    "id": 51,
+    "name": "loot recovery up 3",
+    "behavior": "Battle end: battle gold x2.0 (highest tier only)"
+  }
+]

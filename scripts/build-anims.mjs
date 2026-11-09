@@ -93,12 +93,21 @@ for (const [fam, names] of Object.entries(FAMILIES)) {
   if (names.length > 1) report.push(`${"".padEnd(14)} (cost ${bestCost.toFixed(2)}, next best ${second.toFixed(2)})`);
 }
 
-// write cropped strips
+// write cropped strips, plus a still (first idle frame, trimmed) used as the unit
+// picture for units with no archived portrait
+const outFace = path.join(root, "public/img/sprite-face");
+fs.mkdirSync(outFace, { recursive: true });
 for (const [slug, a] of Object.entries(anims)) {
   await sharp(path.join(slicedDir, `${a.sheet}.png`))
     .extract({ left: 0, top: 0, width: a.cw * a.n, height: a.ch })
     .png({ palette: true, colours: 128, effort: 10 })
     .toFile(path.join(outImg, `${slug}.png`));
+  const first = (a.anims.idle ?? [0])[0];
+  const frame = await sharp(path.join(slicedDir, `${a.sheet}.png`))
+    .extract({ left: first * a.cw, top: 0, width: a.cw, height: a.ch })
+    .png()
+    .toBuffer();
+  await sharp(frame).trim({ threshold: 0 }).png({ palette: true, colours: 128 }).toFile(path.join(outFace, `${slug}.png`));
 }
 const data = Object.fromEntries(Object.entries(anims).map(([k, a]) => [k, { cw: a.cw, ch: a.ch, n: a.n, anims: a.anims, match: a.match }]));
 fs.writeFileSync(path.join(root, "src/data/anims.json"), JSON.stringify(data));

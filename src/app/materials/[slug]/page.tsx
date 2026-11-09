@@ -100,7 +100,10 @@ export default async function MaterialPage({ params }: PageProps<"/materials/[sl
                       const n = resolveMaterial(x);
                       return <MatChip key={x} name={n ?? x} m={n ? data.materials[n] : undefined} />;
                     })}</div></td>
-                    <td className="td text-muted">{c.effect}</td>
+                    <td className="td">
+                      <div>{c.effect}</div>
+                      {c.effectInfo && <div className="text-xs text-muted">{c.effectInfo}</div>}
+                    </td>
                     <td className="td font-mono">{c.success}</td>
                   </tr>
                 ))}

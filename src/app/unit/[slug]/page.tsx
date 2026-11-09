@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import EvolutionTree from "@/components/EvolutionTree";
 import RankupPlanner from "@/components/RankupPlanner";
 import { MatChip, RecipeOptions, UnitImg } from "@/components/ui";
 import { data, spByUnit, unitById, unitBySlug } from "@/lib/data";
@@ -64,7 +65,6 @@ export default async function UnitPage({ params }: PageProps<"/unit/[slug]">) {
   const inEdges = data.edges.filter((e) => e.to === u.id);
   const outEdges = data.edges.filter((e) => e.from === u.id);
   const fam = family(u);
-  const ranks = [...new Set(fam.map((f) => f.rank))].sort((a, b) => a - b);
   const sp = spByUnit.get(u.id);
   const notInGuide = u.name === "O'Rosam";
 
@@ -141,20 +141,7 @@ export default async function UnitPage({ params }: PageProps<"/unit/[slug]">) {
       {/* Family */}
       <section>
         <h2 className="mb-2 font-semibold">Evolution family</h2>
-        <div className="card flex gap-4 overflow-x-auto p-4">
-          {ranks.map((r) => (
-            <div key={r} className="flex min-w-24 flex-col items-center gap-2">
-              <span className="font-mono text-[10px] text-muted">Rank {r}</span>
-              {fam.filter((f) => f.rank === r).map((f) => (
-                <Link key={f.id} href={`/unit/${f.slug}`}
-                  className={`flex w-24 flex-col items-center gap-1 rounded-lg p-1.5 text-center text-xs ${f.id === u.id ? "bg-accent/15 ring-1 ring-accent" : "hover:bg-panel-2"}`}>
-                  <UnitImg u={f} size={40} />
-                  <span className="leading-tight">{f.name}</span>
-                </Link>
-              ))}
-            </div>
-          ))}
-        </div>
+        <EvolutionTree family={fam} current={u.id} byId={unitById} />
       </section>
 
       {/* Planner */}

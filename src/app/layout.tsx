@@ -26,9 +26,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <header className="sticky top-0 z-20 border-b border-line bg-panel/90 backdrop-blur">
           <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-2.5">
             <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
-              <span className="grid h-7 w-7 place-items-center rounded-md bg-accent text-sm font-bold text-accent-ink">
-                PK
-              </span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/img/logo.png`}
+                alt=""
+                width={28}
+                height={28}
+                className="pixel h-7 w-7 rounded-md"
+              />
               <span className="hidden sm:inline">Pocket Kingdom Dex</span>
             </Link>
             <nav className="flex gap-1 overflow-x-auto text-sm">

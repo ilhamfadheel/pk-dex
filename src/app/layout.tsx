@@ -37,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               />
               <span className="hidden sm:inline">Pocket Kingdom Dex</span>
             </Link>
-            <nav className="flex gap-1 overflow-x-auto text-sm">
+            <nav className="flex gap-1 overflow-x-auto text-sm [scrollbar-width:none]">
               {nav.map((n) => (
                 <Link
                   key={n.href}

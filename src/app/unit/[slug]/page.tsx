@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import anims from "@/data/anims.json";
 import EvolutionTree from "@/components/EvolutionTree";
+import SpritePlayer, { type AnimData } from "@/components/SpritePlayer";
 import RankupPlanner from "@/components/RankupPlanner";
 import { MatChip, RecipeOptions, UnitImg } from "@/components/ui";
 import { data, spByUnit, unitById, unitBySlug } from "@/lib/data";
@@ -67,6 +69,7 @@ export default async function UnitPage({ params }: PageProps<"/unit/[slug]">) {
   const fam = family(u);
   const sp = spByUnit.get(u.id);
   const notInGuide = u.name === "O'Rosam";
+  const anim = (anims as Record<string, AnimData>)[u.slug];
 
   return (
     <article className="space-y-6">
@@ -119,6 +122,33 @@ export default async function UnitPage({ params }: PageProps<"/unit/[slug]">) {
           ))}
         </div>
       </section>
+
+      {/* Battle sprite */}
+      {anim && (
+        <section>
+          <h2 className="mb-2 font-semibold">Battle animations</h2>
+          <div className="card grid gap-4 p-4 sm:grid-cols-[minmax(240px,320px)_1fr] sm:items-center">
+            <SpritePlayer
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/img/anim/${u.slug}.png`}
+              data={anim}
+              name={u.name}
+              skillName={u.ability || undefined}
+            />
+            <div className="space-y-2 text-sm text-muted">
+              <p>Click the sprite to attack, or pick an animation. Idle and Walk loop; the others play once.</p>
+              {anim.match === "guess" && (
+                <p className="rounded-md bg-panel-2 p-2 text-xs">
+                  {u.name}&apos;s line shares one sprite in different colours, and this unit has no portrait to
+                  match against, so its colour may be swapped with another unit in the same line.
+                </p>
+              )}
+              <p className="text-xs">
+                Sprites ripped by CrimsonPenguin (The Spriters Resource). Game art © SEGA.
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Evolution links */}
       {(inEdges.length > 0 || outEdges.length > 0) && (

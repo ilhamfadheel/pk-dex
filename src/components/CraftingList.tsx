@@ -1,6 +1,6 @@
 "use client";
 
-import { useDeferredValue, useMemo, useState } from "react";
+import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import type { MaterialLite } from "@/lib/types";
 import { MatChip } from "./ui";
 
@@ -34,7 +34,26 @@ export default function CraftingList({
   const [ore, setOre] = useState("");
   const [effect, setEffect] = useState("");
   const [sort, setSort] = useState<"mold" | "success" | "name">("mold");
+  const [flash, setFlash] = useState("");
   const dq = useDeferredValue(q);
+
+  // Arriving with #item (e.g. from the navbar search): make sure that row is shown,
+  // scroll to it and highlight it, even if filters were hiding it.
+  useEffect(() => {
+    const show = () => {
+      const id = decodeURIComponent(location.hash.slice(1));
+      if (!id || !rows.some((r) => r.slug === id)) return;
+      setQ(""); setType(""); setMold(""); setOre(""); setEffect("");
+      setFlash(id);
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ block: "center", behavior: "smooth" })),
+      );
+      window.setTimeout(() => setFlash((f) => (f === id ? "" : f)), 2500);
+    };
+    show();
+    window.addEventListener("hashchange", show);
+    return () => window.removeEventListener("hashchange", show);
+  }, [rows]);
 
   const molds = useMemo(() => [...new Set(rows.filter((r) => !type || r.type === type).map((r) => r.mold))], [rows, type]);
   const ores = useMemo(() => [...new Set(rows.map((r) => r.ore))], [rows]);
@@ -116,7 +135,11 @@ export default function CraftingList({
           </thead>
           <tbody>
             {shown.map((r) => (
-              <tr key={r.slug} id={r.slug} className="scroll-mt-20 border-b border-line/60 last:border-0 target:bg-accent/10 hover:bg-panel-2/60">
+              <tr
+                key={r.slug}
+                id={r.slug}
+                className={`scroll-mt-20 border-b border-line/60 transition-colors duration-700 last:border-0 hover:bg-panel-2/60 ${flash === r.slug ? "bg-accent/20" : ""}`}
+              >
                 <td className="td">
                   <div className="flex items-center gap-2 font-medium">
                     {typeIcons[r.type] && (

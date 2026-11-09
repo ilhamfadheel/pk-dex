@@ -101,6 +101,15 @@ export default function SearchBox() {
     setOpen(false);
     setQ("");
     inputRef.current?.blur();
+    const [p, hash] = it.h.split("#");
+    const here = location.pathname.replace(/\/$/, "") === `${BASE}${p}`.replace(/\/$/, "");
+    if (hash && here) {
+      // Same page, new anchor: router.push wouldn't fire "hashchange", so the page
+      // couldn't react (clear filters, scroll, highlight). Set the hash directly.
+      if (location.hash === `#${hash}`) window.dispatchEvent(new HashChangeEvent("hashchange"));
+      else location.hash = hash;
+      return;
+    }
     router.push(it.h);
   };
 

@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f6f3ec;
+  --panel: #ffffff;
+  --panel-2: #f1ede3;
+  --ink: #1f1c17;
+  --muted: #6b6457;
+  --line: #ddd5c4;
+  --accent: #8a2d1f;
+  --accent-ink: #ffffff;
+  --gold: #b7862b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14130f;
+    --panel: #1d1b16;
+    --panel-2: #26231c;
+    --ink: #ece6d8;
+    --muted: #a39b8a;
+    --line: #36322a;
+    --accent: #e0745f;
+    --accent-ink: #1a0e0b;
+    --gold: #e0b45c;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-gold: var(--gold);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.pixel {
+  image-rendering: pixelated;
+}
+
+/* shared bits; in the components layer so utility classes can override them */
+@layer components {
+  .ctl {
+    @apply h-9 rounded-md border border-line bg-panel px-2 text-sm text-ink outline-none focus:border-accent;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border border-line bg-panel-2 px-2 py-0.5 text-xs;
+  }
+  .card {
+    @apply rounded-xl border border-line bg-panel;
+  }
+  .th {
+    @apply px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-muted;
+  }
+  .td {
+    @apply px-2 py-1.5 align-middle;
+  }
+}

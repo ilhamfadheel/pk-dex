@@ -1,0 +1,15 @@
+{
+  "_note": "Units shown in the 'Buy from the Shop' table. Default: the 9 base units, which no rank-up leads to, so they can only be bought or recruited. Not verified against the in-game Shop list; edit 'units' (unit names) to correct it, and set 'verified' to true once checked.",
+  "verified": false,
+  "units": [
+    "Soldier",
+    "Noble",
+    "Amazoness",
+    "Lycanthrope",
+    "Skeleton",
+    "Sprite",
+    "Gargoyle",
+    "Lizardfoot",
+    "Primitive Cell"
+  ]
+}

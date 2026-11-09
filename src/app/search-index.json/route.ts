@@ -1,5 +1,5 @@
 // Static search index, emitted as /search-index.json at build time.
-import { data, edgesByEmblem, rawMaterials } from "@/lib/data";
+import { craftRows, data, edgesByEmblem, iconFor, rawMaterials } from "@/lib/data";
 import type { SearchItem } from "@/lib/types";
 
 export const dynamic = "force-static";
@@ -29,6 +29,14 @@ export function GET() {
       h: `/emblems#${encodeURIComponent(e)}`,
       i: data.materials["RankUp Mold"].img,
       k: `${e} emblem`.toLowerCase(),
+    })),
+    ...craftRows.map((c) => ({
+      t: "item" as const,
+      n: c.result,
+      s: `${c.mold} · ${c.effect}`,
+      h: `/crafting#${c.slug}`,
+      i: iconFor(c.type),
+      k: `${c.result} ${c.mold} ${c.type} ${c.effect}`.toLowerCase(),
     })),
   ];
   return Response.json({ v: items.length, items });

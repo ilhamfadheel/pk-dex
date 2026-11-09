@@ -17,6 +17,7 @@ const nav = [
   { href: "/", label: "Units" },
   { href: "/planner", label: "Planner" },
   { href: "/emblems", label: "Emblems" },
+  { href: "/crafting", label: "Crafting" },
   { href: "/materials", label: "Materials" },
 ];
 

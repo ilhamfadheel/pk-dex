@@ -51,7 +51,7 @@ function search(items: SearchItem[], q: string): SearchItem[] {
     if (!words.every((w) => it.k.includes(w))) continue;
     const name = it.n.toLowerCase();
     let s = name === key ? 0 : name.startsWith(key) ? 1 : name.includes(key) ? 2 : 3;
-    s += it.t === "unit" ? 0 : it.t === "material" ? 0.1 : 0.2;
+    s += it.t === "unit" ? 0 : it.t === "material" ? 0.1 : it.t === "item" ? 0.15 : 0.2;
     scored.push({ it, s });
   }
   const out = scored.sort((a, b) => a.s - b.s || a.it.n.localeCompare(b.it.n)).slice(0, 12).map((x) => x.it);
@@ -60,7 +60,7 @@ function search(items: SearchItem[], q: string): SearchItem[] {
   return out;
 }
 
-const TYPE_LABEL = { unit: "Unit", material: "Material", emblem: "Emblem" } as const;
+const TYPE_LABEL = { unit: "Unit", material: "Material", emblem: "Emblem", item: "Item" } as const;
 
 export default function SearchBox() {
   const router = useRouter();

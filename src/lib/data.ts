@@ -237,5 +237,21 @@ export const emblemsUsing = (name: string) =>
     .filter(([, rs]) => rs.some((r) => [r.ore, r.item1, r.item2].includes(name)))
     .map(([e]) => e);
 
+/** Rows for the Crafting page (ingredient names resolved, typed by mold). */
+export const craftRows = crafting.map((c) => ({
+  slug: slugify(c.result),
+  result: c.result,
+  type: (c.mold === "Armor" ? "Armor" : c.mold === "Accessories" ? "Accessories" : "Weapons") as
+    | "Weapons"
+    | "Armor"
+    | "Accessories",
+  mold: c.mold,
+  ore: resolveMaterial(c.ore) ?? c.ore,
+  items: [c.item1, c.item2].map((x) => (x === "Any" ? null : (resolveMaterial(x) ?? x))),
+  effect: c.effect,
+  effectInfo: c.effectInfo,
+  success: c.success,
+}));
+
 export const craftsUsing = (name: string) =>
   crafting.filter((c) => [c.ore, c.item1, c.item2].some((x) => resolveMaterial(x) === name));

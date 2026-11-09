@@ -4,8 +4,11 @@ A fast fan reference for **Pocket Kingdom: Own the World** (SEGA, N-Gage, 2004):
 evolution tree, emblem recipes, materials, and a rank-up planner that totals every material
 you need to get from one unit to another.
 
-Built with Next.js 16 (App Router, Cache Components). All game data is static JSON, so every
-page (213 routes) is prerendered at build time; filtering and planning run in the browser.
+**Live: <https://ilhamfadheel.github.io/pk-dex/>**
+
+Built with Next.js 16 (App Router) as a fully static export. All game data is static JSON, so
+every page (211 routes) is prerendered HTML served from GitHub Pages' CDN; filtering and planning
+run in the browser. Every push to `main` redeploys via `.github/workflows/pages.yml`.
 
 ## Pages
 
@@ -40,5 +43,5 @@ From the Unit Rankup Guide by Gearb0x (GameFAQs):
 ```bash
 npm install
 npm run dev     # http://localhost:3000
-npm run build && npm start
+npm run build   # static site in ./out
 ```

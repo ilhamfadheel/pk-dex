@@ -30,8 +30,12 @@ const iconImgs = listDir("icons");
 
 // Plain <img> tags don't get basePath applied automatically, so prefix here.
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-const raceImg = (n: number | null | undefined) =>
-  n != null && raceImgs.has(`${n}.gif`) ? `${BASE}/img/races/${n}.gif` : null;
+// Archived icons are .gif; ones we generated (scripts/make-race-icons.mjs) are .png.
+const raceImg = (n: number | null | undefined) => {
+  if (n == null) return null;
+  const f = [`${n}.gif`, `${n}.png`].find((x) => raceImgs.has(x));
+  return f ? `${BASE}/img/races/${f}` : null;
+};
 const unitImg = (id: number, race: number | null | undefined) => {
   const f = `face${String(id).padStart(3, "0")}.gif`;
   return unitImgs.has(f) ? `${BASE}/img/units/${f}` : (raceImg(race) ?? `${BASE}/img/placeholder.svg`);

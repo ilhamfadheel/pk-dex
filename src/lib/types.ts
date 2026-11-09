@@ -57,6 +57,15 @@ export interface MaterialLite {
   img: string | null;
 }
 
+export interface SearchItem {
+  t: "unit" | "material" | "emblem";
+  n: string; // name
+  s: string; // subtitle
+  h: string; // href (without basePath)
+  i: string | null; // image src
+  k: string; // lowercase haystack
+}
+
 export interface PlannerData {
   units: UnitLite[];
   edges: Edge[];

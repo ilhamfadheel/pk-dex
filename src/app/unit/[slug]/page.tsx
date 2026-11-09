@@ -2,9 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import RankupPlanner from "@/components/RankupPlanner";
-import { MatChip, UnitImg } from "@/components/ui";
+import { MatChip, RecipeOptions, UnitImg } from "@/components/ui";
 import { data, spByUnit, unitById, unitBySlug } from "@/lib/data";
-import { cheapestRecipe, RANKUP_MOLD } from "@/lib/plan";
 import { STATS, type Edge, type UnitLite } from "@/lib/types";
 
 export function generateStaticParams() {
@@ -31,7 +30,7 @@ function family(u: UnitLite) {
 }
 
 function EdgeCard({ e, other, dir }: { e: Edge; other: UnitLite; dir: "from" | "to" }) {
-  const r = data.emblems[e.emblem]?.[cheapestRecipe(data, e.emblem)];
+  const rs = data.emblems[e.emblem] ?? [];
   return (
     <li className="card p-3">
       <div className="flex items-center gap-3">
@@ -47,14 +46,12 @@ function EdgeCard({ e, other, dir }: { e: Edge; other: UnitLite; dir: "from" | "
           <span className="chip">{e.vp} VP</span>
         </div>
       </div>
-      <div className="mt-2 flex flex-wrap items-center gap-1.5 border-t border-line pt-2 text-xs">
-        <Link href={`/emblems#${encodeURIComponent(e.emblem)}`} className="font-semibold text-gold hover:underline">{e.emblem}</Link>
-        {r && <>
-          <span className="text-muted">=</span>
-          {[r.ore, r.item1, r.item2].map((n) => <MatChip key={n} name={n} m={data.materials[n]} />)}
-          <MatChip name={RANKUP_MOLD} m={data.materials[RANKUP_MOLD]} />
-          <span className="text-muted">({r.success}%)</span>
-        </>}
+      <div className="mt-2 space-y-1.5 border-t border-line pt-2 text-xs">
+        <div className="flex items-center gap-2">
+          <Link href={`/emblems#${encodeURIComponent(e.emblem)}`} className="font-semibold text-gold hover:underline">{e.emblem}</Link>
+          <span className="text-muted">{rs.length} way{rs.length === 1 ? "" : "s"} to make it</span>
+        </div>
+        <RecipeOptions recipes={rs} materials={data.materials} />
       </div>
     </li>
   );

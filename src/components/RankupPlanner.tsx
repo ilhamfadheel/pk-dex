@@ -12,7 +12,7 @@ import {
   totals,
   vpNeeded,
 } from "@/lib/plan";
-import { MatChip, MatIcon, UnitImg } from "./ui";
+import { MatIcon, RecipeOptions, UnitImg } from "./ui";
 
 export default function RankupPlanner({
   data,
@@ -136,23 +136,22 @@ export default function RankupPlanner({
                         <span className="chip">{e.vp} VP</span>
                       </div>
                     </div>
-                    <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-line pt-3 text-sm">
-                      <Link href={`/emblems#${encodeURIComponent(e.emblem)}`} className="flex items-center gap-1.5 font-semibold text-gold hover:underline">
-                        <MatIcon m={data.materials[RANKUP_MOLD]} size={20} /> {e.emblem}
-                      </Link>
-                      <span className="text-muted">=</span>
-                      {r && [r.ore, r.item1, r.item2].map((n) => <MatChip key={n} name={n} m={data.materials[n]} />)}
-                      <span className="text-muted">+</span>
-                      <MatChip name={RANKUP_MOLD} m={data.materials[RANKUP_MOLD]} />
-                      {r && <span className="text-xs text-muted">{r.success}% success</span>}
-                      {rs.length > 1 && (
-                        <select className="ctl ml-auto h-8 text-xs" value={ci} aria-label={`${e.emblem} recipe`}
-                          onChange={(ev) => setChoice((c) => ({ ...c, [e.emblem]: +ev.target.value }))}>
-                          {rs.map((x, j) => (
-                            <option key={j} value={j}>Recipe {j + 1}: {x.item1} + {x.item2}</option>
-                          ))}
-                        </select>
-                      )}
+                    <div className="mt-3 space-y-2 border-t border-line pt-3 text-sm">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Link href={`/emblems#${encodeURIComponent(e.emblem)}`} className="flex items-center gap-1.5 font-semibold text-gold hover:underline">
+                          <MatIcon m={data.materials[RANKUP_MOLD]} size={20} /> {e.emblem}
+                        </Link>
+                        <span className="text-xs text-muted">
+                          {rs.length > 1 ? `${rs.length} ways to make it. Tap the jewel you have; totals update.` : "1 way to make it"}
+                        </span>
+                      </div>
+                      <RecipeOptions
+                        recipes={rs}
+                        materials={data.materials}
+                        selected={ci}
+                        onSelect={(j) => setChoice((c) => ({ ...c, [e.emblem]: j }))}
+                      />
+                      {r && <div className="text-xs text-muted">Using: {r.ore} + {r.item1} + {r.item2} + {RANKUP_MOLD}</div>}
                     </div>
                   </li>
                 );

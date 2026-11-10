@@ -73,8 +73,13 @@ export default async function UnitPage({ params }: PageProps<"/unit/[slug]">) {
 
   return (
     <article className="space-y-6">
-      <nav className="text-xs text-muted">
-        <Link href="/" className="hover:underline">Units</Link> / {u.name}
+      <nav className="flex items-center gap-2 text-xs text-muted">
+        <span>
+          <Link href="/" className="hover:underline">Units</Link> / {u.name}
+        </span>
+        <Link href={`/compare?u=${u.slug}`} className="chip ml-auto !py-1 !text-xs hover:border-accent hover:text-ink">
+          ⇄ Compare with other units
+        </Link>
       </nav>
 
       {/* Header */}

@@ -27,6 +27,9 @@ export default function UnitDex({
   const [stage, setStage] = useState<"" | "base" | "final">("");
   const [sort, setSort] = useState<{ key: SortKey; dir: 1 | -1 }>({ key: "id", dir: 1 });
   const [view, setView] = useState<"table" | "grid">("table");
+  const [picked, setPicked] = useState<string[]>([]); // unit slugs to compare (max 4)
+  const togglePick = (slug: string) =>
+    setPicked((p) => (p.includes(slug) ? p.filter((s) => s !== slug) : p.length < 4 ? [...p, slug] : p));
 
   const dq = useDeferredValue(q);
   const races = useMemo(() => [...new Set(units.map((u) => u.race))].sort(), [units]);
@@ -185,6 +188,7 @@ export default function UnitDex({
             <table className="w-full text-sm">
               <thead className="border-b border-line bg-panel-2">
                 <tr>
+                  <th className="th w-8" title="Tick up to 4 units to compare">⇄</th>
                   {th("id", "#")}
                   {th("name", "Unit")}
                   <th className="th">Race</th>
@@ -197,7 +201,17 @@ export default function UnitDex({
               </thead>
               <tbody>
                 {rows.map((u) => (
-                  <tr key={u.id} className="border-b border-line/60 last:border-0 hover:bg-panel-2/60">
+                  <tr key={u.id} className={`border-b border-line/60 last:border-0 hover:bg-panel-2/60 ${picked.includes(u.slug) ? "bg-accent/10" : ""}`}>
+                    <td className="td">
+                      <input
+                        type="checkbox"
+                        className="accent-[var(--accent)]"
+                        checked={picked.includes(u.slug)}
+                        disabled={!picked.includes(u.slug) && picked.length >= 4}
+                        onChange={() => togglePick(u.slug)}
+                        aria-label={`Compare ${u.name}`}
+                      />
+                    </td>
                     <td className="td font-mono text-xs text-muted">{String(u.id + 1).padStart(3, "0")}</td>
                     <td className="td">
                       <Link href={`/unit/${u.slug}`} className="flex items-center gap-2 font-medium hover:text-accent">
@@ -237,6 +251,32 @@ export default function UnitDex({
           </p>
         )}
       </section>
+
+      {/* compare tray */}
+      {picked.length > 0 && (
+        <div className="fixed inset-x-0 bottom-4 z-30 flex justify-center px-4">
+          <div className="card flex items-center gap-3 px-3 py-2 shadow-lg">
+            <div className="flex -space-x-1.5">
+              {picked.map((s) => {
+                const u = units.find((x) => x.slug === s)!;
+                return (
+                  <button key={s} onClick={() => togglePick(s)} title={`Remove ${u.name}`}>
+                    <UnitImg u={u} size={32} />
+                  </button>
+                );
+              })}
+            </div>
+            <span className="text-sm text-muted">{picked.length}/4</span>
+            <Link
+              href={`/compare?u=${picked.join(",")}`}
+              className={`rounded-md px-3 py-1.5 text-sm font-semibold ${picked.length >= 2 ? "bg-accent text-accent-ink" : "bg-panel-2 text-muted"}`}
+            >
+              Compare{picked.length < 2 ? " (pick 2+)" : ""}
+            </Link>
+            <button className="text-xs text-muted underline" onClick={() => setPicked([])}>Clear</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -237,6 +237,47 @@ export const emblemsUsing = (name: string) =>
     .filter(([, rs]) => rs.some((r) => [r.ore, r.item1, r.item2].includes(name)))
     .map(([e]) => e);
 
+// ---- cities / areas (from each material's shops, area searches and dungeons) ----
+export interface City {
+  name: string;
+  slug: string;
+  shop: string[]; // material names sold here
+  search: { material: string; offline: boolean; online: boolean }[];
+  dungeons: { name: string; rewards: { material: string; floor: number | string }[] }[];
+}
+const cityMap = new Map<string, City>();
+const city = (name: string) => {
+  let c = cityMap.get(name);
+  if (!c) cityMap.set(name, (c = { name, slug: slugify(name), shop: [], search: [], dungeons: [] }));
+  return c;
+};
+for (const m of rawMaterials) {
+  for (const s of m.purchase_in) city(s).shop.push(m.name);
+  for (const a of m.area_searches) {
+    const c = city(a.area);
+    let row = c.search.find((r) => r.material === m.name);
+    if (!row) c.search.push((row = { material: m.name, offline: false, online: false }));
+    if (a.status === "Online") row.online = true;
+    else row.offline = true;
+  }
+  for (const d of m.dungeon_reward) {
+    const c = city(d.area);
+    let dg = c.dungeons.find((x) => x.name === d.dungeon);
+    if (!dg) c.dungeons.push((dg = { name: d.dungeon, rewards: [] }));
+    dg.rewards.push({ material: m.name, floor: d.floors });
+  }
+}
+const byRarity = (a: string, b: string) => (materials[a]?.rarity ?? 0) - (materials[b]?.rarity ?? 0) || a.localeCompare(b);
+for (const c of cityMap.values()) {
+  c.shop.sort(byRarity);
+  c.search.sort((a, b) => byRarity(a.material, b.material));
+  c.dungeons.sort((a, b) => a.name.localeCompare(b.name));
+  for (const d of c.dungeons) d.rewards.sort((a, b) => Number(a.floor) - Number(b.floor) || byRarity(a.material, b.material));
+}
+export const cities = [...cityMap.values()].sort((a, b) => a.name.localeCompare(b.name));
+export const cityBySlug = new Map(cities.map((c) => [c.slug, c]));
+export const citySlug = (name: string) => slugify(name);
+
 /** Rows for the Crafting page (ingredient names resolved, typed by mold). */
 export const craftRows = crafting.map((c) => ({
   slug: slugify(c.result),

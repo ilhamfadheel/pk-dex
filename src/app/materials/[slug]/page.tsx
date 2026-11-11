@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { MatChip, MatIcon, UnitImg, UnitLink } from "@/components/ui";
-import { craftsUsing, data, emblemsUsing, materialBySlug, rawMaterials, resolveMaterial, slugify, unitById } from "@/lib/data";
+import { citySlug, craftsUsing, data, emblemsUsing, materialBySlug, rawMaterials, resolveMaterial, slugify, unitById } from "@/lib/data";
 
 export function generateStaticParams() {
   return rawMaterials.map((m) => ({ slug: slugify(m.name) }));
@@ -50,7 +50,7 @@ export default async function MaterialPage({ params }: PageProps<"/materials/[sl
       <div className="grid gap-4 md:grid-cols-2">
         <Section title="Buy in">
           {raw.purchase_in.length ? (
-            <div className="flex flex-wrap gap-1.5">{raw.purchase_in.map((s) => <span key={s} className="chip">{s}</span>)}</div>
+            <div className="flex flex-wrap gap-1.5">{raw.purchase_in.map((s) => <Link key={s} href={`/cities/${citySlug(s)}`} className="chip hover:border-accent">{s}</Link>)}</div>
           ) : none}
         </Section>
         <Section title="Dropped by">
@@ -117,14 +117,19 @@ export default async function MaterialPage({ params }: PageProps<"/materials/[sl
         <Section title="Area searches">
           {raw.area_searches.length ? (
             <div className="flex flex-wrap gap-1.5">{raw.area_searches.map((a, i) => (
-              <span key={i} className="chip">{a.area} <span className="text-muted">{a.status}</span></span>
+              <Link key={i} href={`/cities/${citySlug(a.area)}`} className="chip hover:border-accent">{a.area} <span className="text-muted">{a.status}</span></Link>
             ))}</div>
           ) : none}
         </Section>
         <Section title="Dungeon rewards">
           {raw.dungeon_reward.length ? (
             <ul className="max-h-72 space-y-0.5 overflow-y-auto text-sm">{raw.dungeon_reward.map((d, i) => (
-              <li key={i}>{d.dungeon} <span className="text-muted">· {d.area} · floor {d.floors}</span></li>
+              <li key={i}>
+                {d.dungeon}{" "}
+                <span className="text-muted">
+                  · <Link href={`/cities/${citySlug(d.area)}`} className="hover:text-accent hover:underline">{d.area}</Link> · floor {d.floors}
+                </span>
+              </li>
             ))}</ul>
           ) : none}
         </Section>

@@ -60,7 +60,7 @@ function search(items: SearchItem[], q: string): SearchItem[] {
   return out;
 }
 
-const TYPE_LABEL = { unit: "Unit", material: "Material", emblem: "Emblem", item: "Item" } as const;
+const TYPE_LABEL = { unit: "Unit", material: "Material", emblem: "Emblem", item: "Item", city: "City" } as const;
 
 export default function SearchBox() {
   const router = useRouter();

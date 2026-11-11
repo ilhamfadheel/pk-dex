@@ -20,6 +20,7 @@ const nav = [
   { href: "/emblems", label: "Emblems" },
   { href: "/crafting", label: "Crafting" },
   { href: "/materials", label: "Materials" },
+  { href: "/cities", label: "Cities" },
 ];
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

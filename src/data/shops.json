@@ -1,0 +1,1541 @@
+[
+ {
+  "index": 0,
+  "city": "Elynotis",
+  "dungeons": [
+   "Castle Matres"
+  ],
+  "units": [
+   "Soldier",
+   "Noble"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Copper"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Sword Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Staff Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Garnet"
+   }
+  ]
+ },
+ {
+  "index": 1,
+  "city": "Cressence",
+  "dungeons": [
+   "Red Wolf Castle"
+  ],
+  "units": [
+   "Soldier",
+   "Noble"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Copper"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Mace Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Blade Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Azulite"
+   }
+  ]
+ },
+ {
+  "index": 2,
+  "city": "Gulldria",
+  "dungeons": [
+   "Beast Palace"
+  ],
+  "units": [
+   "Soldier",
+   "Noble",
+   "Lycanthrope"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Copper"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Spear Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Bow Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Agate"
+   }
+  ]
+ },
+ {
+  "index": 3,
+  "city": "Ruins Road",
+  "dungeons": [
+   "Old Ruins",
+   "Shadow Tower",
+   "Abysm"
+  ],
+  "units": [
+   "Soldier"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Copper"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Claw Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Axe Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Azulite"
+   }
+  ]
+ },
+ {
+  "index": 4,
+  "city": "Elfaria",
+  "dungeons": [
+   "Lake Silk",
+   "Elfaria",
+   "Mayor's House"
+  ],
+  "units": [
+   "Soldier",
+   "Noble",
+   "Sprite",
+   "Amazoness"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Chrome"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Accessories Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Sword Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Lapis Lazuli"
+   }
+  ]
+ },
+ {
+  "index": 5,
+  "city": "Beast Lair",
+  "dungeons": [
+   "Beast Lair",
+   "Giant Lair"
+  ],
+  "units": [
+   "Soldier",
+   "Noble",
+   "Lycanthrope"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Copper"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Bow Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Sword Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Cat's Eye"
+   }
+  ]
+ },
+ {
+  "index": 6,
+  "city": "Thick Forest",
+  "dungeons": [
+   "Amazoness Town",
+   "Patriarch's House"
+  ],
+  "units": [
+   "Soldier",
+   "Amazoness",
+   "Lycanthrope",
+   "Sprite"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Copper"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Spear Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Sword Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Tourmaline"
+   }
+  ]
+ },
+ {
+  "index": 7,
+  "city": "Deserted Ruins",
+  "dungeons": [
+   "Lake Stagnation",
+   "Deserted Ruins"
+  ],
+  "units": [
+   "Soldier",
+   "Amazoness",
+   "Primitive Cell",
+   "Sprite",
+   "Skeleton"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Copper"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Accessories Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Axe Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Cat's Eye"
+   }
+  ]
+ },
+ {
+  "index": 8,
+  "city": "Altar of the Spirits",
+  "dungeons": [
+   "Moon Ruins",
+   "Sun Ruins",
+   "Altar of the Spirits"
+  ],
+  "units": [
+   "Soldier",
+   "Noble",
+   "Amazoness"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Chrome"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Axe Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Spear Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Aquamarine"
+   }
+  ]
+ },
+ {
+  "index": 9,
+  "city": "Tiwana Ruins",
+  "dungeons": [
+   "Wind Ruins",
+   "Sealed Cavern",
+   "Stone Tower",
+   "Earth Shrine"
+  ],
+  "units": [
+   "Soldier",
+   "Noble",
+   "Gargoyle",
+   "Primitive Cell",
+   "Lycanthrope"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Chrome"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Claw Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Axe Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Jade"
+   }
+  ]
+ },
+ {
+  "index": 10,
+  "city": "Ilyumine",
+  "dungeons": [
+   "Ilyumine",
+   "Meeting Place"
+  ],
+  "units": [
+   "Soldier",
+   "Noble",
+   "Lizardfoot"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Chrome"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Sword Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Staff Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Lapis Lazuli"
+   }
+  ]
+ },
+ {
+  "index": 11,
+  "city": "Deeva Volcano",
+  "dungeons": [
+   "Base Cavern",
+   "Wind Cavern",
+   "Fire Cavern",
+   "Flame Pit"
+  ],
+  "units": [
+   "Soldier",
+   "Lizardfoot",
+   "Primitive Cell"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Chrome"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Claw Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Mace Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Jade"
+   }
+  ]
+ },
+ {
+  "index": 12,
+  "city": "Distaria",
+  "dungeons": [
+   "Wind Hole",
+   "Distaria",
+   "Merchant League"
+  ],
+  "units": [
+   "Soldier",
+   "Noble",
+   "Lizardfoot"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Chrome"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Spear Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Bow Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Aquamarine"
+   }
+  ]
+ },
+ {
+  "index": 13,
+  "city": "Pirate Island",
+  "dungeons": [
+   "Surveillance Fort",
+   "Pirate Town",
+   "Hideout"
+  ],
+  "units": [
+   "Soldier",
+   "Lycanthrope",
+   "Skeleton"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Chrome"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Blade Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Axe Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Aquamarine"
+   }
+  ]
+ },
+ {
+  "index": 14,
+  "city": "Treasure Island",
+  "dungeons": [
+   "Burned-out Ruins",
+   "Red Lake",
+   "Fire Shrine"
+  ],
+  "units": [
+   "Gargoyle",
+   "Primitive Cell",
+   "Skeleton"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Chrome"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Claw Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Sword Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Jade"
+   }
+  ]
+ },
+ {
+  "index": 15,
+  "city": "Spirits Forest",
+  "dungeons": [
+   "Silent Lake",
+   "Town of the Spirits",
+   "Spirit Lord Castle"
+  ],
+  "units": [
+   "Noble",
+   "Sprite",
+   "Primitive Cell"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Chrome"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Bow Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Spear Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Lapis Lazuli"
+   }
+  ]
+ },
+ {
+  "index": 16,
+  "city": "Earl's Castle",
+  "dungeons": [
+   "Nightwalker House",
+   "Ivory Tower",
+   "Earl's Castle"
+  ],
+  "units": [
+   "Lycanthrope",
+   "Amazoness",
+   "Sprite"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Silver"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Sword Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Claw Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Crystal"
+   }
+  ]
+ },
+ {
+  "index": 17,
+  "city": "Dark Elf Settlement",
+  "dungeons": [
+   "Darkness Cavern",
+   "Lake Shadow",
+   "Tower of Darkness",
+   "Darkness Shrine"
+  ],
+  "units": [
+   "Lycanthrope",
+   "Amazoness",
+   "Sprite",
+   "Noble"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Gold"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Bow Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Spear Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Turquoise"
+   }
+  ]
+ },
+ {
+  "index": 18,
+  "city": "Yggdrasill",
+  "dungeons": [
+   "Tower of Trees",
+   "Tree Ruins",
+   "Mole Hole",
+   "Deep Blue Lake",
+   "Wood Shrine"
+  ],
+  "units": [
+   "Lycanthrope",
+   "Amazoness",
+   "Sprite",
+   "Gargoyle",
+   "Primitive Cell"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Silver"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Mace Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Claw Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Onyx"
+   }
+  ]
+ },
+ {
+  "index": 19,
+  "city": "Gate of Recollection",
+  "dungeons": [
+   "Collapsed Ruins",
+   "Collapsed Cavern",
+   "Mossy Ruins",
+   "Recollection Fort"
+  ],
+  "units": [
+   "Lycanthrope",
+   "Amazoness",
+   "Sprite"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Chrome"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Staff Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Mace Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Jade"
+   }
+  ]
+ },
+ {
+  "index": 20,
+  "city": "Water City",
+  "dungeons": [
+   "Water Ruins",
+   "Deep Blue Cavern",
+   "Lake Heaven",
+   "Underwater Temple"
+  ],
+  "units": [
+   "Lycanthrope",
+   "Amazoness",
+   "Sprite",
+   "Noble"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Silver"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Accessories Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Claw Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Onyx"
+   }
+  ]
+ },
+ {
+  "index": 21,
+  "city": "Mizuchi Shrine",
+  "dungeons": [
+   "Brightness Lake",
+   "Watery Lake",
+   "Quiet Lakeside",
+   "Deep Lake",
+   "Mizuchi's Lair"
+  ],
+  "units": [
+   "Lycanthrope",
+   "Amazoness",
+   "Sprite"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Silver"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Bow Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Sword Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Opal"
+   }
+  ]
+ },
+ {
+  "index": 22,
+  "city": "Forgotten Village",
+  "dungeons": [
+   "Forgotten Village",
+   "Old Cavern",
+   "Mossy Cavern",
+   "Mysterious Ruins",
+   "Mountain Path"
+  ],
+  "units": [
+   "Gargoyle",
+   "Lycanthrope",
+   "Skeleton",
+   "Sprite",
+   "Lizardfoot"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Mythril"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Claw Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Accessories Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Opal"
+   }
+  ]
+ },
+ {
+  "index": 23,
+  "city": "Mountaintop Shrine",
+  "dungeons": [
+   "Origin Tower",
+   "Ivory Cavern",
+   "Jade Ruins",
+   "Tower of Fortune",
+   "Origin Altar"
+  ],
+  "units": [
+   "Soldier",
+   "Noble",
+   "Primitive Cell",
+   "Lizardfoot",
+   "Gargoyle"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Mythril"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Spear Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Bow Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Crystal"
+   }
+  ]
+ },
+ {
+  "index": 24,
+  "city": "Donam",
+  "dungeons": [
+   "Donam",
+   "Town Ruins",
+   "Lord Donam's Castle"
+  ],
+  "units": [
+   "Soldier",
+   "Noble"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Silver"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Blade Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Axe Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Onyx"
+   }
+  ]
+ },
+ {
+  "index": 25,
+  "city": "Runeheim",
+  "dungeons": [
+   "Runeheim",
+   "Foggy Tower",
+   "Lord Runeheim's Castle"
+  ],
+  "units": [
+   "Soldier",
+   "Noble"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Silver"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Staff Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Accessories Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Onyx"
+   }
+  ]
+ },
+ {
+  "index": 26,
+  "city": "Seles",
+  "dungeons": [
+   "Mirage Ruins",
+   "Seles",
+   "Lord Seles's Castle"
+  ],
+  "units": [
+   "Soldier",
+   "Noble"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Silver"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Mace Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Blade Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Onyx"
+   }
+  ]
+ },
+ {
+  "index": 27,
+  "city": "Nomad",
+  "dungeons": [
+   "Sandstorm Castle",
+   "Moonlight Ruins",
+   "Nomad",
+   "Sandstorm Bar"
+  ],
+  "units": [
+   "Soldier",
+   "Noble"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Silver"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Claw Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Bow Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Ruby"
+   }
+  ]
+ },
+ {
+  "index": 28,
+  "city": "Echigo",
+  "dungeons": [
+   "Echigo 1",
+   "Training Cavern",
+   "Echigo 2",
+   "Ninja Lodge"
+  ],
+  "units": [
+   "Soldier",
+   "Sprite"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Gold"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Bow Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Axe Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Turquoise"
+   }
+  ]
+ },
+ {
+  "index": 29,
+  "city": "Yamato",
+  "dungeons": [
+   "Yamato",
+   "Firefighter Tower",
+   "Soul Spring",
+   "Xinzhou Lodge"
+  ],
+  "units": [
+   "Soldier",
+   "Lycanthrope"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Gold"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Blade Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Sword Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Turquoise"
+   }
+  ]
+ },
+ {
+  "index": 30,
+  "city": "Edo",
+  "dungeons": [
+   "Edo Tower",
+   "Edo 1",
+   "Edo 2",
+   "Great Edo Lake",
+   "Motoyasu Lodge"
+  ],
+  "units": [
+   "Soldier",
+   "Lizardfoot"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Gold"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Claw Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Spear Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Ruby"
+   }
+  ]
+ },
+ {
+  "index": 31,
+  "city": "Shalom",
+  "dungeons": [
+   "Historic Ruins",
+   "Shalom 1",
+   "Shalom 2",
+   "Historic Tower",
+   "Mikado Lodge"
+  ],
+  "units": [
+   "Soldier",
+   "Gargoyle"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Gold"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Bow Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Sword Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Ruby"
+   }
+  ]
+ },
+ {
+  "index": 32,
+  "city": "Mikado Mausoleum",
+  "dungeons": [
+   "Mausoleum Entrance",
+   "Guard Station",
+   "Canal",
+   "Yomotsu Hirasaka",
+   "Metal Shrine"
+  ],
+  "units": [
+   "Gargoyle",
+   "Primitive Cell",
+   "Skeleton"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Gold"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Mace Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Axe Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Peridot"
+   }
+  ]
+ },
+ {
+  "index": 33,
+  "city": "Desert Road",
+  "dungeons": [
+   "Giant Sculpture",
+   "Air Hole",
+   "Underground Passage",
+   "Sunset Castle"
+  ],
+  "units": [
+   "Soldier",
+   "Gargoyle",
+   "Primitive Cell",
+   "Lycanthrope"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Platinum"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Mace Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Accessories Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Peridot"
+   }
+  ]
+ },
+ {
+  "index": 34,
+  "city": "Huge Swamp",
+  "dungeons": [
+   "Putrid Puddle",
+   "Stagnant Puddle",
+   "Muddy Puddle",
+   "Tomb of the Dead",
+   "Deep Stagnation"
+  ],
+  "units": [
+   "Skeleton",
+   "Gargoyle",
+   "Primitive Cell"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Platinum"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Staff Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Sword Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Opal"
+   }
+  ]
+ },
+ {
+  "index": 35,
+  "city": "Nightwalker Town",
+  "dungeons": [
+   "Nightwalker Town",
+   "Night Ruins",
+   "Shadow Moon Tower",
+   "King's Castle"
+  ],
+  "units": [
+   "Lycanthrope",
+   "Skeleton",
+   "Gargoyle",
+   "Primitive Cell"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Platinum"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Staff Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Mace Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Crystal"
+   }
+  ]
+ },
+ {
+  "index": 36,
+  "city": "Gate of Oblivion",
+  "dungeons": [
+   "Mountain of Rubble",
+   "Garbage Dump",
+   "Stone Tree",
+   "Way of the Dead",
+   "Fort of Oblivion"
+  ],
+  "units": [
+   "Lycanthrope",
+   "Skeleton",
+   "Gargoyle",
+   "Primitive Cell",
+   "Lizardfoot"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Mythril"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Spear Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Axe Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Onyx"
+   }
+  ]
+ },
+ {
+  "index": 37,
+  "city": "Pyramid",
+  "dungeons": [
+   "Sand Road",
+   "Sand Cavern",
+   "Sand Ruins",
+   "Pyramid"
+  ],
+  "units": [
+   "Soldier",
+   "Noble"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Silver"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Blade Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Axe Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Onyx"
+   }
+  ]
+ },
+ {
+  "index": 38,
+  "city": "Ishtal",
+  "dungeons": [
+   "Ishtal 1",
+   "Rockwork Cavern",
+   "Ishtal 2",
+   "Ishtal Castle"
+  ],
+  "units": [
+   "Soldier",
+   "Noble",
+   "Sprite"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Silver"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Sword Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Accessories Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Onyx"
+   }
+  ]
+ },
+ {
+  "index": 39,
+  "city": "Water Shrine",
+  "dungeons": [
+   "Lake Sandblast",
+   "Ocean Ruins",
+   "Ice Ruins",
+   "Water Shrine"
+  ],
+  "units": [
+   "Sprite",
+   "Gargoyle",
+   "Lycanthrope"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Silver"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Claw Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Staff Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Crystal"
+   }
+  ]
+ },
+ {
+  "index": 40,
+  "city": "Royal Tomb",
+  "dungeons": [
+   "Deep Cavern",
+   "Cold Cavern",
+   "Ancient Tomb",
+   "Great Tomb",
+   "Royal Tomb"
+  ],
+  "units": [
+   "Skeleton",
+   "Lycanthrope"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Silver"
+   },
+   {
+    "category": "Molds",
+    "name": "Armor Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Spear Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Sword Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Onyx"
+   }
+  ]
+ },
+ {
+  "index": 41,
+  "city": "Bedouin",
+  "dungeons": [
+   "Bedouin's Tent",
+   "Desert Ruins 1",
+   "Desert Ruins 2",
+   "Sand Devil Lair"
+  ],
+  "units": [
+   "Soldier",
+   "Lycanthrope"
+  ],
+  "items": [
+   {
+    "category": "Ores",
+    "name": "Silver"
+   },
+   {
+    "category": "Molds",
+    "name": "RankUp Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Bow Mold"
+   },
+   {
+    "category": "Molds",
+    "name": "Blade Mold"
+   },
+   {
+    "category": "Jewels",
+    "name": "Crystal"
+   }
+  ]
+ }
+]

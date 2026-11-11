@@ -8,7 +8,9 @@ import { MatIcon } from "./ui";
 export interface CityRow {
   name: string;
   slug: string;
-  shop: string[];
+  units: { name: string; img: string }[];
+  shop: string[]; // ores + jewels
+  molds: string[];
   search: string[];
   dungeonNames: string[];
   dungeonRewards: string[];
@@ -16,58 +18,83 @@ export interface CityRow {
 
 export default function CityList({ rows, materials }: { rows: CityRow[]; materials: Record<string, MaterialLite> }) {
   const [q, setQ] = useState("");
-  const [mat, setMat] = useState("");
+  const [want, setWant] = useState(""); // a unit, mold or material name
   const [how, setHow] = useState<"any" | "shop" | "search" | "dungeon">("any");
   const dq = useDeferredValue(q);
 
-  const matOptions = useMemo(
-    () => [...new Set(rows.flatMap((r) => [...r.shop, ...r.search, ...r.dungeonRewards]))].sort((a, b) => a.localeCompare(b)),
-    [rows],
-  );
+  const options = useMemo(() => {
+    const sorted = (xs: string[]) => [...new Set(xs)].sort((a, b) => a.localeCompare(b));
+    return {
+      units: sorted(rows.flatMap((r) => r.units.map((u) => u.name))),
+      molds: sorted(rows.flatMap((r) => r.molds)),
+      materials: sorted(rows.flatMap((r) => [...r.shop, ...r.search, ...r.dungeonRewards])),
+    };
+  }, [rows]);
+  const wantKind = options.units.includes(want) ? "unit" : options.molds.includes(want) ? "mold" : want ? "material" : "";
 
   const shown = useMemo(() => {
     const ql = dq.trim().toLowerCase();
     return rows.filter((r) => {
       if (ql && !r.name.toLowerCase().includes(ql) && !r.dungeonNames.some((d) => d.toLowerCase().includes(ql))) return false;
-      if (!mat) return true;
-      const inShop = r.shop.includes(mat), inSearch = r.search.includes(mat), inDungeon = r.dungeonRewards.includes(mat);
+      if (!want) return true;
+      if (wantKind === "unit") return r.units.some((u) => u.name === want);
+      if (wantKind === "mold") return r.molds.includes(want);
+      const inShop = r.shop.includes(want), inSearch = r.search.includes(want), inDungeon = r.dungeonRewards.includes(want);
       return how === "shop" ? inShop : how === "search" ? inSearch : how === "dungeon" ? inDungeon : inShop || inSearch || inDungeon;
     });
-  }, [rows, dq, mat, how]);
+  }, [rows, dq, want, wantKind, how]);
 
   return (
     <>
       <div className="card mb-3 flex flex-wrap gap-2 p-3">
         <input className="ctl min-w-48 flex-1" placeholder="Search city or dungeon…" value={q} onChange={(e) => setQ(e.target.value)} />
-        <select className="ctl" value={mat} onChange={(e) => setMat(e.target.value)} aria-label="Material">
-          <option value="">Where to get… (any material)</option>
-          {matOptions.map((m) => <option key={m}>{m}</option>)}
+        <select className="ctl" value={want} onChange={(e) => setWant(e.target.value)} aria-label="Where to get">
+          <option value="">Where to get… (anything)</option>
+          <optgroup label="Units">{options.units.map((m) => <option key={m}>{m}</option>)}</optgroup>
+          <optgroup label="Molds">{options.molds.map((m) => <option key={m}>{m}</option>)}</optgroup>
+          <optgroup label="Materials">{options.materials.map((m) => <option key={m}>{m}</option>)}</optgroup>
         </select>
-        <select className="ctl" value={how} onChange={(e) => setHow(e.target.value as typeof how)} aria-label="How" disabled={!mat}>
-          <option value="any">Shop, search or dungeon</option>
-          <option value="shop">Sold in the shop</option>
-          <option value="search">Found by area search</option>
-          <option value="dungeon">Dungeon reward</option>
-        </select>
+        {wantKind === "material" && (
+          <select className="ctl" value={how} onChange={(e) => setHow(e.target.value as typeof how)} aria-label="How">
+            <option value="any">Shop, search or dungeon</option>
+            <option value="shop">Sold in the shop</option>
+            <option value="search">Found by area search</option>
+            <option value="dungeon">Dungeon reward</option>
+          </select>
+        )}
       </div>
-      <p className="mb-2 text-sm text-muted">{shown.length} of {rows.length} locations{mat ? ` with ${mat}` : ""}</p>
+      <p className="mb-2 text-sm text-muted">{shown.length} of {rows.length} locations{want ? ` with ${want}` : ""}</p>
 
       <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {shown.map((r) => (
           <li key={r.slug}>
-            <Link href={`/cities/${r.slug}`} className="card flex h-full flex-col gap-2 p-4 hover:border-accent">
+            <Link href={`/cities/${r.slug}`} className="card flex h-full flex-col gap-2.5 p-4 hover:border-accent">
               <div className="flex items-baseline justify-between gap-2">
                 <h2 className="font-semibold">{r.name}</h2>
                 <span className="text-xs text-muted">{r.dungeonNames.length} dungeon{r.dungeonNames.length === 1 ? "" : "s"}</span>
               </div>
               <div>
-                <div className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted">Shop sells ({r.shop.length})</div>
+                <div className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted">Units for sale</div>
                 <div className="flex flex-wrap gap-1">
-                  {r.shop.length ? r.shop.map((m) => (
-                    <span key={m} className={`chip ${m === mat ? "border-accent" : ""}`} title={m}>
+                  {r.units.map((u) => (
+                    <span key={u.name} className={`chip ${u.name === want ? "border-accent" : ""}`}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={u.img} alt="" width={16} height={16} className="pixel h-4 w-4 object-contain" /> {u.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted">Items for sale</div>
+                <div className="flex flex-wrap gap-1">
+                  {r.shop.map((m) => (
+                    <span key={m} className={`chip ${m === want ? "border-accent" : ""}`}>
                       <MatIcon m={materials[m]} size={14} /> {m}
                     </span>
-                  )) : <span className="text-xs text-muted">No material shop recorded</span>}
+                  ))}
+                  {r.molds.map((m) => (
+                    <span key={m} className={`chip ${m === want ? "border-accent" : ""}`}>{m}</span>
+                  ))}
                 </div>
               </div>
               <div className="mt-auto text-xs text-muted">

@@ -1,6 +1,5 @@
 import Link from "next/link";
-import shop from "@/data/shop-units.json";
-import { data, unitById } from "@/lib/data";
+import { citySlug, data, unitById, unitSoldIn } from "@/lib/data";
 import { STATS, type UnitLite } from "@/lib/types";
 import { UnitImg } from "./ui";
 
@@ -18,9 +17,10 @@ function descendants(u: UnitLite) {
 }
 
 export default function ShopUnits() {
-  const units = shop.units
-    .map((n) => data.units.find((u) => u.name === n))
-    .filter((u): u is UnitLite => !!u);
+  // every unit some city's shop sells (from the game's unitshop table), most widely sold first
+  const units = data.units
+    .filter((u) => unitSoldIn.has(u.name))
+    .sort((a, b) => unitSoldIn.get(b.name)!.length - unitSoldIn.get(a.name)!.length || a.id - b.id);
 
   return (
     <section className="mb-8">
@@ -43,6 +43,7 @@ export default function ShopUnits() {
               ))}
               <th className="th">Ranks up into</th>
               <th className="th">Can become</th>
+              <th className="th">Sold in</th>
             </tr>
           </thead>
           <tbody>
@@ -92,18 +93,24 @@ export default function ShopUnits() {
                       <b className="font-mono text-ink">{all.length}</b> units · {finals.length} final
                     </Link>
                   </td>
+                  <td className="td">
+                    <details className="text-xs">
+                      <summary className="cursor-pointer whitespace-nowrap text-muted hover:text-ink">
+                        <b className="font-mono text-ink">{unitSoldIn.get(u.name)!.length}</b> cities
+                      </summary>
+                      <div className="mt-1 flex max-w-72 flex-wrap gap-1">
+                        {unitSoldIn.get(u.name)!.map((c) => (
+                          <Link key={c} href={`/cities/${citySlug(c)}`} className="chip hover:border-accent">{c}</Link>
+                        ))}
+                      </div>
+                    </details>
+                  </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
       </div>
-      {!shop.verified && (
-        <p className="mt-1.5 text-xs text-muted">
-          These are the units no rank-up leads to, so they have to be bought or recruited. The exact in-game Shop
-          stock per map isn&apos;t in any source we found.
-        </p>
-      )}
     </section>
   );
 }

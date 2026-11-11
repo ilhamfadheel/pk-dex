@@ -33,7 +33,7 @@ export function GET() {
     ...cities.map((c) => ({
       t: "city" as const,
       n: c.name,
-      s: `Shop ${c.shop.length} · Search ${c.search.length} · ${c.dungeons.length} dungeon${c.dungeons.length === 1 ? "" : "s"}`,
+      s: `Sells ${c.units.join(", ")} · ${c.dungeons.length} dungeon${c.dungeons.length === 1 ? "" : "s"}`,
       h: `/cities/${c.slug}`,
       i: null,
       k: `${c.name} city town area ${c.dungeons.map((d) => d.name).join(" ")}`.toLowerCase(),

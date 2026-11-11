@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import shop from "@/data/shop-units.json";
 import { MatChip, UnitImg } from "@/components/ui";
-import { cities, cityBySlug, data } from "@/lib/data";
+import { cities, cityBySlug, data, iconFor } from "@/lib/data";
+
+const moldIcon = (m: string) =>
+  iconFor(m === "RankUp Mold" ? "Emblems" : m === "Armor Mold" ? "Armor" : m === "Accessories Mold" ? "Accessories" : "Weapons");
 
 export function generateStaticParams() {
   return cities.map((c) => ({ slug: c.slug }));
@@ -35,7 +37,7 @@ export default async function CityPage({ params }: PageProps<"/cities/[slug]">) 
       return g;
     }, {}),
   ).sort(([a], [b]) => (ORDER[a] ?? 9) - (ORDER[b] ?? 9));
-  const shopUnits = shop.units.map((n) => data.units.find((u) => u.name === n)).filter((u) => !!u);
+  const units = c.units.map((n) => data.units.find((u) => u.name === n)!).filter(Boolean);
 
   return (
     <article className="space-y-4">
@@ -45,37 +47,47 @@ export default async function CityPage({ params }: PageProps<"/cities/[slug]">) 
       <header>
         <h1 className="text-3xl font-bold tracking-tight">{c.name}</h1>
         <p className="text-sm text-muted">
-          Shop: {c.shop.length} materials · Area search: {c.search.length} · Dungeons: {c.dungeons.length}
+          Shop: {c.units.length} units, {c.shop.length + c.molds.length} items · Area search: {c.search.length} · Dungeons: {c.dungeons.length}
         </p>
       </header>
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        <Section title="Shop: materials" sub="Bought with gold in this city's shop.">
-          {groups.length ? (
-            <div className="space-y-2">
-              {groups.map(([cat, ms]) => (
-                <div key={cat}>
-                  <div className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted">{cat}</div>
-                  <div className="flex flex-wrap gap-1.5">{ms.map((m) => <MatChip key={m} name={m} m={data.materials[m]} />)}</div>
-                </div>
+      <Section title="Shop" sub="Everything this city's shop sells.">
+        <div className="grid gap-5 lg:grid-cols-[1.2fr_1fr_1fr]">
+          <div>
+            <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-muted">Units ({units.length})</div>
+            <div className="flex flex-wrap gap-2">
+              {units.map((u) => (
+                <Link key={u.id} href={`/unit/${u.slug}`} className="flex w-20 flex-col items-center gap-1 rounded-lg p-1.5 text-center text-xs hover:bg-panel-2">
+                  <UnitImg u={u} size={44} />
+                  <span className="leading-tight">{u.name}</span>
+                </Link>
               ))}
             </div>
-          ) : <p className="text-sm text-muted">No material shop recorded here.</p>}
-        </Section>
-
-        <Section title="Shop: units" sub="Which units each city sells isn't in any source we found.">
-          <p className="mb-2 text-sm text-muted">
-            These are the units you start from (no rank-up leads to them), so they come from Shops or recruiting:
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {shopUnits.map((u) => (
-              <Link key={u!.id} href={`/unit/${u!.slug}`} className="chip !py-1 hover:border-accent">
-                <UnitImg u={u!} size={20} /> {u!.name}
-              </Link>
+          </div>
+          <div className="space-y-3">
+            {groups.map(([cat, ms]) => (
+              <div key={cat}>
+                <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-muted">{cat}</div>
+                <div className="flex flex-wrap gap-1.5">{ms.map((m) => <MatChip key={m} name={m} m={data.materials[m]} />)}</div>
+              </div>
             ))}
           </div>
-        </Section>
-      </div>
+          <div>
+            <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-muted">Molds ({c.molds.length})</div>
+            <div className="flex flex-wrap gap-1.5">
+              {c.molds.map((m) => (
+                <Link key={m} href={m === "RankUp Mold" ? "/emblems" : "/crafting"} className="chip hover:border-accent" title={m === "RankUp Mold" ? "Used to make emblems" : "Used to craft weapons, armor and accessories"}>
+                  {moldIcon(m) && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={moldIcon(m)!} alt="" width={18} height={18} className="pixel" />
+                  )}
+                  {m}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Section>
 
       <Section title="Area search" sub="Materials an area search here can turn up. Offline = single-player, Online = online play.">
         {c.search.length ? (

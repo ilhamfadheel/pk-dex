@@ -8,6 +8,7 @@ import emblemsRaw from "@/data/emblems.json";
 import materialsRaw from "@/data/materials.json";
 import craftingRaw from "@/data/crafting.json";
 import effectsRaw from "@/data/effects.json";
+import shopsRaw from "@/data/shops.json";
 import type { Edge, MaterialLite, PlannerData, Recipe, UnitLite } from "./types";
 import { RANKUP_MOLD } from "./plan";
 
@@ -241,18 +242,19 @@ export const emblemsUsing = (name: string) =>
 export interface City {
   name: string;
   slug: string;
-  shop: string[]; // material names sold here
+  shop: string[]; // ores + jewels sold here
+  units: string[]; // unit names sold here
+  molds: string[]; // mold names sold here (e.g. "Sword Mold", "RankUp Mold")
   search: { material: string; offline: boolean; online: boolean }[];
   dungeons: { name: string; rewards: { material: string; floor: number | string }[] }[];
 }
 const cityMap = new Map<string, City>();
 const city = (name: string) => {
   let c = cityMap.get(name);
-  if (!c) cityMap.set(name, (c = { name, slug: slugify(name), shop: [], search: [], dungeons: [] }));
+  if (!c) cityMap.set(name, (c = { name, slug: slugify(name), shop: [], units: [], molds: [], search: [], dungeons: [] }));
   return c;
 };
 for (const m of rawMaterials) {
-  for (const s of m.purchase_in) city(s).shop.push(m.name);
   for (const a of m.area_searches) {
     const c = city(a.area);
     let row = c.search.find((r) => r.material === m.name);
@@ -267,6 +269,19 @@ for (const m of rawMaterials) {
     dg.rewards.push({ material: m.name, floor: d.floors });
   }
 }
+// Shop stock read from the game's own unitshop.dat / itemshop.dat (scripts/extract-shops.py):
+// each city sells up to 5 starting units, 1 ore, 1 jewel and 3 molds.
+for (const s of shopsRaw as { city: string; units: string[]; items: { category: string; name: string }[] }[]) {
+  const c = city(s.city);
+  c.units = s.units;
+  c.molds = s.items.filter((i) => i.category === "Molds").map((i) => i.name);
+  c.shop = s.items.filter((i) => i.category !== "Molds").map((i) => i.name);
+}
+/** Cities whose shop sells a given unit (by unit name). */
+export const unitSoldIn = new Map<string, string[]>();
+for (const c of cityMap.values())
+  for (const u of c.units) unitSoldIn.set(u, [...(unitSoldIn.get(u) ?? []), c.name].sort());
+
 const byRarity = (a: string, b: string) => (materials[a]?.rarity ?? 0) - (materials[b]?.rarity ?? 0) || a.localeCompare(b);
 for (const c of cityMap.values()) {
   c.shop.sort(byRarity);

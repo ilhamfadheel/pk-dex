@@ -6,7 +6,7 @@ import EvolutionTree from "@/components/EvolutionTree";
 import SpritePlayer, { type AnimData } from "@/components/SpritePlayer";
 import RankupPlanner from "@/components/RankupPlanner";
 import { MatChip, RecipeOptions, UnitImg } from "@/components/ui";
-import { data, spByUnit, unitById, unitBySlug } from "@/lib/data";
+import { citySlug, data, spByUnit, unitById, unitBySlug, unitSoldIn } from "@/lib/data";
 import { STATS, type Edge, type UnitLite } from "@/lib/types";
 
 export function generateStaticParams() {
@@ -162,7 +162,18 @@ export default async function UnitPage({ params }: PageProps<"/unit/[slug]">) {
             <h2 className="mb-2 font-semibold">Evolves from</h2>
             {inEdges.length ? (
               <ul className="space-y-2">{inEdges.map((e, i) => <EdgeCard key={i} e={e} other={unitById.get(e.from)!} dir="from" />)}</ul>
-            ) : <p className="text-sm text-muted">Base unit: recruit it directly.</p>}
+            ) : (
+              <div className="card p-3">
+                <div className="mb-2 text-sm">
+                  Starting unit: buy it in {unitSoldIn.get(u.name)?.length ?? 0} cities&apos; shops
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {(unitSoldIn.get(u.name) ?? []).map((c) => (
+                    <Link key={c} href={`/cities/${citySlug(c)}`} className="chip hover:border-accent">{c}</Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
           <div>
             <h2 className="mb-2 font-semibold">Evolves into</h2>

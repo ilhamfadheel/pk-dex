@@ -6,7 +6,11 @@ import type { MaterialLite, Stat, UnitLite } from "@/lib/types";
 import { STATS } from "@/lib/types";
 import { MatIcon, UnitImg } from "./ui";
 
-type SortKey = "id" | "name" | "rank" | "slots" | Stat;
+type SortKey = "id" | "name" | "rank" | "slots" | Stat | "search";
+
+/** Search power per party slot. Search power is tied to AGI (community guide). */
+const searchPower = (u: UnitLite) => u.agi / u.slots;
+const sortValue = (u: UnitLite, k: SortKey) => (k === "search" ? searchPower(u) : u[k]);
 
 export default function UnitDex({
   units,
@@ -67,7 +71,7 @@ export default function UnitDex({
     );
     const k = sort.key;
     return r.sort((a, b) => {
-      const av = a[k], bv = b[k];
+      const av = sortValue(a, k), bv = sortValue(b, k);
       return (typeof av === "string" ? av.localeCompare(bv as string) : (av as number) - (bv as number)) * sort.dir || a.id - b.id;
     });
   }, [units, dq, race, rank, move, slots, ability, drops, stage, needs, needMode, sort]);
@@ -81,7 +85,12 @@ export default function UnitDex({
   };
 
   const th = (k: SortKey, label: string) => (
-    <th key={k} className="th cursor-pointer select-none whitespace-nowrap hover:text-ink" onClick={() => toggleSort(k)}>
+    <th
+      key={k}
+      className="th cursor-pointer select-none whitespace-nowrap hover:text-ink"
+      onClick={() => toggleSort(k)}
+      title={k === "search" ? "Search party power per party slot: AGI ÷ slots (search power is tied to AGI). Click to sort." : undefined}
+    >
       {label}
       {sort.key === k ? (sort.dir === 1 ? " ▲" : " ▼") : ""}
     </th>
@@ -195,6 +204,7 @@ export default function UnitDex({
                   {th("rank", "Rank")}
                   {th("slots", "Slots")}
                   {STATS.map((s) => th(s, s === "hit" ? "Hit%" : s.toUpperCase()))}
+                  {th("search", "Search")}
                   <th className="th">Ability</th>
                   <th className="th">Evolves into</th>
                 </tr>
@@ -224,6 +234,14 @@ export default function UnitDex({
                     <td className="td font-mono">{u.rank}</td>
                     <td className="td font-mono">{u.slots}</td>
                     {STATS.map((s) => <td key={s} className="td text-right font-mono tabular-nums">{u[s]}</td>)}
+                    <td
+                      className="td text-right font-mono tabular-nums"
+                      title={`Search power ≈ AGI ${u.agi} ÷ ${u.slots} slot${u.slots > 1 ? "s" : ""}`}
+                    >
+                      <span className={searchPower(u) >= 40 ? "font-semibold text-accent" : searchPower(u) >= 30 ? "text-gold" : ""}>
+                        {Number.isInteger(searchPower(u)) ? searchPower(u) : searchPower(u).toFixed(1)}
+                      </span>
+                    </td>
                     <td className="td whitespace-nowrap text-muted">{u.ability || "—"}</td>
                     <td className="td">
                       <div className="flex gap-1">

@@ -2,14 +2,29 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { MatChip, MatIcon, UnitImg, UnitLink } from "@/components/ui";
-import { citySlug, craftsUsing, data, emblemsUsing, materialBySlug, rawMaterials, resolveMaterial, slugify, unitById } from "@/lib/data";
+import JsonLd from "@/components/JsonLd";
+import { GAME, breadcrumbs, pageMeta } from "@/lib/seo";
+import { cities, citySlug, craftsUsing, data, emblemsUsing, materialBySlug, rawMaterials, resolveMaterial, slugify, unitById } from "@/lib/data";
 
 export function generateStaticParams() {
   return rawMaterials.map((m) => ({ slug: slugify(m.name) }));
 }
 
 export async function generateMetadata({ params }: PageProps<"/materials/[slug]">): Promise<Metadata> {
-  return { title: materialBySlug.get((await params).slug)?.name ?? "Material" };
+  const m = materialBySlug.get((await params).slug);
+  if (!m) return { title: "Material not found" };
+  const shops = cities.filter((c) => c.shop.includes(m.name)).map((c) => c.name);
+  const emblems = emblemsUsing(m.name);
+  const where = [
+    shops.length ? `sold in ${shops.slice(0, 4).join(", ")}${shops.length > 4 ? ` and ${shops.length - 4} more` : ""}` : "",
+    m.dropped_by.length ? `dropped by ${m.dropped_by.slice(0, 3).map((d) => d.name).join(", ")}` : "",
+    m.dungeon_reward.length ? `found in ${m.dungeon_reward.length} dungeons` : "",
+  ].filter(Boolean);
+  return pageMeta({
+    title: `${m.name} – Where to Get It & Uses`,
+    description: `${m.name} (${m.category.replace(/s$/, "")}, rarity ${m.rarity}${m.effect ? `, ${m.effect}` : ""}) in ${GAME}: ${where.join("; ") || "where to find it"}.${emblems.length ? ` Used in ${emblems.slice(0, 3).join(", ")}${emblems.length > 3 ? " and more" : ""}.` : ""}`,
+    path: `/materials/${slugify(m.name)}`,
+  });
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -34,6 +49,7 @@ export default async function MaterialPage({ params }: PageProps<"/materials/[sl
 
   return (
     <article className="space-y-4">
+      <JsonLd data={breadcrumbs([{ name: "Materials", path: "/materials" }, { name: raw.name, path: `/materials/${slugify(raw.name)}` }])} />
       <nav className="text-xs text-muted">
         <Link href="/materials" className="hover:underline">Materials</Link> / {raw.name}
       </nav>

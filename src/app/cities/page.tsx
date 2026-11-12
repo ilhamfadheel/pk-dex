@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import CityList, { type CityRow } from "@/components/CityList";
 import { cities, data } from "@/lib/data";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Cities" };
+export const metadata: Metadata = pageMeta({
+  title: "Cities & Shops – Where to Buy Units & Items",
+  description: `All ${cities.length} Pocket Kingdom: Own the World cities and areas: which units, ores, jewels and molds each shop sells, what area searches find, and every dungeon's rewards by floor.`,
+  path: "/cities",
+});
 
 const rows: CityRow[] = cities.map((c) => ({
   name: c.name,

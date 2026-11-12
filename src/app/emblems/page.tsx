@@ -3,8 +3,14 @@ import type { Metadata } from "next";
 import { MatChip, MatIcon, UnitImg } from "@/components/ui";
 import { data, edgesByEmblem, unitById } from "@/lib/data";
 import { RANKUP_MOLD } from "@/lib/plan";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Emblems" };
+export const metadata: Metadata = pageMeta({
+  title: "Emblem Recipes – Every Rank-up Emblem",
+  description:
+    "All 31 Pocket Kingdom: Own the World rank-up emblems and their 70 recipes: the ore, jewel and item each one needs, success rates, and which unit rank-ups use it.",
+  path: "/emblems",
+});
 
 export default function EmblemsPage() {
   const list = Object.entries(data.emblems);

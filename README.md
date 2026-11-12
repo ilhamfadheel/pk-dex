@@ -42,6 +42,16 @@ From the Unit Rankup Guide by Gearb0x (GameFAQs):
   (Internet Archive). 20 units have no archived portrait and fall back to their race icon.
 - Game names, data and art © SEGA. The GameFAQs guides' text is not reproduced.
 
+## Search engines
+
+- Every page has its own title, description, canonical URL, Open Graph / Twitter card and
+  JSON-LD (site + breadcrumbs); `src/lib/seo.ts` holds the helpers.
+- `/sitemap.xml` lists all pages. A GitHub Pages project site can't serve `robots.txt` at the
+  domain root, so submit `https://ilhamfadheel.github.io/pk-dex/sitemap.xml` in Google Search Console.
+- Search Console ownership: add the HTML-tag token as a repo variable `GOOGLE_SITE_VERIFICATION`
+  (Settings → Secrets and variables → Actions → Variables) and redeploy.
+- Social images: `node scripts/make-og.mjs` (public/og). Check all pages: `npm run build && node scripts/check-seo.mjs`.
+
 ## Develop
 
 ```bash

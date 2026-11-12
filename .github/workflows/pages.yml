@@ -28,6 +28,8 @@ jobs:
         env:
           NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
           NEXT_TELEMETRY_DISABLED: 1
+          # Optional: Google Search Console HTML-tag token (Settings > Secrets and variables > Actions > Variables)
+          NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ vars.GOOGLE_SITE_VERIFICATION }}
       # Let GitHub Pages serve folders that start with an underscore (_next)
       - run: touch out/.nojekyll
       - uses: actions/upload-pages-artifact@v3

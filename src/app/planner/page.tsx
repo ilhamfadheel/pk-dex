@@ -2,8 +2,14 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import PlannerWithUrl from "@/components/PlannerWithUrl";
 import { data } from "@/lib/data";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Rank-up Planner" };
+export const metadata: Metadata = pageMeta({
+  title: "Rank-up Planner – Materials to Evolve Units",
+  description:
+    "Plan any Pocket Kingdom: Own the World rank-up: pick the unit you have and the one you want to see every evolution path, the emblem for each step, and the total ores, jewels, battles and VP needed.",
+  path: "/planner",
+});
 
 export default function PlannerPage() {
   return (

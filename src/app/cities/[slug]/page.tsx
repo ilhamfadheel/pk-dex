@@ -2,7 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { MatChip, UnitImg } from "@/components/ui";
+import JsonLd from "@/components/JsonLd";
 import { cities, cityBySlug, data, iconFor } from "@/lib/data";
+import { GAME, breadcrumbs, pageMeta } from "@/lib/seo";
 
 const moldIcon = (m: string) =>
   iconFor(m === "RankUp Mold" ? "Emblems" : m === "Armor Mold" ? "Armor" : m === "Accessories Mold" ? "Accessories" : "Weapons");
@@ -12,7 +14,13 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps<"/cities/[slug]">): Promise<Metadata> {
-  return { title: cityBySlug.get((await params).slug)?.name ?? "City" };
+  const c = cityBySlug.get((await params).slug);
+  if (!c) return { title: "City not found" };
+  return pageMeta({
+    title: `${c.name} – Shop, Search & Dungeons`,
+    description: `${c.name} in ${GAME}: the shop sells ${[...c.units, ...c.shop, ...c.molds].join(", ")}. Area searches find ${c.search.length} materials${c.dungeons.length ? `; dungeons: ${c.dungeons.map((d) => d.name).join(", ")}` : ""}.`,
+    path: `/cities/${c.slug}`,
+  });
 }
 
 function Section({ title, sub, children }: { title: string; sub?: string; children: React.ReactNode }) {
@@ -41,6 +49,7 @@ export default async function CityPage({ params }: PageProps<"/cities/[slug]">) 
 
   return (
     <article className="space-y-4">
+      <JsonLd data={breadcrumbs([{ name: "Cities", path: "/cities" }, { name: c.name, path: `/cities/${c.slug}` }])} />
       <nav className="text-xs text-muted">
         <Link href="/cities" className="hover:underline">Cities</Link> / {c.name}
       </nav>

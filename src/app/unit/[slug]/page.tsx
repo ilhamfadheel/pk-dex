@@ -6,7 +6,9 @@ import EvolutionTree from "@/components/EvolutionTree";
 import SpritePlayer, { type AnimData } from "@/components/SpritePlayer";
 import RankupPlanner from "@/components/RankupPlanner";
 import { MatChip, RecipeOptions, UnitImg } from "@/components/ui";
+import JsonLd from "@/components/JsonLd";
 import { citySlug, data, spByUnit, unitById, unitBySlug, unitSoldIn } from "@/lib/data";
+import { GAME, breadcrumbs, pageMeta } from "@/lib/seo";
 import { STATS, type Edge, type UnitLite } from "@/lib/types";
 
 export function generateStaticParams() {
@@ -15,7 +17,19 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps<"/unit/[slug]">): Promise<Metadata> {
   const u = unitBySlug.get((await params).slug);
-  return { title: u?.name ?? "Unit" };
+  if (!u) return { title: "Unit not found" };
+  const from = data.edges.filter((e) => e.to === u.id);
+  const into = u.next.map((id) => unitById.get(id)!.name);
+  const fromText = from.length
+    ? `Evolves from ${from.map((e) => `${unitById.get(e.from)!.name} (${e.emblem}, Lv ${e.level}, ${e.vp} VP)`).join(" or ")}`
+    : `Starting unit sold in ${unitSoldIn.get(u.name)?.length ?? 0} city shops`;
+  return pageMeta({
+    title: `${u.name} – Stats, Evolution & Rank-up`,
+    description: `${u.name} (${u.race}, rank ${u.rank}, ${u.slots} slot${u.slots > 1 ? "s" : ""}${u.ability ? `, ${u.ability}` : ""}): HP ${u.hp}, ATK ${u.atk}, DEF ${u.def}, AGI ${u.agi}. ${fromText}${into.length ? `; ranks up into ${into.join(", ")}` : "; final form"}. Materials, battle animations and evolution tree.`,
+    path: `/unit/${u.slug}`,
+    image: `/og/units/${u.slug}.png`,
+    imageAlt: `${u.name} from ${GAME}`,
+  });
 }
 
 const STAT_MAX: Record<string, number> = { hp: 260, atk: 100, def: 75, agi: 85, dex: 100, wis: 100, int: 100, hit: 80 };
@@ -73,6 +87,7 @@ export default async function UnitPage({ params }: PageProps<"/unit/[slug]">) {
 
   return (
     <article className="space-y-6">
+      <JsonLd data={breadcrumbs([{ name: "Units", path: "/" }, { name: u.name, path: `/unit/${u.slug}` }])} />
       <nav className="flex items-center gap-2 text-xs text-muted">
         <span>
           <Link href="/" className="hover:underline">Units</Link> / {u.name}

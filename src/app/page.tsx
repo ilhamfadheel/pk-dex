@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
 import ShopUnits from "@/components/ShopUnits";
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta({
+  title: "Pocket Kingdom: Own the World – Unit Guide & Database",
+  absoluteTitle: true,
+  description:
+    "Pocket Kingdom: Own the World (N-Gage) database: all 115 units with stats, battle animations and evolution trees, rank-up emblem recipes, a material planner, crafting recipes and every city's shop.",
+  path: "/",
+});
 import UnitDex from "@/components/UnitDex";
 import { data } from "@/lib/data";
 

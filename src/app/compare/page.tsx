@@ -2,8 +2,14 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import CompareView from "@/components/CompareView";
 import { data } from "@/lib/data";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Compare units" };
+export const metadata: Metadata = pageMeta({
+  title: "Compare Units – Stats Side by Side",
+  description:
+    "Compare up to 4 Pocket Kingdom: Own the World units side by side: HP, ATK, DEF, AGI, DEX, WIS, INT, hit rate, slots, abilities and how many rank-ups, battles and VP each one takes to get.",
+  path: "/compare",
+});
 
 export default function ComparePage() {
   return (

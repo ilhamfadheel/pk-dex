@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import CraftingList from "@/components/CraftingList";
 import { craftRows, data, iconFor } from "@/lib/data";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Crafting" };
+export const metadata: Metadata = pageMeta({
+  title: "Crafting Recipes – Weapons, Armor & Accessories",
+  description: `All ${craftRows.length} Pocket Kingdom: Own the World crafting recipes: the mold, ore and materials for every weapon, armor and accessory, what each effect does in battle, and success rates.`,
+  path: "/crafting",
+});
 
 const typeIcons = { Weapons: iconFor("Weapons"), Armor: iconFor("Armor"), Accessories: iconFor("Accessories") };
 

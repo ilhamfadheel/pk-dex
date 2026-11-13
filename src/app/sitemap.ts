@@ -17,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
   return [
     page("/", 1),
-    ...["/planner", "/compare", "/emblems", "/equipment", "/crafting", "/materials", "/cities"].map((p) => page(p, 0.8)),
+    ...["/planner", "/compare", "/party", "/emblems", "/equipment", "/crafting", "/materials", "/cities"].map((p) => page(p, 0.8)),
     ...data.units.map((u) => page(`/unit/${u.slug}`, 0.7, `/og/units/${u.slug}.png`)),
     ...rawMaterials.map((m) => page(`/materials/${slugify(m.name)}`, 0.6)),
     ...cities.map((c) => page(`/cities/${c.slug}`, 0.6)),

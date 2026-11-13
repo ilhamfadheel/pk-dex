@@ -41,6 +41,7 @@ const nav = [
   { href: "/", label: "Units" },
   { href: "/planner", label: "Planner" },
   { href: "/compare", label: "Compare" },
+  { href: "/party", label: "Party" },
   { href: "/emblems", label: "Emblems" },
   { href: "/equipment", label: "Equipment" },
   { href: "/crafting", label: "Crafting" },

@@ -7,7 +7,7 @@ import SpritePlayer, { type AnimData } from "@/components/SpritePlayer";
 import RankupPlanner from "@/components/RankupPlanner";
 import { MatChip, RecipeOptions, UnitImg } from "@/components/ui";
 import JsonLd from "@/components/JsonLd";
-import { citySlug, data, enemyIn, spByUnit, unitById, unitBySlug, unitSoldIn } from "@/lib/data";
+import { citySlug, data, enemyIn, spByUnit, unitById, unitBySlug, unitPrices, unitSoldIn } from "@/lib/data";
 import { GAME, breadcrumbs, pageMeta } from "@/lib/seo";
 import { STATS, type Edge, type UnitLite } from "@/lib/types";
 
@@ -122,6 +122,7 @@ export default async function UnitPage({ params }: PageProps<"/unit/[slug]">) {
             <dt className="text-muted">Rank</dt><dd>{u.rank}</dd>
             <dt className="text-muted">Ability</dt><dd>{u.ability || "—"}</dd>
             {sp != null && <><dt className="text-muted">SP</dt><dd>{sp}</dd></>}
+            {unitPrices[u.name] != null && <><dt className="text-muted">Price</dt><dd className="text-gold">{unitPrices[u.name]} G</dd></>}
             <dt className="text-muted">Stage</dt>
             <dd>{u.prev.length === 0 ? "Base unit" : u.next.length === 0 ? "Final form" : "Middle form"}</dd>
           </dl>

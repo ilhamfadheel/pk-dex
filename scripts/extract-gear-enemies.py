@@ -1,7 +1,7 @@
 """Extract equipment stats and each area's enemy parties from the game's data files.
 
 Usage: python scripts/extract-gear-enemies.py <path to system/apps/6rah>
-Writes src/data/equipment.json and src/data/enemies.json.
+Writes src/data/equipment.json, src/data/enemies.json and src/data/unit-prices.json.
 
 equip0/1/2.dat (weapons, armor, accessories): 16-byte header (u32 count), then
   48-byte records: name (32 bytes, latin-1) + data:
@@ -13,6 +13,11 @@ equip0/1/2.dat (weapons, armor, accessories): 16-byte header (u32 count), then
 partydata.dat: u16 big-endian count (378 = 42 areas x 9 parties) in a 16-byte header,
   then 32-byte party records; unit ids (0xFF = empty) at bytes 3, 10, 17 and 24.
   Party p of area a is record a*9 + p (areas in english/move.dat order).
+  So a party holds at most 4 units.
+
+unit.dat: 115 x 160-byte records, no header, in unit-id order: name (UTF-16, 48 bytes),
+  race name, ..., then at byte 144: race, rank, 0, size, HP ATK DEF AGI DEX WIS INT HIT
+  (u8 each), shop price in gold (u16 big-endian, byte 156).
 """
 import json, os, re, sys
 
@@ -83,4 +88,14 @@ for a, city in enumerate(areas):
 
 json.dump(gear, open(os.path.join(root, "src", "data", "equipment.json"), "w", encoding="utf-8"), indent=1, ensure_ascii=False)
 json.dump(enemies, open(os.path.join(root, "src", "data", "enemies.json"), "w", encoding="utf-8"), indent=1, ensure_ascii=False)
+ub = open(os.path.join(game, "unit.dat"), "rb").read()
+unit_list = load("units.json")
+assert len(ub) == 160 * len(unit_list), "unexpected unit.dat size"
+prices = {}
+for u in unit_list:
+    r = ub[u["id"] * 160:(u["id"] + 1) * 160]
+    name = r[:48].decode("utf-16-le").split("")[0]
+    assert norm(name) == norm(u["name"]), f"unit.dat order differs at {u['id']}: {name} / {u['name']}"
+    prices[u["name"]] = int.from_bytes(r[156:158], "big")
+json.dump(prices, open(os.path.join(root, "src", "data", "unit-prices.json"), "w", encoding="utf-8"), indent=1, ensure_ascii=False)
 print(f"wrote {len(gear)} equipment items, {len(enemies)} areas x 9 enemy parties")

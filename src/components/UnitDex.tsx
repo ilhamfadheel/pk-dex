@@ -5,37 +5,13 @@ import { useDeferredValue, useMemo, useState, useSyncExternalStore } from "react
 import type { MaterialLite, Stat, UnitLite } from "@/lib/types";
 import { STATS } from "@/lib/types";
 import { MatIcon, UnitImg } from "./ui";
+import { setUrl, subscribeUrl } from "@/lib/urlState";
 
 type SortKey = "id" | "name" | "rank" | "slots" | Stat | "search";
 
 /** Search power per party slot. Search power is tied to AGI (community guide). */
 const searchPower = (u: UnitLite) => u.agi / u.slots;
 const sortValue = (u: UnitLite, k: SortKey) => (k === "search" ? searchPower(u) : u[k]);
-
-// ---- URL-backed state ----
-const urlListeners = new Set<() => void>();
-function subscribeUrl(cb: () => void) {
-  urlListeners.add(cb);
-  window.addEventListener("popstate", cb); // Back / Forward
-  return () => {
-    urlListeners.delete(cb);
-    window.removeEventListener("popstate", cb);
-  };
-}
-/** Update query params in place (replaceState: filter tweaks don't pile up in history). */
-function setUrl(changes: Record<string, string>) {
-  const params = new URLSearchParams(window.location.search);
-  for (const [k, v] of Object.entries(changes)) {
-    if (v) params.set(k, v);
-    else params.delete(k);
-  }
-  const qs = params.toString();
-  const url = `${window.location.pathname}${qs ? `?${qs}` : ""}${window.location.hash}`;
-  if (url !== `${window.location.pathname}${window.location.search}${window.location.hash}`) {
-    window.history.replaceState(window.history.state, "", url);
-    urlListeners.forEach((l) => l());
-  }
-}
 
 export default function UnitDex({
   units,

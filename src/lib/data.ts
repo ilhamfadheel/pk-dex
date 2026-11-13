@@ -11,6 +11,7 @@ import effectsRaw from "@/data/effects.json";
 import shopsRaw from "@/data/shops.json";
 import equipmentRaw from "@/data/equipment.json";
 import enemiesRaw from "@/data/enemies.json";
+import unitPricesRaw from "@/data/unit-prices.json";
 import type { Edge, MaterialLite, PlannerData, Recipe, UnitLite } from "./types";
 import { RANKUP_MOLD } from "./plan";
 
@@ -353,3 +354,6 @@ for (const [city, parties] of enemiesByCity) {
 
 export const craftsUsing = (name: string) =>
   crafting.filter((c) => [c.ore, c.item1, c.item2].some((x) => resolveMaterial(x) === name));
+
+/** Each unit's price in gold, from the game's unit table (unit.dat). */
+export const unitPrices = unitPricesRaw as Record<string, number>;

@@ -1,0 +1,681 @@
+{
+ "items": [
+  {
+   "category": "Ores",
+   "name": "Chrome"
+  },
+  {
+   "category": "Jewels",
+   "name": "Garnet"
+  },
+  {
+   "category": "Jewels",
+   "name": "Azulite"
+  },
+  {
+   "category": "Jewels",
+   "name": "Agate"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Lute"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Harp"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Book of Wisdom"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Book of Conduct"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Spellbook-Sword"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Spellbook-Shield"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Kelpie Eye"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Kraken Eye"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Serpent Eye"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Forneus Eye"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Black Leaf"
+  },
+  {
+   "category": "Ores",
+   "name": "Chrome"
+  },
+  {
+   "category": "Emblems",
+   "name": "Warrior Emblem"
+  },
+  {
+   "category": "Emblems",
+   "name": "Hound Emblem"
+  },
+  {
+   "category": "Emblems",
+   "name": "Bone Emblem"
+  },
+  {
+   "category": "Emblems",
+   "name": "Hero Emblem"
+  },
+  {
+   "category": "Emblems",
+   "name": "Jackal Emblem"
+  },
+  {
+   "category": "Ores",
+   "name": "Silver"
+  },
+  {
+   "category": "Ores",
+   "name": "Silver"
+  },
+  {
+   "category": "Jewels",
+   "name": "Cat's Eye"
+  },
+  {
+   "category": "Jewels",
+   "name": "Tourmaline"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Yellow Leaf"
+  },
+  {
+   "category": "Jewels",
+   "name": "Cat's Eye"
+  },
+  {
+   "category": "Jewels",
+   "name": "Tourmaline"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Yellow Leaf"
+  },
+  {
+   "category": "Ores",
+   "name": "Gold"
+  },
+  {
+   "category": "Ores",
+   "name": "Gold"
+  },
+  {
+   "category": "Jewels",
+   "name": "Lapis Lazuli"
+  },
+  {
+   "category": "Jewels",
+   "name": "Aquamarine"
+  },
+  {
+   "category": "Jewels",
+   "name": "Jade"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Red Leaf"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Griffon Blood"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Ninja Blood"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Vampire Blood"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Lich Blood"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Troll Blood"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Dullahan Blood"
+  },
+  {
+   "category": "Emblems",
+   "name": "Soldier Emblem"
+  },
+  {
+   "category": "Emblems",
+   "name": "Mist Emblem"
+  },
+  {
+   "category": "Emblems",
+   "name": "Wind Emblem"
+  },
+  {
+   "category": "Emblems",
+   "name": "Bear Emblem"
+  },
+  {
+   "category": "Ores",
+   "name": "Platinum"
+  },
+  {
+   "category": "Jewels",
+   "name": "Onyx"
+  },
+  {
+   "category": "Jewels",
+   "name": "Crystal"
+  },
+  {
+   "category": "Ores",
+   "name": "Platinum"
+  },
+  {
+   "category": "Jewels",
+   "name": "Onyx"
+  },
+  {
+   "category": "Jewels",
+   "name": "Crystal"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Coral Potion"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Blue Potion"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Gray Potion"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Gold Potion"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Green Horn"
+  },
+  {
+   "category": "Emblems",
+   "name": "Knight Emblem"
+  },
+  {
+   "category": "Emblems",
+   "name": "Needle Emblem"
+  },
+  {
+   "category": "Emblems",
+   "name": "Feather Emblem"
+  },
+  {
+   "category": "Emblems",
+   "name": "Lion Emblem"
+  },
+  {
+   "category": "Ores",
+   "name": "Mythril"
+  },
+  {
+   "category": "Jewels",
+   "name": "Ruby"
+  },
+  {
+   "category": "Jewels",
+   "name": "Turquoise"
+  },
+  {
+   "category": "Ores",
+   "name": "Mythril"
+  },
+  {
+   "category": "Jewels",
+   "name": "Ruby"
+  },
+  {
+   "category": "Jewels",
+   "name": "Turquoise"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Blue Horn"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Neptune Rock"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Mercury Rock"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Jupiter Rock"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Venus Rock"
+  },
+  {
+   "category": "Emblems",
+   "name": "Victor Emblem"
+  },
+  {
+   "category": "Emblems",
+   "name": "Chain Emblem"
+  },
+  {
+   "category": "Emblems",
+   "name": "Lightning Emblem"
+  },
+  {
+   "category": "Emblems",
+   "name": "Chimera Emblem"
+  },
+  {
+   "category": "Ores",
+   "name": "Orihalcon"
+  },
+  {
+   "category": "Jewels",
+   "name": "Peridot"
+  },
+  {
+   "category": "Jewels",
+   "name": "Amethyst"
+  },
+  {
+   "category": "Jewels",
+   "name": "Peridot"
+  },
+  {
+   "category": "Jewels",
+   "name": "Amethyst"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Purple Claw"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Mars Rock"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Uranus Rock"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Chaos Heart"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Dividing Heart"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Io Rock"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Chrysaor Eye"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Skylla Eye"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Naga Eye"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Snake Eye"
+  },
+  {
+   "category": "Jewels",
+   "name": "Opal"
+  },
+  {
+   "category": "Jewels",
+   "name": "Pearl"
+  },
+  {
+   "category": "Jewels",
+   "name": "Topaz"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Pluto Rock"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Saturn Rock"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Vulcan Rock"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Ganymede Rock"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Mage's Book"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Oberon Rock"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Deimos Rock"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Shff Rock"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Spellbook-Sickle"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Black Magic Book"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Nereid Rock"
+  },
+  {
+   "category": "Other Materials",
+   "name": "Red Claw"
+  }
+ ],
+ "tiers": [
+  {
+   "tier": 0,
+   "vpMin": 0,
+   "vpMax": 79,
+   "first": 15,
+   "size": 45,
+   "rewards": [
+    "Chrome",
+    "Warrior Emblem",
+    "Hound Emblem",
+    "Bone Emblem",
+    "Hero Emblem",
+    "Jackal Emblem",
+    "Silver",
+    "Silver",
+    "Cat's Eye",
+    "Tourmaline",
+    "Yellow Leaf",
+    "Cat's Eye",
+    "Tourmaline",
+    "Yellow Leaf",
+    "Gold",
+    "Gold",
+    "Lapis Lazuli",
+    "Aquamarine",
+    "Jade",
+    "Red Leaf",
+    "Griffon Blood",
+    "Ninja Blood",
+    "Vampire Blood",
+    "Lich Blood",
+    "Troll Blood",
+    "Dullahan Blood",
+    "Soldier Emblem",
+    "Mist Emblem",
+    "Wind Emblem",
+    "Bear Emblem",
+    "Platinum",
+    "Onyx",
+    "Crystal",
+    "Platinum",
+    "Onyx",
+    "Crystal",
+    "Coral Potion",
+    "Blue Potion",
+    "Gray Potion",
+    "Gold Potion",
+    "Green Horn",
+    "Knight Emblem",
+    "Needle Emblem",
+    "Feather Emblem",
+    "Lion Emblem"
+   ]
+  },
+  {
+   "tier": 1,
+   "vpMin": 80,
+   "vpMax": 159,
+   "first": 30,
+   "size": 45,
+   "rewards": [
+    "Gold",
+    "Lapis Lazuli",
+    "Aquamarine",
+    "Jade",
+    "Red Leaf",
+    "Griffon Blood",
+    "Ninja Blood",
+    "Vampire Blood",
+    "Lich Blood",
+    "Troll Blood",
+    "Dullahan Blood",
+    "Soldier Emblem",
+    "Mist Emblem",
+    "Wind Emblem",
+    "Bear Emblem",
+    "Platinum",
+    "Onyx",
+    "Crystal",
+    "Platinum",
+    "Onyx",
+    "Crystal",
+    "Coral Potion",
+    "Blue Potion",
+    "Gray Potion",
+    "Gold Potion",
+    "Green Horn",
+    "Knight Emblem",
+    "Needle Emblem",
+    "Feather Emblem",
+    "Lion Emblem",
+    "Mythril",
+    "Ruby",
+    "Turquoise",
+    "Mythril",
+    "Ruby",
+    "Turquoise",
+    "Blue Horn",
+    "Neptune Rock",
+    "Mercury Rock",
+    "Jupiter Rock",
+    "Venus Rock",
+    "Victor Emblem",
+    "Chain Emblem",
+    "Lightning Emblem",
+    "Chimera Emblem"
+   ]
+  },
+  {
+   "tier": 2,
+   "vpMin": 160,
+   "vpMax": 239,
+   "first": 45,
+   "size": 45,
+   "rewards": [
+    "Platinum",
+    "Onyx",
+    "Crystal",
+    "Platinum",
+    "Onyx",
+    "Crystal",
+    "Coral Potion",
+    "Blue Potion",
+    "Gray Potion",
+    "Gold Potion",
+    "Green Horn",
+    "Knight Emblem",
+    "Needle Emblem",
+    "Feather Emblem",
+    "Lion Emblem",
+    "Mythril",
+    "Ruby",
+    "Turquoise",
+    "Mythril",
+    "Ruby",
+    "Turquoise",
+    "Blue Horn",
+    "Neptune Rock",
+    "Mercury Rock",
+    "Jupiter Rock",
+    "Venus Rock",
+    "Victor Emblem",
+    "Chain Emblem",
+    "Lightning Emblem",
+    "Chimera Emblem",
+    "Orihalcon",
+    "Peridot",
+    "Amethyst",
+    "Peridot",
+    "Amethyst",
+    "Purple Claw",
+    "Mars Rock",
+    "Uranus Rock",
+    "Chaos Heart",
+    "Dividing Heart",
+    "Io Rock",
+    "Chrysaor Eye",
+    "Skylla Eye",
+    "Naga Eye",
+    "Snake Eye"
+   ]
+  },
+  {
+   "tier": 3,
+   "vpMin": 240,
+   "vpMax": 319,
+   "first": 60,
+   "size": 45,
+   "rewards": [
+    "Mythril",
+    "Ruby",
+    "Turquoise",
+    "Mythril",
+    "Ruby",
+    "Turquoise",
+    "Blue Horn",
+    "Neptune Rock",
+    "Mercury Rock",
+    "Jupiter Rock",
+    "Venus Rock",
+    "Victor Emblem",
+    "Chain Emblem",
+    "Lightning Emblem",
+    "Chimera Emblem",
+    "Orihalcon",
+    "Peridot",
+    "Amethyst",
+    "Peridot",
+    "Amethyst",
+    "Purple Claw",
+    "Mars Rock",
+    "Uranus Rock",
+    "Chaos Heart",
+    "Dividing Heart",
+    "Io Rock",
+    "Chrysaor Eye",
+    "Skylla Eye",
+    "Naga Eye",
+    "Snake Eye",
+    "Opal",
+    "Pearl",
+    "Topaz",
+    "Pluto Rock",
+    "Saturn Rock",
+    "Vulcan Rock",
+    "Ganymede Rock",
+    "Mage's Book",
+    "Oberon Rock",
+    "Deimos Rock",
+    "Shff Rock",
+    "Spellbook-Sickle",
+    "Black Magic Book",
+    "Nereid Rock",
+    "Red Claw"
+   ]
+  },
+  {
+   "tier": 4,
+   "vpMin": 320,
+   "vpMax": null,
+   "first": 75,
+   "size": 30,
+   "rewards": [
+    "Orihalcon",
+    "Peridot",
+    "Amethyst",
+    "Peridot",
+    "Amethyst",
+    "Purple Claw",
+    "Mars Rock",
+    "Uranus Rock",
+    "Chaos Heart",
+    "Dividing Heart",
+    "Io Rock",
+    "Chrysaor Eye",
+    "Skylla Eye",
+    "Naga Eye",
+    "Snake Eye",
+    "Opal",
+    "Pearl",
+    "Topaz",
+    "Pluto Rock",
+    "Saturn Rock",
+    "Vulcan Rock",
+    "Ganymede Rock",
+    "Mage's Book",
+    "Oberon Rock",
+    "Deimos Rock",
+    "Shff Rock",
+    "Spellbook-Sickle",
+    "Black Magic Book",
+    "Nereid Rock",
+    "Red Claw"
+   ]
+  }
+ ]
+}

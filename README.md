@@ -34,6 +34,10 @@ From the Unit Rankup Guide by Gearb0x (GameFAQs):
 - `src/data/shops.json` (each city's shop: units, ore, jewel, molds) is read from the game's own
   `unitshop.dat` / `itemshop.dat` with `python scripts/extract-shops.py <path to system/apps/6rah>`.
   Its ores and jewels match the archived fan-site shop lists for all 42 cities.
+- `src/data/world.json` (world map: each area's region and position, the 44 paths between
+  areas, and the VP needed to enter each) is read from tables inside the game program with
+  `python scripts/extract-world.py <path to system/apps/6rah>`; the script documents the offsets
+  and validates them. City pages use it for "How to get here" routes.
 
 - `src/data/*.json` comes from [Apihplays/Pocket-Kingdom-Compendium](https://github.com/Apihplays/Pocket-Kingdom-Compendium)
   (scraped from archived pk.warcry.com). Its 109 rank-up edges were checked against the GameFAQs

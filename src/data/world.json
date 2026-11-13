@@ -1,0 +1,510 @@
+[
+ {
+  "index": 0,
+  "city": "Elynotis",
+  "region": "Northeast",
+  "x": 450,
+  "y": 18,
+  "vp": 0,
+  "links": [
+   "Cressence"
+  ]
+ },
+ {
+  "index": 1,
+  "city": "Cressence",
+  "region": "Northeast",
+  "x": 440,
+  "y": 100,
+  "vp": 10,
+  "links": [
+   "Elfaria",
+   "Elynotis",
+   "Gulldria",
+   "Ruins Road"
+  ]
+ },
+ {
+  "index": 2,
+  "city": "Gulldria",
+  "region": "Northeast",
+  "x": 500,
+  "y": 165,
+  "vp": 20,
+  "links": [
+   "Beast Lair",
+   "Cressence"
+  ]
+ },
+ {
+  "index": 3,
+  "city": "Ruins Road",
+  "region": "Northeast",
+  "x": 365,
+  "y": 175,
+  "vp": 100,
+  "links": [
+   "Cressence",
+   "Tiwana Ruins"
+  ]
+ },
+ {
+  "index": 4,
+  "city": "Elfaria",
+  "region": "Northeast",
+  "x": 385,
+  "y": 80,
+  "vp": 40,
+  "links": [
+   "Cressence",
+   "Spirits Forest"
+  ]
+ },
+ {
+  "index": 5,
+  "city": "Beast Lair",
+  "region": "East",
+  "x": 450,
+  "y": 240,
+  "vp": 30,
+  "links": [
+   "Deserted Ruins",
+   "Gulldria",
+   "Thick Forest"
+  ]
+ },
+ {
+  "index": 6,
+  "city": "Thick Forest",
+  "region": "East",
+  "x": 430,
+  "y": 290,
+  "vp": 40,
+  "links": [
+   "Altar of the Spirits",
+   "Beast Lair",
+   "Deserted Ruins"
+  ]
+ },
+ {
+  "index": 7,
+  "city": "Deserted Ruins",
+  "region": "East",
+  "x": 500,
+  "y": 300,
+  "vp": 40,
+  "links": [
+   "Beast Lair",
+   "Ilyumine",
+   "Thick Forest"
+  ]
+ },
+ {
+  "index": 8,
+  "city": "Altar of the Spirits",
+  "region": "East",
+  "x": 365,
+  "y": 315,
+  "vp": 60,
+  "links": [
+   "Gate of Recollection",
+   "Thick Forest"
+  ]
+ },
+ {
+  "index": 9,
+  "city": "Tiwana Ruins",
+  "region": "East",
+  "x": 365,
+  "y": 230,
+  "vp": 150,
+  "links": [
+   "Ruins Road"
+  ]
+ },
+ {
+  "index": 10,
+  "city": "Ilyumine",
+  "region": "Southeast",
+  "x": 460,
+  "y": 435,
+  "vp": 50,
+  "links": [
+   "Deeva Volcano",
+   "Deserted Ruins",
+   "Distaria"
+  ]
+ },
+ {
+  "index": 11,
+  "city": "Deeva Volcano",
+  "region": "Southeast",
+  "x": 505,
+  "y": 520,
+  "vp": 120,
+  "links": [
+   "Ilyumine"
+  ]
+ },
+ {
+  "index": 12,
+  "city": "Distaria",
+  "region": "Southeast",
+  "x": 455,
+  "y": 560,
+  "vp": 60,
+  "links": [
+   "Ilyumine",
+   "Pirate Island",
+   "Treasure Island"
+  ]
+ },
+ {
+  "index": 13,
+  "city": "Pirate Island",
+  "region": "Southeast",
+  "x": 370,
+  "y": 610,
+  "vp": 70,
+  "links": [
+   "Distaria",
+   "Donam"
+  ]
+ },
+ {
+  "index": 14,
+  "city": "Treasure Island",
+  "region": "Southeast",
+  "x": 485,
+  "y": 610,
+  "vp": 100,
+  "links": [
+   "Distaria"
+  ]
+ },
+ {
+  "index": 15,
+  "city": "Spirits Forest",
+  "region": "North",
+  "x": 275,
+  "y": 130,
+  "vp": 60,
+  "links": [
+   "Earl's Castle",
+   "Elfaria"
+  ]
+ },
+ {
+  "index": 16,
+  "city": "Earl's Castle",
+  "region": "North",
+  "x": 260,
+  "y": 80,
+  "vp": 80,
+  "links": [
+   "Dark Elf Settlement",
+   "Spirits Forest"
+  ]
+ },
+ {
+  "index": 17,
+  "city": "Dark Elf Settlement",
+  "region": "North",
+  "x": 210,
+  "y": 110,
+  "vp": 100,
+  "links": [
+   "Earl's Castle",
+   "Echigo"
+  ]
+ },
+ {
+  "index": 18,
+  "city": "Yggdrasill",
+  "region": "North",
+  "x": 200,
+  "y": 155,
+  "vp": 200,
+  "links": [
+   "Mizuchi Shrine"
+  ]
+ },
+ {
+  "index": 19,
+  "city": "Gate of Recollection",
+  "region": "Central",
+  "x": 335,
+  "y": 280,
+  "vp": 100,
+  "links": [
+   "Altar of the Spirits",
+   "Water City"
+  ]
+ },
+ {
+  "index": 20,
+  "city": "Water City",
+  "region": "Central",
+  "x": 300,
+  "y": 220,
+  "vp": 140,
+  "links": [
+   "Gate of Recollection",
+   "Mizuchi Shrine"
+  ]
+ },
+ {
+  "index": 21,
+  "city": "Mizuchi Shrine",
+  "region": "Central",
+  "x": 245,
+  "y": 220,
+  "vp": 180,
+  "links": [
+   "Water City",
+   "Yggdrasill"
+  ]
+ },
+ {
+  "index": 22,
+  "city": "Forgotten Village",
+  "region": "Central",
+  "x": 200,
+  "y": 340,
+  "vp": 260,
+  "links": [
+   "Gate of Oblivion",
+   "Mountaintop Shrine"
+  ]
+ },
+ {
+  "index": 23,
+  "city": "Mountaintop Shrine",
+  "region": "Central",
+  "x": 220,
+  "y": 260,
+  "vp": 300,
+  "links": [
+   "Forgotten Village"
+  ]
+ },
+ {
+  "index": 24,
+  "city": "Donam",
+  "region": "South",
+  "x": 335,
+  "y": 535,
+  "vp": 80,
+  "links": [
+   "Pirate Island",
+   "Runeheim",
+   "Seles"
+  ]
+ },
+ {
+  "index": 25,
+  "city": "Runeheim",
+  "region": "South",
+  "x": 280,
+  "y": 580,
+  "vp": 100,
+  "links": [
+   "Donam",
+   "Seles"
+  ]
+ },
+ {
+  "index": 26,
+  "city": "Seles",
+  "region": "South",
+  "x": 240,
+  "y": 485,
+  "vp": 90,
+  "links": [
+   "Donam",
+   "Nomad",
+   "Runeheim"
+  ]
+ },
+ {
+  "index": 27,
+  "city": "Nomad",
+  "region": "South",
+  "x": 195,
+  "y": 535,
+  "vp": 110,
+  "links": [
+   "Pyramid",
+   "Seles"
+  ]
+ },
+ {
+  "index": 28,
+  "city": "Echigo",
+  "region": "Northwest",
+  "x": 150,
+  "y": 35,
+  "vp": 120,
+  "links": [
+   "Dark Elf Settlement",
+   "Edo",
+   "Yamato"
+  ]
+ },
+ {
+  "index": 29,
+  "city": "Yamato",
+  "region": "Northwest",
+  "x": 65,
+  "y": 50,
+  "vp": 150,
+  "links": [
+   "Echigo",
+   "Shalom"
+  ]
+ },
+ {
+  "index": 30,
+  "city": "Edo",
+  "region": "Northwest",
+  "x": 140,
+  "y": 170,
+  "vp": 180,
+  "links": [
+   "Echigo",
+   "Shalom"
+  ]
+ },
+ {
+  "index": 31,
+  "city": "Shalom",
+  "region": "Northwest",
+  "x": 25,
+  "y": 115,
+  "vp": 200,
+  "links": [
+   "Edo",
+   "Mikado Mausoleum",
+   "Yamato"
+  ]
+ },
+ {
+  "index": 32,
+  "city": "Mikado Mausoleum",
+  "region": "West",
+  "x": 90,
+  "y": 220,
+  "vp": 250,
+  "links": [
+   "Shalom"
+  ]
+ },
+ {
+  "index": 33,
+  "city": "Desert Road",
+  "region": "West",
+  "x": 15,
+  "y": 375,
+  "vp": 150,
+  "links": [
+   "Bedouin",
+   "Huge Swamp"
+  ]
+ },
+ {
+  "index": 34,
+  "city": "Huge Swamp",
+  "region": "West",
+  "x": 120,
+  "y": 270,
+  "vp": 200,
+  "links": [
+   "Desert Road",
+   "Gate of Oblivion",
+   "Nightwalker Town"
+  ]
+ },
+ {
+  "index": 35,
+  "city": "Nightwalker Town",
+  "region": "West",
+  "x": 60,
+  "y": 275,
+  "vp": 170,
+  "links": [
+   "Huge Swamp"
+  ]
+ },
+ {
+  "index": 36,
+  "city": "Gate of Oblivion",
+  "region": "West",
+  "x": 165,
+  "y": 280,
+  "vp": 220,
+  "links": [
+   "Forgotten Village",
+   "Huge Swamp"
+  ]
+ },
+ {
+  "index": 37,
+  "city": "Pyramid",
+  "region": "Southwest",
+  "x": 140,
+  "y": 500,
+  "vp": 120,
+  "links": [
+   "Ishtal",
+   "Nomad"
+  ]
+ },
+ {
+  "index": 38,
+  "city": "Ishtal",
+  "region": "Southwest",
+  "x": 85,
+  "y": 475,
+  "vp": 130,
+  "links": [
+   "Bedouin",
+   "Pyramid",
+   "Royal Tomb",
+   "Water Shrine"
+  ]
+ },
+ {
+  "index": 39,
+  "city": "Water Shrine",
+  "region": "Southwest",
+  "x": 115,
+  "y": 580,
+  "vp": 150,
+  "links": [
+   "Ishtal"
+  ]
+ },
+ {
+  "index": 40,
+  "city": "Royal Tomb",
+  "region": "Southwest",
+  "x": 15,
+  "y": 510,
+  "vp": 160,
+  "links": [
+   "Ishtal"
+  ]
+ },
+ {
+  "index": 41,
+  "city": "Bedouin",
+  "region": "Southwest",
+  "x": 55,
+  "y": 430,
+  "vp": 140,
+  "links": [
+   "Desert Road",
+   "Ishtal"
+  ]
+ }
+]

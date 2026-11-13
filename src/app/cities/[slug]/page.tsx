@@ -3,7 +3,9 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { MatChip, UnitImg } from "@/components/ui";
 import JsonLd from "@/components/JsonLd";
-import { cities, cityBySlug, data, iconFor } from "@/lib/data";
+import WorldMap from "@/components/WorldMap";
+import { cities, cityBySlug, citySlug, data, iconFor } from "@/lib/data";
+import { START, areaByCity, routeTo } from "@/lib/world";
 import { GAME, breadcrumbs, pageMeta } from "@/lib/seo";
 
 const moldIcon = (m: string) =>
@@ -18,7 +20,7 @@ export async function generateMetadata({ params }: PageProps<"/cities/[slug]">):
   if (!c) return { title: "City not found" };
   return pageMeta({
     title: `${c.name} – Shop, Search & Dungeons`,
-    description: `${c.name} in ${GAME}: the shop sells ${[...c.units, ...c.shop, ...c.molds].join(", ")}. Area searches find ${c.search.length} materials${c.dungeons.length ? `; dungeons: ${c.dungeons.map((d) => d.name).join(", ")}` : ""}.`,
+    description: `${c.name} in ${GAME} (${areaByCity.get(c.name)!.vp} VP to enter, reached via ${routeTo.get(c.name)!.path.slice(-3, -1).join(" → ") || "the start"}): the shop sells ${[...c.units, ...c.shop, ...c.molds].join(", ")}. Area searches find ${c.search.length} materials${c.dungeons.length ? `; dungeons: ${c.dungeons.map((d) => d.name).join(", ")}` : ""}.`,
     path: `/cities/${c.slug}`,
   });
 }
@@ -46,6 +48,8 @@ export default async function CityPage({ params }: PageProps<"/cities/[slug]">) 
     }, {}),
   ).sort(([a], [b]) => (ORDER[a] ?? 9) - (ORDER[b] ?? 9));
   const units = c.units.map((n) => data.units.find((u) => u.name === n)!).filter(Boolean);
+  const area = areaByCity.get(c.name)!;
+  const route = routeTo.get(c.name)!;
 
   return (
     <article className="space-y-4">
@@ -56,9 +60,62 @@ export default async function CityPage({ params }: PageProps<"/cities/[slug]">) 
       <header>
         <h1 className="text-3xl font-bold tracking-tight">{c.name}</h1>
         <p className="text-sm text-muted">
-          Shop: {c.units.length} units, {c.shop.length + c.molds.length} items · Area search: {c.search.length} · Dungeons: {c.dungeons.length}
+          {area.region} Ulgress · {area.vp} VP to enter · Shop: {c.units.length} units, {c.shop.length + c.molds.length} items ·
+          Area search: {c.search.length} · Dungeons: {c.dungeons.length}
         </p>
       </header>
+
+      <Section
+        title="How to get here"
+        sub={
+          route.path.length === 1
+            ? "Your kingdom starts here."
+            : `Follow the paths from ${START}. Each area opens once your kingdom has its Victory Points (VP); you need ${route.vpNeeded} VP to reach ${c.name}.`
+        }
+      >
+        <div className="grid gap-4 lg:grid-cols-[1fr_minmax(300px,520px)]">
+          <div className="space-y-4">
+            {route.path.length > 1 && (
+              <ol className="flex flex-wrap items-center gap-1.5">
+                {route.path.map((city, i) => {
+                  const a = areaByCity.get(city)!;
+                  const isHere = city === c.name;
+                  return (
+                    <li key={city} className="flex items-center gap-1.5">
+                      {i > 0 && <span className="text-muted">→</span>}
+                      <Link
+                        href={`/cities/${citySlug(city)}`}
+                        className={`chip !py-1 ${isHere ? "border-accent bg-accent text-accent-ink" : "hover:border-accent"}`}
+                      >
+                        <span className="font-mono text-[10px] opacity-70">{i + 1}</span> {city}
+                        <span className={`font-mono text-[10px] ${isHere ? "" : "text-gold"}`}>{a.vp} VP</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ol>
+            )}
+            <div>
+              <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-muted">
+                Paths from {c.name} ({area.links.length})
+              </div>
+              <ul className="space-y-1">
+                {area.links
+                  .map((n) => areaByCity.get(n)!)
+                  .sort((a, b) => a.vp - b.vp)
+                  .map((n) => (
+                    <li key={n.city} className="flex items-center gap-2 text-sm">
+                      <Link href={`/cities/${citySlug(n.city)}`} className="hover:text-accent hover:underline">{n.city}</Link>
+                      <span className="text-xs text-muted">{n.region}</span>
+                      <span className="ml-auto font-mono text-xs text-gold">{n.vp} VP</span>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          </div>
+          <WorldMap slugOf={citySlug} current={c.name} route={route.path} compact />
+        </div>
+      </Section>
 
       <Section title="Shop" sub="Everything this city's shop sells.">
         <div className="grid gap-5 lg:grid-cols-[1.2fr_1fr_1fr]">

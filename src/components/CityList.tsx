@@ -8,6 +8,11 @@ import { MatIcon } from "./ui";
 export interface CityRow {
   name: string;
   slug: string;
+  region: string;
+  vp: number; // VP to enter
+  vpNeeded: number; // VP to reach it from the start
+  steps: number; // paths from the start
+  order: number; // progression order
   units: { name: string; img: string }[];
   shop: string[]; // ores + jewels
   molds: string[];
@@ -20,6 +25,7 @@ export default function CityList({ rows, materials }: { rows: CityRow[]; materia
   const [q, setQ] = useState("");
   const [want, setWant] = useState(""); // a unit, mold or material name
   const [how, setHow] = useState<"any" | "shop" | "search" | "dungeon">("any");
+  const [order, setOrder] = useState<"progression" | "name" | "region">("progression");
   const dq = useDeferredValue(q);
 
   const options = useMemo(() => {
@@ -34,7 +40,12 @@ export default function CityList({ rows, materials }: { rows: CityRow[]; materia
 
   const shown = useMemo(() => {
     const ql = dq.trim().toLowerCase();
-    return rows.filter((r) => {
+    const sorted = [...rows].sort((a, b) =>
+      order === "name" ? a.name.localeCompare(b.name)
+        : order === "region" ? a.region.localeCompare(b.region) || a.order - b.order
+        : a.order - b.order,
+    );
+    return sorted.filter((r) => {
       if (ql && !r.name.toLowerCase().includes(ql) && !r.dungeonNames.some((d) => d.toLowerCase().includes(ql))) return false;
       if (!want) return true;
       if (wantKind === "unit") return r.units.some((u) => u.name === want);
@@ -42,7 +53,7 @@ export default function CityList({ rows, materials }: { rows: CityRow[]; materia
       const inShop = r.shop.includes(want), inSearch = r.search.includes(want), inDungeon = r.dungeonRewards.includes(want);
       return how === "shop" ? inShop : how === "search" ? inSearch : how === "dungeon" ? inDungeon : inShop || inSearch || inDungeon;
     });
-  }, [rows, dq, want, wantKind, how]);
+  }, [rows, dq, want, wantKind, how, order]);
 
   return (
     <>
@@ -53,6 +64,11 @@ export default function CityList({ rows, materials }: { rows: CityRow[]; materia
           <optgroup label="Units">{options.units.map((m) => <option key={m}>{m}</option>)}</optgroup>
           <optgroup label="Molds">{options.molds.map((m) => <option key={m}>{m}</option>)}</optgroup>
           <optgroup label="Materials">{options.materials.map((m) => <option key={m}>{m}</option>)}</optgroup>
+        </select>
+        <select className="ctl" value={order} onChange={(e) => setOrder(e.target.value as typeof order)} aria-label="Order">
+          <option value="progression">Order: progression (VP)</option>
+          <option value="region">Order: by region</option>
+          <option value="name">Order: A–Z</option>
         </select>
         {wantKind === "material" && (
           <select className="ctl" value={how} onChange={(e) => setHow(e.target.value as typeof how)} aria-label="How">
@@ -71,7 +87,11 @@ export default function CityList({ rows, materials }: { rows: CityRow[]; materia
             <Link href={`/cities/${r.slug}`} className="card flex h-full flex-col gap-2.5 p-4 hover:border-accent">
               <div className="flex items-baseline justify-between gap-2">
                 <h2 className="font-semibold">{r.name}</h2>
-                <span className="text-xs text-muted">{r.dungeonNames.length} dungeon{r.dungeonNames.length === 1 ? "" : "s"}</span>
+                <span className="chip !py-0.5 font-mono text-gold">{r.vp} VP</span>
+              </div>
+              <div className="-mt-1.5 text-xs text-muted">
+                {r.region} · {r.steps === 0 ? "starting city" : `${r.steps} path${r.steps === 1 ? "" : "s"} from the start, ${r.vpNeeded} VP to reach`} ·{" "}
+                {r.dungeonNames.length} dungeon{r.dungeonNames.length === 1 ? "" : "s"}
               </div>
               <div>
                 <div className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted">Units for sale</div>

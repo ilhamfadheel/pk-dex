@@ -3,14 +3,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { AnimData } from "./SpritePlayer";
 import type { UnitLite } from "@/lib/types";
-import { FIELD_H, FIELD_W, FRAME_EVERY, simulate, winRate, type BattleEvent, type Fighter } from "@/lib/battle";
+import { FIELD_H, FIELD_W, FPS, FRAME_EVERY, simulate, winRate, type BattleEvent, type Fighter } from "@/lib/battle";
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const SPEEDS = [1, 2, 4, 8];
-const TICKS_PER_SEC = 60; // 1x speed
-const ATTACK_TICKS = 18; // how long an attack pose shows
-const HIT_TICKS = 12; // how long a hit target flinches
-const POP_TICKS = 45; // how long a damage number floats
+const TICKS_PER_SEC = FPS; // 1x = the game's frame rate
+const ATTACK_TICKS = 10; // how long an attack pose shows
+const HIT_TICKS = 8; // how long a hit target flinches
+const POP_TICKS = 24; // how long a damage number floats
 
 type Pose = "idle" | "walk" | "attack" | "skill" | "defend";
 
@@ -120,12 +120,12 @@ export default function BattleView({
     const act = lastAct.get(f.key);
     if (act && t - act.tick < ATTACK_TICKS) {
       const p: Pose = act.kind === "magic" || act.kind === "skill" || act.kind === "heal" ? "skill" : "attack";
-      return { p, fr: Math.floor((t - act.tick) / 4) };
+      return { p, fr: Math.floor((t - act.tick) / 3) };
     }
     const hitAt = lastHit.get(f.key);
     if (hitAt != null && t - hitAt < HIT_TICKS) return { p: "defend", fr: 0 };
-    if (frame.units[f.key]?.moving) return { p: "walk", fr: Math.floor(t / 7) };
-    return { p: "idle", fr: Math.floor(t / 12) };
+    if (frame.units[f.key]?.moving) return { p: "walk", fr: Math.floor(t / 4) };
+    return { p: "idle", fr: Math.floor(t / 7) };
   };
 
   const pct = Math.round(odds.rate * 100);
@@ -185,7 +185,7 @@ export default function BattleView({
                 className={`pointer-events-none absolute font-mono text-[9px] font-bold ${h.miss ? "text-white/80" : h.dmg < 0 ? "text-emerald-300" : h.crit ? "text-yellow-300" : "text-red-300"}`}
                 style={{
                   left: at.x,
-                  top: at.y - 46 - age * 0.4,
+                  top: at.y - 46 - age * 0.8,
                   transform: "translateX(-50%)",
                   opacity: 1 - age / POP_TICKS,
                   textShadow: "0 1px 0 #000, 1px 0 0 #000, -1px 0 0 #000, 0 -1px 0 #000",

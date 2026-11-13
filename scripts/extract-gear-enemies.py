@@ -1,7 +1,7 @@
 """Extract equipment stats and each area's enemy parties from the game's data files.
 
 Usage: python scripts/extract-gear-enemies.py <path to system/apps/6rah>
-Writes src/data/equipment.json, src/data/enemies.json and src/data/unit-prices.json.
+Writes src/data/equipment.json, enemies.json, unit-prices.json and unit-battle.json.
 
 equip0/1/2.dat (weapons, armor, accessories): 16-byte header (u32 count), then
   48-byte records: name (32 bytes, latin-1) + data:
@@ -91,11 +91,17 @@ json.dump(enemies, open(os.path.join(root, "src", "data", "enemies.json"), "w", 
 ub = open(os.path.join(game, "unit.dat"), "rb").read()
 unit_list = load("units.json")
 assert len(ub) == 160 * len(unit_list), "unexpected unit.dat size"
-prices = {}
+prices, battle = {}, {}
 for u in unit_list:
     r = ub[u["id"] * 160:(u["id"] + 1) * 160]
     name = r[:48].decode("utf-16-le").split("")[0]
     assert norm(name) == norm(u["name"]), f"unit.dat order differs at {u['id']}: {name} / {u['name']}"
     prices[u["name"]] = int.from_bytes(r[156:158], "big")
+    t = r[144:156]
+    # what the battle engine reads (same order as the game's 92-byte stat record:
+    # ATK DEF HP AGI DEX WIS INT ACC); size 1/2/4 = small/medium/large body
+    battle[u["name"]] = {"size": t[3], "hp": t[4], "atk": t[5], "def": t[6], "agi": t[7],
+                         "dex": t[8], "wis": t[9], "int": t[10], "acc": t[11]}
+json.dump(battle, open(os.path.join(root, "src", "data", "unit-battle.json"), "w", encoding="utf-8"), indent=1, ensure_ascii=False)
 json.dump(prices, open(os.path.join(root, "src", "data", "unit-prices.json"), "w", encoding="utf-8"), indent=1, ensure_ascii=False)
 print(f"wrote {len(gear)} equipment items, {len(enemies)} areas x 9 enemy parties")

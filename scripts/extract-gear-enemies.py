@@ -13,7 +13,7 @@ equip0/1/2.dat (weapons, armor, accessories): 16-byte header (u32 count), then
 partydata.dat: u16 big-endian count (378 = 42 areas x 9 parties) in a 16-byte header,
   then 32-byte party records; unit ids (0xFF = empty) at bytes 3, 10, 17 and 24.
   Party p of area a is record a*9 + p (areas in english/move.dat order).
-  So a party holds at most 4 units.
+  An enemy party has up to 4 units; all but one boss party fit in a party's 6 slots.
 
 unit.dat: 115 x 160-byte records, no header, in unit-id order: name (UTF-16, 48 bytes),
   race name, ..., then at byte 144: race, rank, 0, size, HP ATK DEF AGI DEX WIS INT HIT

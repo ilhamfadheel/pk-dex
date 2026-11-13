@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { MatChip, UnitImg } from "@/components/ui";
 import JsonLd from "@/components/JsonLd";
 import WorldMap from "@/components/WorldMap";
-import { cities, cityBySlug, citySlug, data, iconFor } from "@/lib/data";
+import { cities, cityBySlug, citySlug, data, enemiesByCity, iconFor } from "@/lib/data";
 import { START, areaByCity, routeTo } from "@/lib/world";
 import { GAME, breadcrumbs, pageMeta } from "@/lib/seo";
 
@@ -49,6 +49,14 @@ export default async function CityPage({ params }: PageProps<"/cities/[slug]">) 
   ).sort(([a], [b]) => (ORDER[a] ?? 9) - (ORDER[b] ?? 9));
   const units = c.units.map((n) => data.units.find((u) => u.name === n)!).filter(Boolean);
   const area = areaByCity.get(c.name)!;
+  const unitByName = new Map(data.units.map((u) => [u.name, u]));
+  const parties = enemiesByCity.get(c.name) ?? [];
+  const counts = new Map<string, number>();
+  for (const p of parties) for (const n of new Set(p)) counts.set(n, (counts.get(n) ?? 0) + 1);
+  const foes = [...counts]
+    .map(([name, n]) => ({ u: unitByName.get(name)!, n }))
+    .sort((a, b) => b.n - a.n || b.u.rank - a.u.rank);
+  const maxRank = Math.max(0, ...foes.map((f) => f.u.rank));
   const route = routeTo.get(c.name)!;
 
   return (
@@ -153,6 +161,38 @@ export default async function CityPage({ params }: PageProps<"/cities/[slug]">) 
             </div>
           </div>
         </div>
+      </Section>
+
+      <Section
+        title="Enemies"
+        sub={`The ${parties.length} enemy parties you can meet here, from the game's party table. Highest rank: ${maxRank}.`}
+      >
+        <div className="mb-3 flex flex-wrap gap-1.5">
+          {foes.map(({ u, n }) => (
+            <Link key={u.id} href={`/unit/${u.slug}`} className="chip !py-1 hover:border-accent" title={`${u.name}: rank ${u.rank}, in ${n} part${n === 1 ? "y" : "ies"}`}>
+              <UnitImg u={u} size={20} /> {u.name}
+              <span className="font-mono text-[10px] text-muted">R{u.rank} ×{n}</span>
+            </Link>
+          ))}
+        </div>
+        <ol className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {parties.map((p, i) => (
+            <li key={i} className="flex items-center gap-2 rounded-lg border border-line p-2">
+              <span className="w-12 shrink-0 font-mono text-[10px] text-muted">Party {i + 1}</span>
+              <div className="flex flex-wrap gap-1.5">
+                {p.map((name, j) => {
+                  const u = unitByName.get(name)!;
+                  return (
+                    <Link key={j} href={`/unit/${u.slug}`} title={`${u.name} (rank ${u.rank})`}>
+                      <UnitImg u={u} size={36} />
+                    </Link>
+                  );
+                })}
+              </div>
+              <span className="ml-auto font-mono text-[10px] text-muted">{p.length} unit{p.length === 1 ? "" : "s"}</span>
+            </li>
+          ))}
+        </ol>
       </Section>
 
       <Section title="Area search" sub="Materials an area search here can turn up. Offline = single-player, Online = online play.">

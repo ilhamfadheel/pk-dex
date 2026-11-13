@@ -66,4 +66,15 @@ body {
   .td {
     @apply px-2 py-1.5 align-middle;
   }
+  /* command palette (cmdk) */
+  .pk-cmd-group [cmdk-group-heading] {
+    @apply px-2 pt-2 pb-1 text-[10px] font-semibold uppercase tracking-wide text-muted;
+  }
+  .pk-cmd-item {
+    @apply flex cursor-pointer items-center gap-2.5 rounded-md px-2 py-1.5 text-sm text-ink;
+  }
+  .pk-cmd-item[data-selected="true"] {
+    @apply bg-panel-2;
+    box-shadow: inset 2px 0 0 var(--accent);
+  }
 }

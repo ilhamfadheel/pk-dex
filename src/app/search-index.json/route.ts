@@ -1,5 +1,5 @@
 // Static search index, emitted as /search-index.json at build time.
-import { cities, craftRows, data, edgesByEmblem, iconFor, rawMaterials } from "@/lib/data";
+import { cities, data, edgesByEmblem, equipment, iconFor, rawMaterials } from "@/lib/data";
 import type { SearchItem } from "@/lib/types";
 
 export const dynamic = "force-static";
@@ -38,13 +38,14 @@ export function GET() {
       i: null,
       k: `${c.name} city town area ${c.dungeons.map((d) => d.name).join(" ")}`.toLowerCase(),
     })),
-    ...craftRows.map((c) => ({
-      t: "item" as const,
-      n: c.result,
-      s: `${c.mold} · ${c.effect}`,
-      h: `/crafting#${c.slug}`,
-      i: iconFor(c.type),
-      k: `${c.result} ${c.mold} ${c.type} ${c.effect}`.toLowerCase(),
+    // every weapon / armor / accessory (named ones also carry their crafting effect)
+    ...equipment.map((e) => ({
+      t: "equip" as const,
+      n: e.name,
+      s: `${e.type} · Tier ${e.tier}${e.atk ? ` · ATK +${e.atk}` : e.def ? ` · DEF +${e.def}` : ""}${e.effect ? ` · ${e.effect}` : ""}`,
+      h: `/equipment#${e.slug}`,
+      i: iconFor(e.category),
+      k: `${e.name} ${e.type} ${e.category} ${e.effect} ${e.ore ?? ""}`.toLowerCase(),
     })),
   ];
   return Response.json({ v: items.length, items });

@@ -7,7 +7,7 @@ import SpritePlayer, { type AnimData } from "@/components/SpritePlayer";
 import RankupPlanner from "@/components/RankupPlanner";
 import { MatChip, RecipeOptions, UnitImg } from "@/components/ui";
 import JsonLd from "@/components/JsonLd";
-import { citySlug, data, spByUnit, unitById, unitBySlug, unitSoldIn } from "@/lib/data";
+import { citySlug, data, enemyIn, spByUnit, unitById, unitBySlug, unitSoldIn } from "@/lib/data";
 import { GAME, breadcrumbs, pageMeta } from "@/lib/seo";
 import { STATS, type Edge, type UnitLite } from "@/lib/types";
 
@@ -84,6 +84,7 @@ export default async function UnitPage({ params }: PageProps<"/unit/[slug]">) {
   const sp = spByUnit.get(u.id);
   const notInGuide = u.name === "O'Rosam";
   const anim = (anims as Record<string, AnimData>)[u.slug];
+  const foughtIn = [...(enemyIn.get(u.name) ?? [])].sort((a, b) => b.count - a.count || a.city.localeCompare(b.city));
 
   return (
     <article className="space-y-6">
@@ -226,6 +227,28 @@ export default async function UnitPage({ params }: PageProps<"/unit/[slug]">) {
           </div>
         </section>
       )}
+
+      {/* Where it fights you */}
+      <section>
+        <h2 className="mb-1 font-semibold">Met as an enemy in</h2>
+        {foughtIn.length ? (
+          <>
+            <p className="mb-2 text-sm text-muted">
+              Enemy parties include {u.name} in {foughtIn.length} area{foughtIn.length === 1 ? "" : "s"}
+              {u.drops.length ? "; defeat them there for its drops" : ""}.
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {foughtIn.map((f) => (
+                <Link key={f.city} href={`/cities/${citySlug(f.city)}`} className="chip !py-1 hover:border-accent">
+                  {f.city} <span className="font-mono text-[10px] text-muted">×{f.count}</span>
+                </Link>
+              ))}
+            </div>
+          </>
+        ) : (
+          <p className="text-sm text-muted">No area&apos;s enemy parties include {u.name}.</p>
+        )}
+      </section>
     </article>
   );
 }

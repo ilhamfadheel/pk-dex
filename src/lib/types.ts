@@ -58,7 +58,7 @@ export interface MaterialLite {
 }
 
 export interface SearchItem {
-  t: "unit" | "material" | "emblem" | "item" | "city";
+  t: "unit" | "material" | "emblem" | "item" | "equip" | "city";
   n: string; // name
   s: string; // subtitle
   h: string; // href (without basePath)

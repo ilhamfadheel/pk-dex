@@ -9,6 +9,8 @@ import materialsRaw from "@/data/materials.json";
 import craftingRaw from "@/data/crafting.json";
 import effectsRaw from "@/data/effects.json";
 import shopsRaw from "@/data/shops.json";
+import equipmentRaw from "@/data/equipment.json";
+import enemiesRaw from "@/data/enemies.json";
 import type { Edge, MaterialLite, PlannerData, Recipe, UnitLite } from "./types";
 import { RANKUP_MOLD } from "./plan";
 
@@ -124,7 +126,7 @@ const EFFECT_NAMES: Record<number, string> = {
 };
 const effectInfo = new Map((effectsRaw as { id: number; behavior: string }[]).map((e) => [e.id, e.behavior]));
 
-// Item names the source chart misspells.
+// Item names the source chart misspells, corrected to the game's own item tables.
 const ITEM_NAME_FIX: Record<string, string> = {
   "Fairy Cloack": "Fairy Cloak",
   ForestMace: "Forest Mace",
@@ -132,7 +134,7 @@ const ITEM_NAME_FIX: Record<string, string> = {
   "Shinning Mace": "Shining Mace",
   "Shinning Robe": "Shining Robe",
   "Goliat Sling": "Goliath Sling",
-  "Black Anis Claw": "Black Annis Claw",
+  "Judgement Blade": "Judgment Blade",
 };
 
 const rawUnits = unitsRaw as unknown as RawUnit[];
@@ -308,6 +310,46 @@ export const craftRows = crafting.map((c) => ({
   effectInfo: c.effectInfo,
   success: c.success,
 }));
+
+// ---- equipment (game's equip0/1/2.dat via scripts/extract-gear-enemies.py) ----
+export interface EquipRow {
+  slug: string;
+  name: string;
+  category: "Weapons" | "Armor" | "Accessories";
+  type: string; // Sword … Mace, Armor, Accessory
+  tier: number;
+  atk: number;
+  def: number;
+  value: number;
+  crafted: boolean; // a named item from the crafting chart
+  ore: string | null; // base items: the ore it's made from
+  effect: string;
+  effectInfo: string;
+  recipe: { mold: string; ore: string; items: (string | null)[]; success: number } | null;
+}
+const craftByName = new Map(craftRows.map((c) => [c.result, c]));
+export const equipment: EquipRow[] = (equipmentRaw as Omit<EquipRow, "slug" | "effect" | "effectInfo" | "recipe">[]).map((g) => {
+  const c = craftByName.get(g.name);
+  return {
+    ...g,
+    slug: slugify(g.name),
+    effect: c?.effect ?? "",
+    effectInfo: c?.effectInfo ?? "",
+    recipe: c ? { mold: c.mold, ore: c.ore, items: c.items, success: c.success } : null,
+  };
+});
+
+// ---- enemy parties per area (game's partydata.dat) ----
+export const enemiesByCity = new Map(
+  (enemiesRaw as { city: string; parties: string[][] }[]).map((e) => [e.city, e.parties]),
+);
+/** Areas where a unit appears as an enemy, with how many enemy slots it fills there. */
+export const enemyIn = new Map<string, { city: string; count: number }[]>();
+for (const [city, parties] of enemiesByCity) {
+  const counts = new Map<string, number>();
+  for (const p of parties) for (const u of p) counts.set(u, (counts.get(u) ?? 0) + 1);
+  for (const [u, n] of counts) enemyIn.set(u, [...(enemyIn.get(u) ?? []), { city, count: n }]);
+}
 
 export const craftsUsing = (name: string) =>
   crafting.filter((c) => [c.ore, c.item1, c.item2].some((x) => resolveMaterial(x) === name));

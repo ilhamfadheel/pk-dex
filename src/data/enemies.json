@@ -1,0 +1,2202 @@
+[
+ {
+  "city": "Elynotis",
+  "parties": [
+   [
+    "Primitive Cell",
+    "Primitive Cell"
+   ],
+   [
+    "Soldier",
+    "Primitive Cell",
+    "Primitive Cell"
+   ],
+   [
+    "Primitive Cell",
+    "Soldier"
+   ],
+   [
+    "Soldier",
+    "Noble"
+   ],
+   [
+    "Primitive Cell",
+    "Noble"
+   ],
+   [
+    "Primitive Cell",
+    "Soldier",
+    "Noble"
+   ],
+   [
+    "Warrior",
+    "Soldier",
+    "Noble",
+    "Noble"
+   ],
+   [
+    "Soldier",
+    "Soldier",
+    "Warrior",
+    "Noble"
+   ],
+   [
+    "Soldier",
+    "Soldier",
+    "Noble"
+   ]
+  ]
+ },
+ {
+  "city": "Cressence",
+  "parties": [
+   [
+    "Soldier",
+    "Soldier",
+    "Lycanthrope",
+    "Lycanthrope"
+   ],
+   [
+    "Soldier",
+    "Soldier",
+    "Soldier",
+    "Lycanthrope"
+   ],
+   [
+    "Soldier",
+    "Lycanthrope",
+    "Lycanthrope",
+    "Lycanthrope"
+   ],
+   [
+    "Soldier",
+    "Lycanthrope",
+    "Orc"
+   ],
+   [
+    "Soldier",
+    "Lycanthrope",
+    "Warrior",
+    "Thief"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Thief",
+    "Thief"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Orc"
+   ],
+   [
+    "Warrior",
+    "Thief",
+    "Orc"
+   ],
+   [
+    "Rogue",
+    "Thief",
+    "Thief",
+    "Thief"
+   ]
+  ]
+ },
+ {
+  "city": "Gulldria",
+  "parties": [
+   [
+    "Lizardfoot",
+    "Lizardfoot",
+    "Lycanthrope",
+    "Lycanthrope"
+   ],
+   [
+    "Primitive Cell",
+    "Primitive Cell",
+    "Skeleton",
+    "Skeleton"
+   ],
+   [
+    "Lizardfoot",
+    "Skeleton",
+    "Lycanthrope",
+    "Primitive Cell"
+   ],
+   [
+    "Lizardfoot",
+    "Skeleton",
+    "Lycanthrope",
+    "Archer"
+   ],
+   [
+    "Lizardfoot",
+    "Dingo",
+    "Archer"
+   ],
+   [
+    "Lizardfoot",
+    "Lizardfoot",
+    "Archer"
+   ],
+   [
+    "Dingo",
+    "Lizardfoot",
+    "Theoricus"
+   ],
+   [
+    "Lizardfoot",
+    "Lizardfoot",
+    "Lizardfoot",
+    "Theoricus"
+   ],
+   [
+    "Scale Runner",
+    "Dingo"
+   ]
+  ]
+ },
+ {
+  "city": "Ruins Road",
+  "parties": [
+   [
+    "Warrior",
+    "Warrior",
+    "Thief",
+    "Thief"
+   ],
+   [
+    "Warrior",
+    "Dingo",
+    "Thief"
+   ],
+   [
+    "Warrior",
+    "Dingo",
+    "Monk"
+   ],
+   [
+    "Warrior",
+    "Monk",
+    "Monk",
+    "Thief"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Thief",
+    "Rogue"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Monk",
+    "Hunter"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Warrior",
+    "Rogue"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Warrior",
+    "Skeleton Lord"
+   ],
+   [
+    "Gargoyle",
+    "Rogue",
+    "Rogue",
+    "Rogue"
+   ]
+  ]
+ },
+ {
+  "city": "Elfaria",
+  "parties": [
+   [
+    "High Elf",
+    "Noble",
+    "Noble",
+    "Noble"
+   ],
+   [
+    "High Elf",
+    "Sprite",
+    "Sprite",
+    "Sprite"
+   ],
+   [
+    "High Elf",
+    "Sprite",
+    "Sprite",
+    "Noble"
+   ],
+   [
+    "High Elf",
+    "Sprite",
+    "Thief",
+    "Noble"
+   ],
+   [
+    "High Elf",
+    "Sprite",
+    "Archer",
+    "Noble"
+   ],
+   [
+    "High Elf",
+    "Sprite",
+    "Noble",
+    "Priest"
+   ],
+   [
+    "High Elf",
+    "Thief",
+    "Noble",
+    "Priest"
+   ],
+   [
+    "High Elf",
+    "Noble",
+    "Archer",
+    "Priest"
+   ],
+   [
+    "High Elf",
+    "High Elf",
+    "High Elf",
+    "High Elf"
+   ]
+  ]
+ },
+ {
+  "city": "Beast Lair",
+  "parties": [
+   [
+    "Skeleton",
+    "Skeleton",
+    "Lizardfoot",
+    "Sprite"
+   ],
+   [
+    "Skeleton",
+    "Skeleton",
+    "Lizardfoot",
+    "Harpy"
+   ],
+   [
+    "Skeleton",
+    "Lizardfoot",
+    "Harpy",
+    "Harpy"
+   ],
+   [
+    "Dingo",
+    "Lizardfoot",
+    "Harpy"
+   ],
+   [
+    "Orc",
+    "Dingo"
+   ],
+   [
+    "Skeleton",
+    "Harpy",
+    "Skeleton Knight"
+   ],
+   [
+    "Vulture",
+    "Vulture"
+   ],
+   [
+    "Vulture",
+    "Skeleton Knight",
+    "Skeleton"
+   ],
+   [
+    "Troll",
+    "Caveman"
+   ]
+  ]
+ },
+ {
+  "city": "Thick Forest",
+  "parties": [
+   [
+    "Lycanthrope",
+    "Lycanthrope",
+    "Lycanthrope",
+    "Amazoness"
+   ],
+   [
+    "Amazoness",
+    "Amazoness",
+    "Lycanthrope",
+    "Lycanthrope"
+   ],
+   [
+    "Dingo",
+    "Amazoness",
+    "Lycanthrope"
+   ],
+   [
+    "Amazoness",
+    "Lycanthrope",
+    "Harpy",
+    "Harpy"
+   ],
+   [
+    "Dingo",
+    "Harpy",
+    "Harpy"
+   ],
+   [
+    "Dingo",
+    "Vulture"
+   ],
+   [
+    "Vulture",
+    "Harpy",
+    "Harpy"
+   ],
+   [
+    "Vulture",
+    "Vulture"
+   ],
+   [
+    "High Elf",
+    "High Elf",
+    "Siren",
+    "Siren"
+   ]
+  ]
+ },
+ {
+  "city": "Deserted Ruins",
+  "parties": [
+   [
+    "Primitive Cell",
+    "Primitive Cell",
+    "Primitive Cell",
+    "Primitive Cell"
+   ],
+   [
+    "Skeleton",
+    "Skeleton",
+    "Primitive Cell",
+    "Primitive Cell"
+   ],
+   [
+    "Banshee",
+    "Skeleton",
+    "Primitive Cell",
+    "Primitive Cell"
+   ],
+   [
+    "Banshee",
+    "Zombie",
+    "Skeleton",
+    "Primitive Cell"
+   ],
+   [
+    "Gargoyle",
+    "Banshee",
+    "Zombie"
+   ],
+   [
+    "Skeleton",
+    "Skeleton",
+    "Skeleton Knight",
+    "Zombie"
+   ],
+   [
+    "Golem",
+    "Golem"
+   ],
+   [
+    "Golem",
+    "Skeleton Knight",
+    "Banshee"
+   ],
+   [
+    "Gargoyle",
+    "Gargoyle"
+   ]
+  ]
+ },
+ {
+  "city": "Altar of the Spirits",
+  "parties": [
+   [
+    "Gargoyle",
+    "Gargoyle",
+    "Gargoyle",
+    "Gargoyle"
+   ],
+   [
+    "Gargoyle",
+    "Gargoyle",
+    "Banshee",
+    "Wight"
+   ],
+   [
+    "Gargoyle",
+    "Banshee",
+    "Wight",
+    "Wight"
+   ],
+   [
+    "Steel Gargoyle",
+    "Banshee",
+    "Gargoyle",
+    "Wight"
+   ],
+   [
+    "Steel Gargoyle",
+    "Gargoyle",
+    "Wight",
+    "Wight"
+   ],
+   [
+    "Steel Gargoyle",
+    "Golem",
+    "Banshee"
+   ],
+   [
+    "Rock Wall",
+    "Golem"
+   ],
+   [
+    "Rock Wall",
+    "Steel Gargoyle",
+    "Gargoyle"
+   ],
+   [
+    "High Elf",
+    "High Elf",
+    "Philosophas",
+    "Philosophas"
+   ]
+  ]
+ },
+ {
+  "city": "Tiwana Ruins",
+  "parties": [
+   [
+    "Zombie",
+    "Zombie",
+    "Skeleton Knight",
+    "Skeleton Knight"
+   ],
+   [
+    "Zombie",
+    "Skeleton Knight",
+    "Large Scale"
+   ],
+   [
+    "Dragon Runner",
+    "Large Scale"
+   ],
+   [
+    "Dragon Runner",
+    "Dragon Runner"
+   ],
+   [
+    "Garuda",
+    "Garuda"
+   ],
+   [
+    "Garuda",
+    "Dragon Runner"
+   ],
+   [
+    "Dragon",
+    "Garuda"
+   ],
+   [
+    "Dragon",
+    "Garuda"
+   ],
+   [
+    "Golem",
+    "Golem"
+   ]
+  ]
+ },
+ {
+  "city": "Ilyumine",
+  "parties": [
+   [
+    "Soldier",
+    "Soldier",
+    "Soldier",
+    "Priest"
+   ],
+   [
+    "Soldier",
+    "Soldier",
+    "Archer",
+    "Priest"
+   ],
+   [
+    "Warrior",
+    "Soldier",
+    "Archer",
+    "Priest"
+   ],
+   [
+    "Soldier",
+    "Warrior",
+    "Archer",
+    "Priest"
+   ],
+   [
+    "Knight",
+    "Warrior",
+    "Soldier",
+    "Priest"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Archer",
+    "Priest"
+   ],
+   [
+    "Soldier",
+    "Knight",
+    "Troll"
+   ],
+   [
+    "Troll",
+    "Troll"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Priest",
+    "Noble"
+   ]
+  ]
+ },
+ {
+  "city": "Deeva Volcano",
+  "parties": [
+   [
+    "Orc",
+    "Caveman"
+   ],
+   [
+    "Orc",
+    "Vulture"
+   ],
+   [
+    "Large Scale",
+    "Vulture"
+   ],
+   [
+    "Large Scale",
+    "Dragon Runner"
+   ],
+   [
+    "Dragon Runner",
+    "Lesser Demon"
+   ],
+   [
+    "Lesser Demon",
+    "Colossus"
+   ],
+   [
+    "Colossus",
+    "Colossus"
+   ],
+   [
+    "Large Scale",
+    "Dragon"
+   ],
+   [
+    "Tiamat"
+   ]
+  ]
+ },
+ {
+  "city": "Distaria",
+  "parties": [
+   [
+    "Soldier",
+    "Soldier",
+    "Soldier",
+    "Thief"
+   ],
+   [
+    "Warrior",
+    "Soldier",
+    "Soldier",
+    "Thief"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Soldier",
+    "Thief"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Thief",
+    "Thief"
+   ],
+   [
+    "Knight",
+    "Warrior",
+    "Thief",
+    "Thief"
+   ],
+   [
+    "Knight",
+    "Orc Chief",
+    "Thief"
+   ],
+   [
+    "Warrior",
+    "Knight",
+    "Orc Chief"
+   ],
+   [
+    "Orc Chief",
+    "Orc Chief"
+   ],
+   [
+    "Warrior",
+    "Monk",
+    "Priest",
+    "Theoricus"
+   ]
+  ]
+ },
+ {
+  "city": "Pirate Island",
+  "parties": [
+   [
+    "Soldier",
+    "Soldier",
+    "Lizardfoot",
+    "Wight"
+   ],
+   [
+    "Warrior",
+    "Soldier",
+    "Lizardfoot",
+    "Wight"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Wight",
+    "Thief"
+   ],
+   [
+    "Skeleton Knight",
+    "Lizardfoot",
+    "Thief",
+    "Thief"
+   ],
+   [
+    "Soldier",
+    "Lizardfoot",
+    "Thief",
+    "Hunter"
+   ],
+   [
+    "Skeleton Knight",
+    "Soldier",
+    "Soldier",
+    "Hunter"
+   ],
+   [
+    "Soldier",
+    "Skeleton Lord",
+    "Thief",
+    "Thief"
+   ],
+   [
+    "Warrior",
+    "Skeleton Lord",
+    "Lizardfoot",
+    "Thief"
+   ],
+   [
+    "Monk",
+    "Monk",
+    "Rogue"
+   ]
+  ]
+ },
+ {
+  "city": "Treasure Island",
+  "parties": [
+   [
+    "Scale Runner",
+    "Caveman"
+   ],
+   [
+    "Scale Runner",
+    "Golem"
+   ],
+   [
+    "Golem",
+    "Golem"
+   ],
+   [
+    "Steel Gargoyle",
+    "Steel Gargoyle",
+    "Golem"
+   ],
+   [
+    "Rock Wall",
+    "Golem"
+   ],
+   [
+    "Steel Gargoyle",
+    "Steel Gargoyle",
+    "Rock Wall"
+   ],
+   [
+    "Rock Wall",
+    "Thorn Wall",
+    "Archer",
+    "Archer"
+   ],
+   [
+    "Thorn Wall",
+    "Thorn Wall",
+    "Archer",
+    "Archer"
+   ],
+   [
+    "Colossus",
+    "Wing Guarder",
+    "Wing Guarder"
+   ]
+  ]
+ },
+ {
+  "city": "Spirits Forest",
+  "parties": [
+   [
+    "Sprite",
+    "Sprite",
+    "Lizardfoot",
+    "Lizardfoot"
+   ],
+   [
+    "Banshee",
+    "Sprite",
+    "Lizardfoot",
+    "Lizardfoot"
+   ],
+   [
+    "Banshee",
+    "Wight",
+    "Sprite",
+    "Lizardfoot"
+   ],
+   [
+    "Banshee",
+    "Wight",
+    "Wight",
+    "Lizardfoot"
+   ],
+   [
+    "Banshee",
+    "Banshee",
+    "Wight",
+    "Wight"
+   ],
+   [
+    "Vulture",
+    "Wight",
+    "Banshee"
+   ],
+   [
+    "Wraith",
+    "Vulture",
+    "Wight"
+   ],
+   [
+    "Wraith",
+    "Wight",
+    "Vulture"
+   ],
+   [
+    "Wraith",
+    "Wraith",
+    "Siren",
+    "Siren"
+   ]
+  ]
+ },
+ {
+  "city": "Earl's Castle",
+  "parties": [
+   [
+    "Skeleton",
+    "Zombie",
+    "Wight",
+    "Wight"
+   ],
+   [
+    "Zombie",
+    "Wight",
+    "Imp"
+   ],
+   [
+    "Skeleton",
+    "Skeleton Knight",
+    "Imp"
+   ],
+   [
+    "Skeleton Knight",
+    "Imp",
+    "Skeleton"
+   ],
+   [
+    "Skeleton",
+    "Skeleton",
+    "Skeleton Knight",
+    "Undead Knight"
+   ],
+   [
+    "Skeleton",
+    "Skeleton",
+    "Zombie",
+    "Living Dead"
+   ],
+   [
+    "Skeleton",
+    "Skeleton",
+    "Skeleton Knight",
+    "Living Dead"
+   ],
+   [
+    "Skeleton",
+    "Skeleton",
+    "Skeleton Knight",
+    "Vampire"
+   ],
+   [
+    "August",
+    "Skeleton",
+    "Skeleton"
+   ]
+  ]
+ },
+ {
+  "city": "Dark Elf Settlement",
+  "parties": [
+   [
+    "Sprite",
+    "Sprite",
+    "High Elf",
+    "High Elf"
+   ],
+   [
+    "Sprite",
+    "Harpy",
+    "High Elf",
+    "High Elf"
+   ],
+   [
+    "Sprite",
+    "High Elf",
+    "High Elf",
+    "High Elf"
+   ],
+   [
+    "Harpy",
+    "Harpy",
+    "High Elf",
+    "High Elf"
+   ],
+   [
+    "Sprite",
+    "Sky Stalker",
+    "High Elf",
+    "High Elf"
+   ],
+   [
+    "Sprite",
+    "Sprite",
+    "Acid Ooze",
+    "High Elf"
+   ],
+   [
+    "Sprite",
+    "Harpy",
+    "Acid Ooze",
+    "High Elf"
+   ],
+   [
+    "Ladyhawke",
+    "Sprite",
+    "High Elf"
+   ],
+   [
+    "Valkyrie",
+    "High Elf",
+    "High Elf",
+    "Hunter"
+   ]
+  ]
+ },
+ {
+  "city": "Yggdrasill",
+  "parties": [
+   [
+    "Golem",
+    "Golem"
+   ],
+   [
+    "Steel Gargoyle",
+    "Steel Gargoyle",
+    "Golem"
+   ],
+   [
+    "Steel Gargoyle",
+    "Steel Gargoyle",
+    "Steel Gargoyle",
+    "Steel Gargoyle"
+   ],
+   [
+    "Steel Gargoyle",
+    "Steel Gargoyle",
+    "Wing Guarder",
+    "Wing Guarder"
+   ],
+   [
+    "Wing Guarder",
+    "Wing Guarder",
+    "Wing Guarder",
+    "Wing Guarder"
+   ],
+   [
+    "Wing Guarder",
+    "Wing Guarder",
+    "Imperial Guard"
+   ],
+   [
+    "Imperial Guard",
+    "Imperial Guard"
+   ],
+   [
+    "Imperial Guard",
+    "Talos"
+   ],
+   [
+    "Hell Hound",
+    "Ladyhawke"
+   ]
+  ]
+ },
+ {
+  "city": "Gate of Recollection",
+  "parties": [
+   [
+    "Mud Wall",
+    "Mud Wall",
+    "Archer"
+   ],
+   [
+    "Mud Wall",
+    "Steel Gargoyle",
+    "Steel Gargoyle"
+   ],
+   [
+    "Mud Wall",
+    "Steel Gargoyle",
+    "Wraith"
+   ],
+   [
+    "Mud Wall",
+    "Steel Gargoyle",
+    "Lich"
+   ],
+   [
+    "Steel Gargoyle",
+    "Skeleton Lord",
+    "Mud Wall"
+   ],
+   [
+    "Mud Wall",
+    "Skeleton Lord",
+    "Steel Gargoyle"
+   ],
+   [
+    "Gargoyle",
+    "Lesser Demon",
+    "Lich"
+   ],
+   [
+    "Lesser Demon",
+    "Specter"
+   ],
+   [
+    "Talos",
+    "Wing Guarder",
+    "Wing Guarder"
+   ]
+  ]
+ },
+ {
+  "city": "Water City",
+  "parties": [
+   [
+    "Imp",
+    "Imp"
+   ],
+   [
+    "Imp",
+    "Siren",
+    "Siren"
+   ],
+   [
+    "Skeleton Lord",
+    "Primitive Cell",
+    "Harpy",
+    "Siren"
+   ],
+   [
+    "Harpy",
+    "Harpy",
+    "Siren",
+    "Siren"
+   ],
+   [
+    "Harpy",
+    "Harpy",
+    "Skeleton Lord",
+    "Siren"
+   ],
+   [
+    "Garuda",
+    "Siren",
+    "Siren"
+   ],
+   [
+    "Garuda",
+    "Skeleton Lord",
+    "Harpy"
+   ],
+   [
+    "Garuda",
+    "Garuda"
+   ],
+   [
+    "Serpent",
+    "Specter"
+   ]
+  ]
+ },
+ {
+  "city": "Mizuchi Shrine",
+  "parties": [
+   [
+    "Poison Jelly",
+    "Poison Jelly",
+    "Poison Jelly",
+    "Poison Jelly"
+   ],
+   [
+    "Poison Jelly",
+    "Poison Jelly",
+    "Poison Jelly",
+    "Siren"
+   ],
+   [
+    "Poison Jelly",
+    "Poison Jelly",
+    "Siren",
+    "Siren"
+   ],
+   [
+    "Primitive Cell",
+    "Poison Jelly",
+    "Acid Ooze",
+    "Siren"
+   ],
+   [
+    "Poison Jelly",
+    "Poison Jelly",
+    "Acid Ooze",
+    "Siren"
+   ],
+   [
+    "Poison Jelly",
+    "Poison Jelly",
+    "Poison Jelly",
+    "Acid Ooze"
+   ],
+   [
+    "Poison Jelly",
+    "Poison Jelly",
+    "Bishop"
+   ],
+   [
+    "Poison Jelly",
+    "Poison Jelly",
+    "Scathacha"
+   ],
+   [
+    "Serpent",
+    "Serpent"
+   ]
+  ]
+ },
+ {
+  "city": "Forgotten Village",
+  "parties": [
+   [
+    "Shadow Wolf",
+    "Lesser Demon"
+   ],
+   [
+    "Lesser Demon",
+    "Lesser Demon"
+   ],
+   [
+    "Lesser Demon",
+    "Garuda"
+   ],
+   [
+    "Garuda",
+    "Ladyhawke"
+   ],
+   [
+    "Ladyhawke",
+    "Wyvern"
+   ],
+   [
+    "Rock",
+    "Wyvern"
+   ],
+   [
+    "Rock",
+    "Sword Master",
+    "Succubus"
+   ],
+   [
+    "Sword Master",
+    "Sword Master"
+   ],
+   [
+    "Talos",
+    "Talos",
+    "Lich"
+   ]
+  ]
+ },
+ {
+  "city": "Mountaintop Shrine",
+  "parties": [
+   [
+    "Colossus",
+    "Lich",
+    "Lich"
+   ],
+   [
+    "Colossus",
+    "Ghoul",
+    "Lich"
+   ],
+   [
+    "Hell Hound",
+    "Wyvern"
+   ],
+   [
+    "Ogre",
+    "Sword Master"
+   ],
+   [
+    "Dragon",
+    "Lich Lord"
+   ],
+   [
+    "Sword Master",
+    "Lich Lord"
+   ],
+   [
+    "Sword Master",
+    "Dragon"
+   ],
+   [
+    "Dragon",
+    "Dragon"
+   ],
+   [
+    "Lesser Demon",
+    "Lich Lord",
+    "Priest",
+    "Bahzam DeGole"
+   ]
+  ]
+ },
+ {
+  "city": "Donam",
+  "parties": [
+   [
+    "Soldier",
+    "Soldier",
+    "Thief",
+    "Thief"
+   ],
+   [
+    "Warrior",
+    "Soldier",
+    "Soldier",
+    "Thief"
+   ],
+   [
+    "Soldier",
+    "Warrior",
+    "Thief",
+    "Thief"
+   ],
+   [
+    "Soldier",
+    "Phalanx",
+    "Warrior",
+    "Thief"
+   ],
+   [
+    "Soldier",
+    "Phalanx",
+    "Thief",
+    "Thief"
+   ],
+   [
+    "Soldier",
+    "Soldier",
+    "Thief",
+    "Phalanx"
+   ],
+   [
+    "Soldier",
+    "Warrior",
+    "Thief",
+    "Phalanx"
+   ],
+   [
+    "Soldier",
+    "Warrior",
+    "Thief",
+    "Swordman"
+   ],
+   [
+    "Phalanx",
+    "Phalanx",
+    "Hunter",
+    "Hunter"
+   ]
+  ]
+ },
+ {
+  "city": "Runeheim",
+  "parties": [
+   [
+    "Soldier",
+    "Warrior",
+    "Priest",
+    "Priest"
+   ],
+   [
+    "Soldier",
+    "Warrior",
+    "Priest",
+    "Necromancer"
+   ],
+   [
+    "Soldier",
+    "Warrior",
+    "Necromancer",
+    "Theoricus"
+   ],
+   [
+    "Soldier",
+    "Warrior",
+    "Theoricus",
+    "Rogue"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Rogue",
+    "Priest"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Phalanx",
+    "Priest"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Philosophas",
+    "Priest"
+   ],
+   [
+    "Warrior",
+    "Priest",
+    "Bishop"
+   ],
+   [
+    "Phalanx",
+    "Swordman",
+    "Hunter",
+    "Hunter"
+   ]
+  ]
+ },
+ {
+  "city": "Seles",
+  "parties": [
+   [
+    "Soldier",
+    "Soldier",
+    "Noble",
+    "Noble"
+   ],
+   [
+    "Soldier",
+    "Warrior",
+    "Noble",
+    "Priest"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Priest",
+    "Priest"
+   ],
+   [
+    "Warrior",
+    "Phalanx",
+    "Priest",
+    "Noble"
+   ],
+   [
+    "Warrior",
+    "Phalanx",
+    "Theoricus",
+    "Noble"
+   ],
+   [
+    "Soldier",
+    "Warrior",
+    "Phalanx",
+    "Theoricus"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Theoricus",
+    "Phalanx"
+   ],
+   [
+    "Soldier",
+    "Warrior",
+    "Theoricus",
+    "High Priest"
+   ],
+   [
+    "Swordman",
+    "Temple Knight",
+    "High Priest",
+    "Philosophas"
+   ]
+  ]
+ },
+ {
+  "city": "Nomad",
+  "parties": [
+   [
+    "Warrior",
+    "Warrior",
+    "Warrior",
+    "Archer"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Archer",
+    "Archer"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Archer",
+    "Rogue"
+   ],
+   [
+    "Soldier",
+    "Archer",
+    "Rogue",
+    "Rogue"
+   ],
+   [
+    "Soldier",
+    "Phalanx",
+    "Phalanx",
+    "Thief"
+   ],
+   [
+    "Soldier",
+    "Warrior",
+    "Rogue",
+    "Rogue"
+   ],
+   [
+    "Soldier",
+    "Warrior",
+    "Swordman",
+    "Rogue"
+   ],
+   [
+    "Warrior",
+    "Assassin",
+    "Archer"
+   ],
+   [
+    "Assassin",
+    "Assassin"
+   ]
+  ]
+ },
+ {
+  "city": "Echigo",
+  "parties": [
+   [
+    "Knight",
+    "Knight",
+    "Knight",
+    "Knight"
+   ],
+   [
+    "Monk",
+    "Monk",
+    "Monk",
+    "Monk"
+   ],
+   [
+    "Knight",
+    "Knight",
+    "Monk",
+    "Monk"
+   ],
+   [
+    "Temple Knight",
+    "Knight",
+    "Monk",
+    "Monk"
+   ],
+   [
+    "Soldier",
+    "Temple Knight",
+    "Knight",
+    "Monk"
+   ],
+   [
+    "Soldier",
+    "Soldier",
+    "Expert Monk",
+    "Expert Monk"
+   ],
+   [
+    "Soldier",
+    "Soldier",
+    "Temple Knight",
+    "Temple Knight"
+   ],
+   [
+    "Soldier",
+    "Soldier",
+    "Temple Knight",
+    "Expert Monk"
+   ],
+   [
+    "Expert Monk",
+    "Expert Monk",
+    "Expert Monk",
+    "Expert Monk"
+   ]
+  ]
+ },
+ {
+  "city": "Yamato",
+  "parties": [
+   [
+    "Warrior",
+    "Warrior",
+    "Thief",
+    "Thief"
+   ],
+   [
+    "Knight",
+    "Warrior",
+    "Thief",
+    "Thief"
+   ],
+   [
+    "Knight",
+    "Warrior",
+    "Thief",
+    "Rogue"
+   ],
+   [
+    "Knight",
+    "Knight",
+    "Knight",
+    "Rogue"
+   ],
+   [
+    "Knight",
+    "Thief",
+    "Rogue",
+    "Rogue"
+   ],
+   [
+    "Knight",
+    "Knight",
+    "Rogue",
+    "Rogue"
+   ],
+   [
+    "Assassin",
+    "Knight",
+    "Rogue"
+   ],
+   [
+    "Assassin",
+    "Assassin"
+   ],
+   [
+    "Assassin",
+    "Assassin"
+   ]
+  ]
+ },
+ {
+  "city": "Edo",
+  "parties": [
+   [
+    "Warrior",
+    "Warrior",
+    "Knight",
+    "Knight"
+   ],
+   [
+    "Warrior",
+    "Knight",
+    "Knight",
+    "Swordman"
+   ],
+   [
+    "Warrior",
+    "Knight",
+    "Swordman",
+    "Swordman"
+   ],
+   [
+    "Warrior",
+    "Knight",
+    "Swordman",
+    "Swordman"
+   ],
+   [
+    "Warrior",
+    "Knight",
+    "Swordman",
+    "Swordman"
+   ],
+   [
+    "Knight",
+    "Knight",
+    "Paladin"
+   ],
+   [
+    "Knight",
+    "Swordman",
+    "Paladin"
+   ],
+   [
+    "Warrior",
+    "Swordman",
+    "Sword Master"
+   ],
+   [
+    "Paladin",
+    "Assassin"
+   ]
+  ]
+ },
+ {
+  "city": "Shalom",
+  "parties": [
+   [
+    "Warrior",
+    "Monk",
+    "Monk",
+    "Monk"
+   ],
+   [
+    "Monk",
+    "Monk",
+    "Swordman",
+    "Swordman"
+   ],
+   [
+    "Monk",
+    "Swordman",
+    "Swordman",
+    "Swordman"
+   ],
+   [
+    "Swordman",
+    "Swordman",
+    "Swordman",
+    "Swordman"
+   ],
+   [
+    "Swordman",
+    "Swordman",
+    "Expert Monk",
+    "Expert Monk"
+   ],
+   [
+    "Assassin",
+    "Swordman",
+    "Expert Monk"
+   ],
+   [
+    "Assassin",
+    "Assassin"
+   ],
+   [
+    "Assassin",
+    "Master Monk"
+   ],
+   [
+    "Genzoh",
+    "Assassin"
+   ]
+  ]
+ },
+ {
+  "city": "Mikado Mausoleum",
+  "parties": [
+   [
+    "Phalanx",
+    "Phalanx",
+    "Knight",
+    "Knight"
+   ],
+   [
+    "Phalanx",
+    "Phalanx",
+    "Expert Monk",
+    "Expert Monk"
+   ],
+   [
+    "Paladin",
+    "Expert Monk",
+    "Expert Monk"
+   ],
+   [
+    "Swordman",
+    "Sword Master",
+    "Expert Monk"
+   ],
+   [
+    "Sword Master",
+    "Paladin"
+   ],
+   [
+    "Master Monk",
+    "Master Monk"
+   ],
+   [
+    "Sword Master",
+    "Sword Master"
+   ],
+   [
+    "Sword Master",
+    "Master Monk"
+   ],
+   [
+    "Mikaduchi",
+    "Hunter",
+    "Hunter"
+   ]
+  ]
+ },
+ {
+  "city": "Desert Road",
+  "parties": [
+   [
+    "Warrior",
+    "Thief",
+    "Thief",
+    "Thief"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Thief",
+    "Thief"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Thief",
+    "Rogue"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Rogue",
+    "Rogue"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Sniper"
+   ],
+   [
+    "Assassin",
+    "Warrior",
+    "Rogue"
+   ],
+   [
+    "Assassin",
+    "Sniper"
+   ],
+   [
+    "Assassin",
+    "Assassin"
+   ],
+   [
+    "Assassin",
+    "Assassin"
+   ]
+  ]
+ },
+ {
+  "city": "Huge Swamp",
+  "parties": [
+   [
+    "Poison Jelly",
+    "Poison Jelly",
+    "Poison Jelly",
+    "Poison Jelly"
+   ],
+   [
+    "Primitive Cell",
+    "Poison Jelly",
+    "Poison Jelly",
+    "Acid Ooze"
+   ],
+   [
+    "Poison Jelly",
+    "Poison Jelly",
+    "Poison Jelly",
+    "Acid Ooze"
+   ],
+   [
+    "Primitive Cell",
+    "Poison Jelly",
+    "Acid Ooze",
+    "Acid Ooze"
+   ],
+   [
+    "Poison Jelly",
+    "Poison Jelly",
+    "Blood Ooze"
+   ],
+   [
+    "Serpent",
+    "Acid Ooze",
+    "Poison Jelly"
+   ],
+   [
+    "Blood Ooze",
+    "Acid Ooze",
+    "Poison Jelly"
+   ],
+   [
+    "Naga",
+    "Acid Ooze",
+    "Poison Jelly"
+   ],
+   [
+    "Durahan",
+    "Hunter",
+    "Hunter"
+   ]
+  ]
+ },
+ {
+  "city": "Nightwalker Town",
+  "parties": [
+   [
+    "Imp",
+    "Specter"
+   ],
+   [
+    "Imp",
+    "Vampire",
+    "Vampire"
+   ],
+   [
+    "Vampire",
+    "Vampire",
+    "Specter"
+   ],
+   [
+    "Vampire",
+    "Vampire",
+    "Vampire",
+    "Vampire"
+   ],
+   [
+    "Succubus",
+    "Specter"
+   ],
+   [
+    "Succubus",
+    "Vampire",
+    "Vampire"
+   ],
+   [
+    "Morrigan",
+    "Succubus"
+   ],
+   [
+    "Morrigan",
+    "Morrigan"
+   ],
+   [
+    "Mage Silion",
+    "Vampire",
+    "Vampire"
+   ]
+  ]
+ },
+ {
+  "city": "Gate of Oblivion",
+  "parties": [
+   [
+    "Imp",
+    "Imp"
+   ],
+   [
+    "Imp",
+    "Lesser Demon"
+   ],
+   [
+    "Lesser Demon",
+    "Lesser Demon"
+   ],
+   [
+    "Lesser Demon",
+    "Troll King"
+   ],
+   [
+    "Troll King",
+    "Troll King"
+   ],
+   [
+    "Troll King",
+    "Lesser Demon"
+   ],
+   [
+    "Lesser Demon",
+    "Arc Demon"
+   ],
+   [
+    "Arc Demon",
+    "Adept"
+   ],
+   [
+    "Behemoth",
+    "Lich"
+   ]
+  ]
+ },
+ {
+  "city": "Pyramid",
+  "parties": [
+   [
+    "Mud Wall",
+    "Mud Wall",
+    "Necromancer"
+   ],
+   [
+    "Mud Wall",
+    "Steel Gargoyle",
+    "Steel Gargoyle"
+   ],
+   [
+    "Steel Gargoyle",
+    "Steel Gargoyle",
+    "Golem"
+   ],
+   [
+    "Rock Wall",
+    "Rock Wall",
+    "Necromancer"
+   ],
+   [
+    "Rock Wall",
+    "Wing Guarder",
+    "Steel Gargoyle"
+   ],
+   [
+    "Colossus",
+    "Rock Wall"
+   ],
+   [
+    "Thorn Wall",
+    "Thorn Wall",
+    "Colossus"
+   ],
+   [
+    "Colossus",
+    "Colossus"
+   ],
+   [
+    "Imperial Guard",
+    "Imperial Guard",
+    "Imperial Guard"
+   ]
+  ]
+ },
+ {
+  "city": "Ishtal",
+  "parties": [
+   [
+    "Warrior",
+    "Warrior",
+    "Warrior",
+    "Phalanx"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Phalanx",
+    "Hunter"
+   ],
+   [
+    "Warrior",
+    "Hunter",
+    "Hunter",
+    "Hunter"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Hunter",
+    "Hunter"
+   ],
+   [
+    "Warrior",
+    "Phalanx",
+    "Swordman",
+    "Hunter"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Phalanx",
+    "Expert Monk"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Swordman",
+    "Expert Monk"
+   ],
+   [
+    "Warrior",
+    "Phalanx",
+    "Assassin"
+   ],
+   [
+    "Luna",
+    "Assassin"
+   ]
+  ]
+ },
+ {
+  "city": "Water Shrine",
+  "parties": [
+   [
+    "Poison Jelly",
+    "Poison Jelly",
+    "Poison Jelly",
+    "Poison Jelly"
+   ],
+   [
+    "Poison Jelly",
+    "Poison Jelly",
+    "Poison Jelly",
+    "Siren"
+   ],
+   [
+    "Poison Jelly",
+    "Poison Jelly",
+    "Siren",
+    "Siren"
+   ],
+   [
+    "Poison Jelly",
+    "Siren",
+    "Siren",
+    "Siren"
+   ],
+   [
+    "Poison Jelly",
+    "Poison Jelly",
+    "Serpent"
+   ],
+   [
+    "Serpent",
+    "Serpent"
+   ],
+   [
+    "Blood Ooze",
+    "Serpent"
+   ],
+   [
+    "Blood Ooze",
+    "Blood Ooze"
+   ],
+   [
+    "Leviathan"
+   ]
+  ]
+ },
+ {
+  "city": "Royal Tomb",
+  "parties": [
+   [
+    "Undead Knight",
+    "Undead Knight",
+    "Undead Knight",
+    "Undead Knight"
+   ],
+   [
+    "Undead Knight",
+    "Undead Knight",
+    "Living Dead",
+    "Living Dead"
+   ],
+   [
+    "Living Dead",
+    "Living Dead",
+    "Living Dead",
+    "Living Dead"
+   ],
+   [
+    "Undead Knight",
+    "Living Dead",
+    "Living Dead",
+    "Ghoul"
+   ],
+   [
+    "Living Dead",
+    "Ghoul",
+    "Ghoul",
+    "Ghoul"
+   ],
+   [
+    "Naga",
+    "Colossus"
+   ],
+   [
+    "Naga",
+    "Ghoul",
+    "Ghoul"
+   ],
+   [
+    "Naga",
+    "Naga"
+   ],
+   [
+    "Al Acid",
+    "Skeleton",
+    "Skeleton",
+    "Skeleton"
+   ]
+  ]
+ },
+ {
+  "city": "Bedouin",
+  "parties": [
+   [
+    "Knight",
+    "Knight",
+    "Knight",
+    "Knight"
+   ],
+   [
+    "Warrior",
+    "Knight",
+    "Knight",
+    "Phalanx"
+   ],
+   [
+    "Warrior",
+    "Warrior",
+    "Phalanx",
+    "Phalanx"
+   ],
+   [
+    "Warrior",
+    "Knight",
+    "Valkyrie",
+    "Phalanx"
+   ],
+   [
+    "Knight",
+    "Knight",
+    "Valkyrie",
+    "Valkyrie"
+   ],
+   [
+    "Knight",
+    "Knight",
+    "Temple Knight",
+    "Temple Knight"
+   ],
+   [
+    "Warrior",
+    "Phalanx",
+    "Valkyrie",
+    "Temple Knight"
+   ],
+   [
+    "Knight",
+    "Knight",
+    "Paladin"
+   ],
+   [
+    "Assassin",
+    "Sniper"
+   ]
+  ]
+ }
+]

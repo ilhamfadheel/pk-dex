@@ -49,7 +49,7 @@ export default function CitiesPage() {
         </div>
         <WorldMap slugOf={citySlug} current={START} />
       </section>
-      <CityList rows={rows} materials={data.materials} />
+      <CityList rows={rows} materials={data.materials} unitOrder={Object.fromEntries(data.units.map((u) => [u.name, u.id]))} />
       <p className="mt-4 text-xs text-muted">
         Shop stock read from the game&apos;s own shop tables; area searches and dungeon rewards from archived
         pk.warcry.com pages.

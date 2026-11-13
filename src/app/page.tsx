@@ -13,9 +13,7 @@ import UnitDex from "@/components/UnitDex";
 import { data } from "@/lib/data";
 
 // Static JSON imported at module scope → fully prerendered.
-const materials = Object.values(data.materials).sort(
-  (a, b) => a.category.localeCompare(b.category) || a.rarity - b.rarity,
-);
+const materials = Object.values(data.materials).sort((a, b) => a.order - b.order); // game order
 
 export default function Home() {
   return (

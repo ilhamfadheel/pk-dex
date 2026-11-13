@@ -55,6 +55,8 @@ export interface MaterialLite {
   rarity: number;
   effect: string;
   img: string | null;
+  /** Position in the game's own item lists (category * 1000 + index); sort by this. */
+  order: number;
 }
 
 export interface SearchItem {

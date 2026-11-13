@@ -10,7 +10,6 @@ export const metadata: Metadata = pageMeta({
   path: "/materials",
 });
 
-const order: Record<string, number> = { Ores: 0, Jewels: 1, "Other Materials": 2 };
 const rows: MaterialRow[] = rawMaterials
   .map((m) => {
     const emblems = emblemsUsing(m.name);
@@ -22,7 +21,7 @@ const rows: MaterialRow[] = rawMaterials
       units: data.units.filter((u) => u.needs.includes(m.name)).length,
     };
   })
-  .sort((a, b) => (order[a.category] ?? 9) - (order[b.category] ?? 9) || a.rarity - b.rarity);
+  .sort((a, b) => a.order - b.order); // as the game lists them
 
 export default function MaterialsPage() {
   return (

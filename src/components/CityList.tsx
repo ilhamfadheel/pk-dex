@@ -21,7 +21,15 @@ export interface CityRow {
   dungeonRewards: string[];
 }
 
-export default function CityList({ rows, materials }: { rows: CityRow[]; materials: Record<string, MaterialLite> }) {
+export default function CityList({
+  rows,
+  materials,
+  unitOrder,
+}: {
+  rows: CityRow[];
+  materials: Record<string, MaterialLite>;
+  unitOrder: Record<string, number>; // unit name -> game unit number
+}) {
   const [q, setQ] = useState("");
   const [want, setWant] = useState(""); // a unit, mold or material name
   const [how, setHow] = useState<"any" | "shop" | "search" | "dungeon">("any");
@@ -29,13 +37,15 @@ export default function CityList({ rows, materials }: { rows: CityRow[]; materia
   const dq = useDeferredValue(q);
 
   const options = useMemo(() => {
-    const sorted = (xs: string[]) => [...new Set(xs)].sort((a, b) => a.localeCompare(b));
+    // in the game's own order: units by unit number, items as the game lists them
+    const pos = (n: string) => materials[n]?.order ?? unitOrder[n] ?? 99999;
+    const sorted = (xs: string[]) => [...new Set(xs)].sort((a, b) => pos(a) - pos(b) || a.localeCompare(b));
     return {
       units: sorted(rows.flatMap((r) => r.units.map((u) => u.name))),
       molds: sorted(rows.flatMap((r) => r.molds)),
       materials: sorted(rows.flatMap((r) => [...r.shop, ...r.search, ...r.dungeonRewards])),
     };
-  }, [rows]);
+  }, [rows, materials, unitOrder]);
   const wantKind = options.units.includes(want) ? "unit" : options.molds.includes(want) ? "mold" : want ? "material" : "";
 
   const shown = useMemo(() => {

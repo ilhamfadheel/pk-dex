@@ -35,7 +35,7 @@ export default function RankupPlanner({
 
   const unit = (id: number) => data.units.find((u) => u.id === id)!;
   const sortedUnits = useMemo(
-    () => [...data.units].sort((a, b) => a.name.localeCompare(b.name)),
+    () => [...data.units].sort((a, b) => a.id - b.id), // the game's unit order
     [data.units],
   );
   // Ancestors of `to`, so the "from" dropdown only offers reachable units.

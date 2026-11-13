@@ -12,6 +12,7 @@ import shopsRaw from "@/data/shops.json";
 import equipmentRaw from "@/data/equipment.json";
 import enemiesRaw from "@/data/enemies.json";
 import unitPricesRaw from "@/data/unit-prices.json";
+import itemOrderRaw from "@/data/item-order.json";
 import type { Edge, MaterialLite, PlannerData, Recipe, UnitLite } from "./types";
 import { RANKUP_MOLD } from "./plan";
 
@@ -152,6 +153,13 @@ export const crafting: CraftRecipe[] = (
   effectInfo: effect_ids.map((id) => effectInfo.get(id)).filter(Boolean).join(" · "),
 }));
 
+// ---- game order ----
+// Where each item sits in the game's own lists (scripts/extract-item-order.py): molds,
+// ores, jewels, other materials, emblems, weapons, armor, accessories, each in table order.
+const ITEM_ORDER = itemOrderRaw as Record<string, number>;
+export const gameOrder = (name: string) => ITEM_ORDER[name] ?? 99999;
+export const byGameOrder = (a: string, b: string) => gameOrder(a) - gameOrder(b) || a.localeCompare(b);
+
 // ---- materials ----
 const materials: Record<string, MaterialLite> = {};
 for (const m of rawMaterials) {
@@ -162,6 +170,7 @@ for (const m of rawMaterials) {
     rarity: m.rarity,
     effect: m.effect,
     img: iconFor(m.category),
+    order: gameOrder(m.name),
   };
 }
 materials[RANKUP_MOLD] = {
@@ -171,6 +180,7 @@ materials[RANKUP_MOLD] = {
   rarity: 1,
   effect: "Consumed by every emblem combine. Sold in the Shop from map 2.",
   img: iconFor("Emblems"),
+  order: gameOrder(RANKUP_MOLD),
 };
 const byNorm = new Map(Object.keys(materials).map((n) => [norm(n), n]));
 const ALIAS: Record<string, string> = { chaostheart: "Chaos Heart" };
@@ -179,7 +189,9 @@ export const resolveMaterial = (s: string) => ALIAS[norm(s)] ?? byNorm.get(norm(
 
 // ---- emblems ----
 const emblems: Record<string, Recipe[]> = {};
-for (const r of emblemsRaw as { emblem: string; ore: string; item1: string; item2: string; success: number }[]) {
+type EmblemRow = { emblem: string; ore: string; item1: string; item2: string; success: number };
+// in the game's emblem order (stable sort keeps each emblem's recipe order)
+for (const r of [...(emblemsRaw as EmblemRow[])].sort((a, b) => gameOrder(a.emblem) - gameOrder(b.emblem))) {
   (emblems[r.emblem] ??= []).push({ ore: r.ore, item1: r.item1, item2: r.item2, success: r.success });
 }
 
@@ -221,8 +233,8 @@ const units: UnitLite[] = rawUnits.map((u) => {
     raceImg: raceImg(u.race_icon),
     next: u.advances.map((a) => a.id),
     prev: incoming.map((e) => e.from),
-    needs: [...needs],
-    drops: dropsByUnit.get(u.id) ?? [],
+    needs: [...needs].sort(byGameOrder),
+    drops: [...(dropsByUnit.get(u.id) ?? [])].sort(byGameOrder),
   };
 });
 
@@ -277,7 +289,7 @@ for (const m of rawMaterials) {
 for (const s of shopsRaw as { city: string; units: string[]; items: { category: string; name: string }[] }[]) {
   const c = city(s.city);
   c.units = s.units;
-  c.molds = s.items.filter((i) => i.category === "Molds").map((i) => i.name);
+  c.molds = s.items.filter((i) => i.category === "Molds").map((i) => i.name).sort(byGameOrder);
   c.shop = s.items.filter((i) => i.category !== "Molds").map((i) => i.name);
 }
 /** Cities whose shop sells a given unit (by unit name). */
@@ -285,7 +297,7 @@ export const unitSoldIn = new Map<string, string[]>();
 for (const c of cityMap.values())
   for (const u of c.units) unitSoldIn.set(u, [...(unitSoldIn.get(u) ?? []), c.name].sort());
 
-const byRarity = (a: string, b: string) => (materials[a]?.rarity ?? 0) - (materials[b]?.rarity ?? 0) || a.localeCompare(b);
+const byRarity = byGameOrder; // shop and reward lists in the game's item order
 for (const c of cityMap.values()) {
   c.shop.sort(byRarity);
   c.search.sort((a, b) => byRarity(a.material, b.material));

@@ -56,7 +56,10 @@ export default function CraftingList({
   }, [rows]);
 
   const molds = useMemo(() => [...new Set(rows.filter((r) => !type || r.type === type).map((r) => r.mold))], [rows, type]);
-  const ores = useMemo(() => [...new Set(rows.map((r) => r.ore))], [rows]);
+  const ores = useMemo(
+    () => [...new Set(rows.map((r) => r.ore))].sort((a, b) => (materials[a]?.order ?? 999) - (materials[b]?.order ?? 999)),
+    [rows, materials],
+  );
   const effects = useMemo(
     () => [...new Set(rows.flatMap((r) => r.effect.split(" + ")))].sort(),
     [rows],

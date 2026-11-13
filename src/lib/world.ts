@@ -9,6 +9,7 @@ export interface Area {
   x: number;
   y: number;
   vp: number; // Victory Points your kingdom needs to enter
+  terrain: string; // plains, desert, sea, mountains, forest, jungle, volcano, swamp, valley, farmland
   links: string[];
 }
 
@@ -50,3 +51,21 @@ export const routeTo = routes();
 export const progression = [...areas].sort(
   (a, b) => routeTo.get(a.city)!.vpNeeded - routeTo.get(b.city)!.vpNeeded || routeTo.get(a.city)!.path.length - routeTo.get(b.city)!.path.length,
 );
+
+/**
+ * Battle backdrop (public/img/battle/<name>.png, from the game's pokekin.mbm) for each
+ * terrain. The game has 11 backdrops for 10 terrains; each terrain gets the one whose
+ * scenery matches its areas.
+ */
+export const TERRAIN_BG: Record<string, string> = {
+  plains: "plains",
+  desert: "desert",
+  sea: "beach",
+  mountains: "temple",
+  forest: "forest",
+  jungle: "ruins",
+  volcano: "volcano",
+  swamp: "swamp",
+  valley: "town",
+  farmland: "plains",
+};

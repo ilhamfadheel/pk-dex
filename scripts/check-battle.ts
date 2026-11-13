@@ -17,7 +17,8 @@ check(simulate([u("Soldier")], [u("Soldier")], 5).events.length === simulate([u(
 check(winRate([u("Khazad's Ghost")], [u("Soldier")], 50).rate === 1, "rank 9 beats a Soldier every time");
 check(winRate([u("Soldier")], [u("Khazad's Ghost")], 50).rate === 0, "a Soldier never beats a rank 9");
 // every enemy party in the game must resolve
-let t = Date.now(), n = 0, draws = 0;
+const t = Date.now();
+let n = 0, draws = 0;
 for (const a of enemies) for (const p of a.parties) if (p.length) {
   const w = simulate([u("Warrior"), u("Archer"), u("Priest"), u("Knight")], p.map(u), n).winner; n++; if (w === null) draws++;
 }

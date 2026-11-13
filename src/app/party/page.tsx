@@ -3,7 +3,7 @@ import PartyBuilder, { type AreaFoes } from "@/components/PartyBuilder";
 import type { AnimData } from "@/components/SpritePlayer";
 import anims from "@/data/anims.json";
 import { cities, citySlug, data, enemiesByCity, unitPrices, unitSoldIn } from "@/lib/data";
-import { areaByCity } from "@/lib/world";
+import { TERRAIN_BG, areaByCity } from "@/lib/world";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
@@ -19,6 +19,7 @@ export default function PartyPage() {
     city: c.name,
     slug: citySlug(c.name),
     vp: areaByCity.get(c.name)!.vp,
+    bg: TERRAIN_BG[areaByCity.get(c.name)!.terrain] ?? "plains",
     parties: (enemiesByCity.get(c.name) ?? []).map((p) => p.map((n) => id.get(n)!)),
   }));
   return (

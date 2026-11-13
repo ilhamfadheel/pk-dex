@@ -10,6 +10,9 @@ Tables found in 6RAH.APP (all little-endian u32), indexed in the game's area ord
                                     x/y = position on the world map
   0x96654  44 x (a, b)              links between areas (paths on the world map)
   0xAC704  42 x (vp, vp)            Victory Points needed to enter the area
+  0x9630C  42 x terrain              0 plains, 1 desert, 2 sea, 3 mountains, 4 forest lake,
+                                    5 jungle, 6 volcano, 7 swamp, 8 valley, 9 farmland
+                                    (the order of the 10 scenery pictures in pokekin.mbm)
 Each table is validated before use, so another build of the game fails loudly instead
 of producing a wrong map.
 """
@@ -23,10 +26,12 @@ N = 42
 move = open(os.path.join(game, "english", "move.dat"), "rb").read()
 names = [move[i * 48:(i + 1) * 48].decode("utf-16-le").split("\x1b")[0] for i in range(N)]
 
-POS, LINKS, NLINKS, VP = 0x963B4, 0x96654, 44, 0xAC704
+POS, LINKS, NLINKS, VP, TERRAIN = 0x963B4, 0x96654, 44, 0xAC704, 0x9630C
 pos = [struct.unpack_from("<4I", app, POS + i * 16) for i in range(N)]
 links = [struct.unpack_from("<2I", app, LINKS + i * 8) for i in range(NLINKS)]
 vp_pairs = [struct.unpack_from("<2I", app, VP + i * 8) for i in range(N)]
+terrain = list(struct.unpack_from("<42I", app, TERRAIN))
+TERRAIN_NAMES = ["plains", "desert", "sea", "mountains", "forest", "jungle", "volcano", "swamp", "valley", "farmland"]
 
 # --- validation ---
 assert len(app) == 743788, f"unexpected 6RAH.APP size {len(app)} (tables are for the 743,788-byte release)"
@@ -34,6 +39,7 @@ assert all(r[0] <= 8 and r[1] < 1000 and r[2] < 1000 for r in pos), "position ta
 assert all(a < N and b < N and a != b for a, b in links), "link table looks wrong"
 assert all(a == b and a % 10 == 0 for a, b in vp_pairs), "VP table looks wrong"
 assert vp_pairs[0][0] == 0, "start area should need 0 VP"
+assert set(terrain) == set(range(10)), "terrain table looks wrong"
 adj = {i: set() for i in range(N)}
 for a, b in links:
     adj[a].add(b); adj[b].add(a)
@@ -59,6 +65,7 @@ out = [
         "x": pos[i][1],
         "y": pos[i][2],
         "vp": vp_pairs[i][0],
+        "terrain": TERRAIN_NAMES[terrain[i]],
         "links": sorted(names[j] for j in adj[i]),
     }
     for i in range(N)

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useDeferredValue, useMemo, useState, useSyncExternalStore } from "react";
+import { useDeferredValue, useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import type { UnitLite } from "@/lib/types";
 import { setUrl, subscribeUrl } from "@/lib/urlState";
 import { winRate } from "@/lib/battle";
@@ -21,6 +21,7 @@ export interface AreaFoes {
   city: string;
   slug: string;
   vp: number;
+  bg: string; // battle backdrop name
   parties: number[][]; // unit ids
 }
 
@@ -111,23 +112,34 @@ export default function PartyBuilder({
 
   // Simulated win rate against each of the chosen area's parties.
   const vsOdds = useMemo(
-    () => (vs && party.length ? vs.parties.map((ids) => winRate(party, foesOf(ids), 80, 7)) : []),
+    () => (vs && party.length ? vs.parties.map((ids) => winRate(party, foesOf(ids), 40, 7)) : []),
     [vs, party, foesOf],
   );
   // How the party fares in every area (fewer runs; deferred so clicks stay snappy).
-  const lazyParty = useDeferredValue(party);
-  const outlook = useMemo(
-    () =>
-      !lazyParty.length
-        ? []
-        : areas
-          .map((a) => {
-            const rates = a.parties.filter((x) => x.length).map((x) => winRate(lazyParty, foesOf(x), 12, 3).rate);
-            return { a, wins: rates.filter((r) => r >= 0.7).length, risky: rates.filter((r) => r < 0.4).length, n: rates.length };
-          })
-          .sort((x, y) => x.a.vp - y.a.vp || x.a.city.localeCompare(y.a.city)),
-    [lazyParty, areas, foesOf],
-  );
+  // Computed a few areas at a time in the background so the page stays responsive.
+  type Outlook = { a: AreaFoes; wins: number; risky: number; n: number };
+  const partyKey = party.map((u) => u.slug).join(",");
+  const [outlookState, setOutlookState] = useState<{ key: string; rows: Outlook[] }>({ key: "", rows: [] });
+  useEffect(() => {
+    if (!party.length) return;
+    const order = [...areas].sort((x, y) => x.vp - y.vp || x.city.localeCompare(y.city));
+    const rows: Outlook[] = [];
+    let i = 0;
+    let timer: ReturnType<typeof setTimeout>;
+    const step = () => {
+      for (const a of order.slice(i, i + 3)) {
+        const rates = a.parties.filter((x) => x.length).map((x) => winRate(party, foesOf(x), 8, 3).rate);
+        rows.push({ a, wins: rates.filter((r) => r >= 0.7).length, risky: rates.filter((r) => r < 0.4).length, n: rates.length });
+      }
+      i += 3;
+      setOutlookState({ key: partyKey, rows: [...rows] });
+      if (i < order.length) timer = setTimeout(step, 0);
+    };
+    timer = setTimeout(step, 0);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- partyKey identifies the party
+  }, [partyKey, areas, foesOf]);
+  const outlook = outlookState.key === partyKey ? outlookState.rows : [];
 
   const free = PARTY_SLOTS - mine.slots;
   const blocked = (u: UnitLite) =>
@@ -285,7 +297,7 @@ export default function PartyBuilder({
           </select>
         </div>
         <p className="mb-3 text-xs text-muted">
-          Each enemy party the area can send, with your win rate from 80 simulated battles. Press Fight to watch one
+          Each enemy party the area can send, with your win rate from 40 simulated battles. Press Fight to watch one
           play out.
         </p>
 
@@ -296,6 +308,7 @@ export default function PartyBuilder({
               party={party}
               foes={foesOf(vs.parties[fight])}
               title={`${vs.city}, party ${fight + 1}`}
+              bg={vs.bg}
               anims={anims}
               onClose={() => setFight(null)}
             />

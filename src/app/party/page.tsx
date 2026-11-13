@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import PartyBuilder, { type AreaFoes } from "@/components/PartyBuilder";
+import type { AnimData } from "@/components/SpritePlayer";
+import anims from "@/data/anims.json";
 import { cities, citySlug, data, enemiesByCity, unitPrices, unitSoldIn } from "@/lib/data";
 import { areaByCity } from "@/lib/world";
 import { pageMeta } from "@/lib/seo";
@@ -24,11 +26,11 @@ export default function PartyPage() {
       <div className="mb-4">
         <h1 className="text-2xl font-bold tracking-tight">Party builder</h1>
         <p className="text-sm text-muted">
-          Put up to 4 units in a party, using at most 6 slots between them, to see its combined stats and price, then check it against the enemy parties of
+          Put up to 4 units in a party, using at most 6 slots between them, to see its combined stats and price, then fight the enemy parties of
           any area. Unit prices and enemy parties come from the game&apos;s own data files.
         </p>
       </div>
-      <PartyBuilder units={data.units} prices={unitPrices} soldIn={Object.fromEntries(unitSoldIn)} areas={areas} />
+      <PartyBuilder units={data.units} prices={unitPrices} soldIn={Object.fromEntries(unitSoldIn)} areas={areas} anims={anims as Record<string, AnimData>} />
     </>
   );
 }

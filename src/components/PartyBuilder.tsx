@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useDeferredValue, useMemo, useState, useSyncExternalStore } from "react";
 import type { UnitLite } from "@/lib/types";
 import { setUrl, subscribeUrl } from "@/lib/urlState";
+import { winRate } from "@/lib/battle";
+import BattleView from "./BattleView";
+import type { AnimData } from "./SpritePlayer";
 import { UnitImg } from "./ui";
 
 /**
@@ -21,7 +24,6 @@ export interface AreaFoes {
   parties: number[][]; // unit ids
 }
 
-type Totals = ReturnType<typeof totals>;
 function totals(us: UnitLite[], price: (u: UnitLite) => number) {
   const sum = (k: "hp" | "atk" | "def" | "agi" | "dex" | "wis" | "int") => us.reduce((s, u) => s + u[k], 0);
   return {
@@ -38,12 +40,10 @@ function totals(us: UnitLite[], price: (u: UnitLite) => number) {
     maxRank: Math.max(0, ...us.map((u) => u.rank)),
   };
 }
-/** Rough strength: total HP x total ATK. Not the game's battle formula, just a way to rank match-ups. */
-const strength = (t: Totals) => t.hp * t.atk;
-
-function verdict(ratio: number) {
-  if (ratio >= 1.5) return { label: "Favored", cls: "border-emerald-500/50 bg-emerald-500/15 text-emerald-400" };
-  if (ratio >= 0.9) return { label: "Even", cls: "border-gold/50 bg-gold/15 text-gold" };
+/** Verdict from the simulated win rate. */
+function verdict(rate: number) {
+  if (rate >= 0.7) return { label: "Favored", cls: "border-emerald-500/50 bg-emerald-500/15 text-emerald-400" };
+  if (rate >= 0.4) return { label: "Even", cls: "border-gold/50 bg-gold/15 text-gold" };
   return { label: "Risky", cls: "border-red-500/50 bg-red-500/15 text-red-400" };
 }
 
@@ -62,7 +62,9 @@ export default function PartyBuilder({
   prices,
   soldIn,
   areas,
+  anims,
 }: {
+  anims: Record<string, AnimData>;
   units: UnitLite[];
   prices: Record<string, number>;
   soldIn: Record<string, string[]>;
@@ -104,18 +106,28 @@ export default function PartyBuilder({
   const mine = totals(party, price);
   const foeTotals = (ids: number[]) => totals(ids.map((id) => byId.get(id)!), price);
 
-  // How the party fares in every area: share of the area's 9 parties it out-muscles.
-  const s0 = strength(mine);
-  const outlook = !party.length
-    ? []
-    : areas
-      .map((a) => {
-        const ratios = a.parties.filter((x) => x.length).map((x) => s0 / Math.max(1, strength(foeTotals(x))));
-        const wins = ratios.filter((r) => r >= 1.5).length;
-        const risky = ratios.filter((r) => r < 0.9).length;
-        return { a, wins, risky, n: ratios.length, worst: Math.min(...ratios) };
-      })
-      .sort((x, y) => x.a.vp - y.a.vp || x.a.city.localeCompare(y.a.city));
+  const foesOf = useMemo(() => (ids: number[]) => ids.map((id) => byId.get(id)!), [byId]);
+  const [fight, setFight] = useState<number | null>(null); // enemy party index in the chosen area
+
+  // Simulated win rate against each of the chosen area's parties.
+  const vsOdds = useMemo(
+    () => (vs && party.length ? vs.parties.map((ids) => winRate(party, foesOf(ids), 80, 7)) : []),
+    [vs, party, foesOf],
+  );
+  // How the party fares in every area (fewer runs; deferred so clicks stay snappy).
+  const lazyParty = useDeferredValue(party);
+  const outlook = useMemo(
+    () =>
+      !lazyParty.length
+        ? []
+        : areas
+          .map((a) => {
+            const rates = a.parties.filter((x) => x.length).map((x) => winRate(lazyParty, foesOf(x), 12, 3).rate);
+            return { a, wins: rates.filter((r) => r >= 0.7).length, risky: rates.filter((r) => r < 0.4).length, n: rates.length };
+          })
+          .sort((x, y) => x.a.vp - y.a.vp || x.a.city.localeCompare(y.a.city)),
+    [lazyParty, areas, foesOf],
+  );
 
   const free = PARTY_SLOTS - mine.slots;
   const blocked = (u: UnitLite) =>
@@ -263,7 +275,7 @@ export default function PartyBuilder({
           <select
             className="ctl ml-auto"
             value={vs?.slug ?? ""}
-            onChange={(e) => setUrl({ vs: e.target.value })}
+            onChange={(e) => { setFight(null); setUrl({ vs: e.target.value }); }}
             aria-label="Area to fight in"
           >
             <option value="">Pick an area…</option>
@@ -273,24 +285,45 @@ export default function PartyBuilder({
           </select>
         </div>
         <p className="mb-3 text-xs text-muted">
-          Compares your party with each enemy party the area can send, by total HP × total ATK. That&apos;s a rough
-          guide to who hits harder and lasts longer, not the game&apos;s battle formula.
+          Each enemy party the area can send, with your win rate from 80 simulated battles. Press Fight to watch one
+          play out.
         </p>
+
+        {vs && fight != null && party.length > 0 && (
+          <div className="mb-3">
+            <BattleView
+              key={`${vs.slug}-${fight}-${party.map((u) => u.slug).join(",")}`}
+              party={party}
+              foes={foesOf(vs.parties[fight])}
+              title={`${vs.city}, party ${fight + 1}`}
+              anims={anims}
+              onClose={() => setFight(null)}
+            />
+          </div>
+        )}
 
         {vs ? (
           <ol className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
             {vs.parties.map((ids, i) => {
               const t = foeTotals(ids);
-              const ratio = party.length ? strength(mine) / Math.max(1, strength(t)) : 0;
-              const v = verdict(ratio);
+              const o = vsOdds[i];
+              const v = verdict(o?.rate ?? 0);
               return (
-                <li key={i} className="rounded-lg border border-line p-2">
+                <li key={i} className={`rounded-lg border p-2 ${fight === i ? "border-accent" : "border-line"}`}>
                   <div className="mb-1.5 flex items-center gap-2">
                     <span className="font-mono text-[10px] text-muted">Party {i + 1}</span>
-                    {party.length > 0 && (
-                      <span className={`ml-auto rounded border px-1.5 text-[11px] font-semibold ${v.cls}`} title={`Your strength is ${ratio.toFixed(2)}× theirs`}>
-                        {v.label} · {ratio.toFixed(1)}×
-                      </span>
+                    {o && (
+                      <>
+                        <span className={`ml-auto rounded border px-1.5 text-[11px] font-semibold ${v.cls}`} title={`Won ${o.wins}, lost ${o.losses}${o.draws ? `, ${o.draws} ran out of time` : ""} of ${o.runs} simulated battles`}>
+                          {v.label} · {Math.round(o.rate * 100)}%
+                        </span>
+                        <button
+                          onClick={() => { setFight(i); document.getElementById("party-vs")?.scrollIntoView({ behavior: "smooth" }); }}
+                          className="chip !px-2 !py-0.5 !text-[11px] hover:border-accent"
+                        >
+                          ⚔ Fight
+                        </button>
+                      </>
                     )}
                   </div>
                   <div className="flex flex-wrap gap-1">
@@ -324,8 +357,8 @@ export default function PartyBuilder({
         <section className="card p-4">
           <h2 className="font-semibold">Where this party can fight</h2>
           <p className="mb-3 text-xs text-muted">
-            Every area by VP: how many of its enemy parties yours is favored against, and how many look risky. Click one
-            to see the match-ups.
+            Every area by VP: in simulated battles, how many of its enemy parties yours usually beats (70%+) and how
+            many it usually loses to (under 40%). Click one to see the match-ups.
           </p>
           <ul className="grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
             {outlook.map(({ a, wins, risky, n }) => {
@@ -334,6 +367,7 @@ export default function PartyBuilder({
                 <li key={a.slug}>
                   <button
                     onClick={() => {
+                      setFight(null);
                       setUrl({ vs: a.slug });
                       document.getElementById("party-vs")?.scrollIntoView({ behavior: "smooth" });
                     }}

@@ -78,3 +78,11 @@ body {
     box-shadow: inset 2px 0 0 var(--accent);
   }
 }
+
+/* floating damage numbers in the battle view */
+@keyframes pk-dmg {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-22px); opacity: 0; }
+}
+.pk-dmg { animation: pk-dmg 0.9s ease-out forwards; }
+@media (prefers-reduced-motion: reduce) { .pk-dmg { animation: none; } }

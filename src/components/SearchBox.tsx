@@ -10,7 +10,7 @@ const PAGES: { n: string; s: string; h: string }[] = [
   { n: "Units", s: "All 115 units, filters and the Shop table", h: "/" },
   { n: "Rank-up Planner", s: "Materials to evolve any unit", h: "/planner" },
   { n: "Compare units", s: "Up to 4 units side by side", h: "/compare" },
-  { n: "Party builder", s: "Fill a 6-slot party, see totals, price and enemy match-ups", h: "/party" },
+  { n: "Party builder", s: "Up to 4 units / 6 slots: totals, price and enemy match-ups", h: "/party" },
   { n: "Emblems", s: "Every rank-up emblem recipe", h: "/emblems" },
   { n: "Crafting", s: "Weapon, armor and accessory recipes", h: "/crafting" },
   { n: "Equipment", s: "Every weapon, armor and accessory with stats", h: "/equipment" },

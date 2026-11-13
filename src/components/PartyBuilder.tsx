@@ -7,9 +7,11 @@ import { setUrl, subscribeUrl } from "@/lib/urlState";
 import { UnitImg } from "./ui";
 
 /**
- * A party has 6 slots; each unit takes 1-3 of them. Every regular enemy party in the
- * game's party table fits in 6 (the only bigger one is a boss party).
+ * A party holds at most 4 units, and their slots (1-3 each) can add up to at most 6.
+ * The game's party table has 4 unit places per party, and every regular enemy party
+ * fits in 6 slots (the only bigger one is a boss party).
  */
+export const PARTY_UNITS = 4;
 export const PARTY_SLOTS = 6;
 
 export interface AreaFoes {
@@ -78,7 +80,7 @@ export default function PartyBuilder({
       const out: UnitLite[] = [];
       for (const s of (p.get("u") ?? "").split(",")) {
         const u = bySlug.get(s);
-        if (u && out.reduce((n, x) => n + x.slots, u.slots) <= PARTY_SLOTS) out.push(u);
+        if (u && out.length < PARTY_UNITS && out.reduce((n, x) => n + x.slots, u.slots) <= PARTY_SLOTS) out.push(u);
       }
       return out;
     },
@@ -116,6 +118,12 @@ export default function PartyBuilder({
       .sort((x, y) => x.a.vp - y.a.vp || x.a.city.localeCompare(y.a.city));
 
   const free = PARTY_SLOTS - mine.slots;
+  const blocked = (u: UnitLite) =>
+    party.length >= PARTY_UNITS
+      ? `The party is full (${PARTY_UNITS} units)`
+      : u.slots > free
+        ? `${u.name} needs ${u.slots} slot${u.slots > 1 ? "s" : ""}; ${free} of ${PARTY_SLOTS} left`
+        : null;
 
   return (
     <div className="space-y-4">
@@ -124,7 +132,7 @@ export default function PartyBuilder({
         <div className="mb-3 flex flex-wrap items-center gap-2">
           <h2 className="font-semibold">Your party</h2>
           <span className="text-xs text-muted">
-            {mine.slots}/{PARTY_SLOTS} slots used · {party.length} unit{party.length === 1 ? "" : "s"} · the link keeps this party
+            {party.length}/{PARTY_UNITS} units · {mine.slots}/{PARTY_SLOTS} slots · the link keeps this party
           </span>
           {party.length > 0 && (
             <>
@@ -135,13 +143,25 @@ export default function PartyBuilder({
             </>
           )}
         </div>
-        {/* 6 slot cells; each unit card spans as many cells as it has slots */}
-        <ol className="grid grid-cols-3 gap-2 sm:grid-cols-6">
-          {[...party, ...Array<undefined>(free).fill(undefined)].map((u, i) => {
+        {/* slot meter: 6 cells, coloured per unit */}
+        <div className="mb-3 flex items-center gap-2" aria-label={`${mine.slots} of ${PARTY_SLOTS} slots used`}>
+          <span className="text-[10px] font-semibold uppercase text-muted">Slots</span>
+          <div className="flex flex-1 gap-1">
+            {party.flatMap((u, i) =>
+              Array.from({ length: u.slots }, (_, j) => (
+                <span key={`${i}-${j}`} title={u.name} className={`h-2.5 flex-1 rounded-sm ${i % 2 ? "bg-accent/60" : "bg-accent"}`} />
+              )),
+            )}
+            {Array.from({ length: free }, (_, i) => <span key={`f${i}`} className="h-2.5 flex-1 rounded-sm bg-panel-2" />)}
+          </div>
+          <span className="font-mono text-xs tabular-nums">{mine.slots}/{PARTY_SLOTS}</span>
+        </div>
+        <ol className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {Array.from({ length: PARTY_UNITS }, (_, i) => {
+            const u = party[i];
             return (
               <li
                 key={i}
-                style={u ? { gridColumn: `span ${u.slots}` } : undefined}
                 className={`relative flex min-h-36 flex-col items-center justify-center gap-1 rounded-lg border p-2 text-center ${u ? "border-line bg-panel-2" : "border-dashed border-line text-muted"}`}>
                 {u && <span className="absolute top-1 left-2 font-mono text-[10px] text-muted">{u.slots} slot{u.slots > 1 ? "s" : ""}</span>}
                 {u ? (
@@ -164,7 +184,7 @@ export default function PartyBuilder({
                     {u.ability && <span className="chip !px-1.5 !py-0 !text-[10px]">{u.ability}</span>}
                   </>
                 ) : (
-                  <span className="text-xs">Empty slot</span>
+                  <span className="text-xs">{free > 0 ? "Empty: pick a unit below" : "No slots left"}</span>
                 )}
               </li>
             );
@@ -219,10 +239,10 @@ export default function PartyBuilder({
           {pickable.map((u) => (
             <li key={u.id}>
               <button
-                disabled={u.slots > free}
+                disabled={!!blocked(u)}
                 onClick={() => setParty([...party, u])}
                 className="flex w-full items-center gap-2 rounded-lg border border-line p-1.5 text-left text-sm hover:border-accent disabled:cursor-not-allowed disabled:opacity-40"
-                title={u.slots > free ? `${u.name} needs ${u.slots} slot${u.slots > 1 ? "s" : ""}; ${free} of ${PARTY_SLOTS} left` : `Add ${u.name} (${u.slots} slot${u.slots > 1 ? "s" : ""})`}
+                title={blocked(u) ?? `Add ${u.name} (${u.slots} slot${u.slots > 1 ? "s" : ""})`}
               >
                 <UnitImg u={u} size={36} />
                 <span className="min-w-0">

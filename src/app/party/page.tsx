@@ -7,7 +7,7 @@ import { pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
   title: "Party Builder – Plan a Party and Its Match-ups",
   description:
-    "Build a Pocket Kingdom: Own the World 6-slot party (each unit takes 1 to 3 slots): total HP, ATK, DEF, AGI and search power, total price in gold, and how it stacks up against the enemy parties of all 42 areas.",
+    "Build a Pocket Kingdom: Own the World party of up to 4 units and 6 slots: total HP, ATK, DEF, AGI and search power, total price in gold, and how it stacks up against the enemy parties of all 42 areas.",
   path: "/party",
 });
 
@@ -24,7 +24,7 @@ export default function PartyPage() {
       <div className="mb-4">
         <h1 className="text-2xl font-bold tracking-tight">Party builder</h1>
         <p className="text-sm text-muted">
-          Fill a party&apos;s 6 slots (each unit takes 1 to 3) to see its combined stats and price, then check it against the enemy parties of
+          Put up to 4 units in a party, using at most 6 slots between them, to see its combined stats and price, then check it against the enemy parties of
           any area. Unit prices and enemy parties come from the game&apos;s own data files.
         </p>
       </div>

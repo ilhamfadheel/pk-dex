@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useDeferredValue, useMemo, useState } from "react";
+import { useDeferredValue, useMemo, useState, useSyncExternalStore } from "react";
 import type { MaterialLite, Stat, UnitLite } from "@/lib/types";
 import { STATS } from "@/lib/types";
 import { MatIcon, UnitImg } from "./ui";
@@ -12,6 +12,31 @@ type SortKey = "id" | "name" | "rank" | "slots" | Stat | "search";
 const searchPower = (u: UnitLite) => u.agi / u.slots;
 const sortValue = (u: UnitLite, k: SortKey) => (k === "search" ? searchPower(u) : u[k]);
 
+// ---- URL-backed state ----
+const urlListeners = new Set<() => void>();
+function subscribeUrl(cb: () => void) {
+  urlListeners.add(cb);
+  window.addEventListener("popstate", cb); // Back / Forward
+  return () => {
+    urlListeners.delete(cb);
+    window.removeEventListener("popstate", cb);
+  };
+}
+/** Update query params in place (replaceState: filter tweaks don't pile up in history). */
+function setUrl(changes: Record<string, string>) {
+  const params = new URLSearchParams(window.location.search);
+  for (const [k, v] of Object.entries(changes)) {
+    if (v) params.set(k, v);
+    else params.delete(k);
+  }
+  const qs = params.toString();
+  const url = `${window.location.pathname}${qs ? `?${qs}` : ""}${window.location.hash}`;
+  if (url !== `${window.location.pathname}${window.location.search}${window.location.hash}`) {
+    window.history.replaceState(window.history.state, "", url);
+    urlListeners.forEach((l) => l());
+  }
+}
+
 export default function UnitDex({
   units,
   materials,
@@ -19,18 +44,48 @@ export default function UnitDex({
   units: UnitLite[];
   materials: MaterialLite[];
 }) {
-  const [q, setQ] = useState("");
-  const [race, setRace] = useState("");
-  const [rank, setRank] = useState<[number, number]>([1, 9]);
-  const [move, setMove] = useState("");
-  const [slots, setSlots] = useState("");
-  const [ability, setAbility] = useState("");
-  const [needs, setNeeds] = useState<string[]>([]);
-  const [needMode, setNeedMode] = useState<"any" | "all">("any");
-  const [drops, setDrops] = useState("");
-  const [stage, setStage] = useState<"" | "base" | "final">("");
-  const [sort, setSort] = useState<{ key: SortKey; dir: 1 | -1 }>({ key: "id", dir: 1 });
-  const [view, setView] = useState<"table" | "grid">("table");
+  // Filters, sort and view live in the URL (?race=…&sort=agi&dir=desc…), so Back returns
+  // to the same list and links can be shared. Defaults are left out of the URL.
+  const search = useSyncExternalStore(subscribeUrl, () => window.location.search, () => "");
+  const p = useMemo(() => new URLSearchParams(search), [search]);
+  const q = p.get("q") ?? "";
+  const race = p.get("race") ?? "";
+  const rank = useMemo<[number, number]>(() => {
+    const [a, b] = (p.get("rank") ?? "1-9").split("-").map(Number);
+    return [Math.min(Math.max(a || 1, 1), 9), Math.min(Math.max(b || 9, 1), 9)];
+  }, [p]);
+  const move = p.get("move") ?? "";
+  const slots = p.get("slots") ?? "";
+  const ability = p.get("ability") ?? "";
+  const needs = useMemo(() => (p.get("needs") ? p.get("needs")!.split(",") : []), [p]);
+  const needMode: "any" | "all" = p.get("match") === "all" ? "all" : "any";
+  const drops = p.get("drops") ?? "";
+  const stage = (["base", "final"].includes(p.get("stage") ?? "") ? p.get("stage") : "") as "" | "base" | "final";
+  const sort = useMemo<{ key: SortKey; dir: 1 | -1 }>(() => {
+    const key = (p.get("sort") ?? "id") as SortKey;
+    const valid: SortKey[] = ["id", "name", "rank", "slots", "search", ...STATS];
+    return { key: valid.includes(key) ? key : "id", dir: p.get("dir") === "desc" ? -1 : 1 };
+  }, [p]);
+  const view: "table" | "grid" = p.get("view") === "grid" ? "grid" : "table";
+
+  const setQ = (v: string) => setUrl({ q: v });
+  const setRace = (v: string) => setUrl({ race: v });
+  const setRank = (f: (r: [number, number]) => [number, number]) => {
+    const [a, b] = f(rank);
+    setUrl({ rank: a === 1 && b === 9 ? "" : `${a}-${b}` });
+  };
+  const setMove = (v: string) => setUrl({ move: v });
+  const setSlots = (v: string) => setUrl({ slots: v });
+  const setAbility = (v: string) => setUrl({ ability: v });
+  const setNeeds = (f: (n: string[]) => string[]) => setUrl({ needs: f(needs).join(",") });
+  const setNeedMode = (v: "any" | "all") => setUrl({ match: v === "all" ? "all" : "" });
+  const setDrops = (v: string) => setUrl({ drops: v });
+  const setStage = (v: "" | "base" | "final") => setUrl({ stage: v });
+  const setSort = (f: (s: { key: SortKey; dir: 1 | -1 }) => { key: SortKey; dir: 1 | -1 }) => {
+    const s = f(sort);
+    setUrl({ sort: s.key === "id" ? "" : s.key, dir: s.dir === -1 ? "desc" : "" });
+  };
+  const setView = (v: "table" | "grid") => setUrl({ view: v === "grid" ? "grid" : "" });
   const [picked, setPicked] = useState<string[]>([]); // unit slugs to compare (max 4)
   const togglePick = (slug: string) =>
     setPicked((p) => (p.includes(slug) ? p.filter((s) => s !== slug) : p.length < 4 ? [...p, slug] : p));
@@ -79,10 +134,9 @@ export default function UnitDex({
   const byName = useMemo(() => new Map(materials.map((m) => [m.name, m])), [materials]);
   const toggleSort = (key: SortKey) =>
     setSort((s) => ({ key, dir: s.key === key ? ((-s.dir) as 1 | -1) : key === "name" || key === "id" ? 1 : -1 }));
-  const reset = () => {
-    setQ(""); setRace(""); setRank([1, 9]); setMove(""); setSlots(""); setAbility("");
-    setNeeds([]); setDrops(""); setStage("");
-  };
+  // keeps sort and view, clears every filter
+  const reset = () =>
+    setUrl({ q: "", race: "", rank: "", move: "", slots: "", ability: "", needs: "", match: "", drops: "", stage: "" });
 
   const th = (k: SortKey, label: string) => (
     <th

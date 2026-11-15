@@ -15,11 +15,14 @@ export default function WorldMap({
   current,
   route = [],
   compact = false,
+  unlock = [],
 }: {
   slugOf: (city: string) => string;
   current?: string;
   route?: string[];
   compact?: boolean;
+  /** Areas whose boss must be beaten to open `current`: drawn as dashed gold lines. */
+  unlock?: string[];
 }) {
   const xs = areas.map((a) => a.x), ys = areas.map((a) => a.y);
   const pad = 40;
@@ -28,6 +31,8 @@ export default function WorldMap({
   const onRoute = new Set(route.slice(1).map((c, i) => [route[i], c].sort().join("|")));
   const routeSet = new Set(route);
   const edges = areas.flatMap((a) => a.links.filter((b) => a.city < b).map((b) => [a, areaByCity.get(b)!] as const));
+  const cur = current ? areaByCity.get(current) : undefined;
+  const unlockSet = new Set(unlock);
 
   return (
     <div className="overflow-x-auto">
@@ -51,20 +56,36 @@ export default function WorldMap({
             />
           );
         })}
+        {cur && unlock.map((c) => {
+          const b = areaByCity.get(c)!;
+          return (
+            <line
+              key={`unlock-${c}`}
+              x1={b.x} y1={b.y} x2={cur.x} y2={cur.y}
+              stroke="var(--gold)"
+              strokeWidth={2.5}
+              strokeDasharray="7 6"
+              strokeLinecap="round"
+            >
+              <title>{`Beat the boss of ${c} to open ${cur.city}`}</title>
+            </line>
+          );
+        })}
         {areas.map((a) => {
           const isCur = a.city === current, isStart = a.city === START, inRoute = routeSet.has(a.city);
+          const isKey = unlockSet.has(a.city);
           const r = isCur ? 11 : 7;
           return (
             <Link key={a.city} href={`/cities/${slugOf(a.city)}`}>
               <g className="cursor-pointer">
-                <title>{`${a.city} – ${a.region}, ${a.vp} VP to enter`}</title>
+                <title>{`${a.city} – ${a.region}, ${a.vp} VP to enter${a.requires.length ? `; opens after beating the boss of ${a.requires.join(" and ")}` : ""}`}</title>
                 <circle
                   cx={a.x} cy={a.y} r={r}
                   fill={isCur ? "var(--accent)" : REGION_TINT[a.region]}
-                  stroke={inRoute || isStart ? "var(--ink)" : "var(--panel)"}
-                  strokeWidth={inRoute || isStart ? 2.5 : 1.5}
+                  stroke={isKey ? "var(--gold)" : inRoute || isStart ? "var(--ink)" : "var(--panel)"}
+                  strokeWidth={isKey ? 3 : inRoute || isStart ? 2.5 : 1.5}
                 />
-                {(!compact || isCur || inRoute) && (
+                {(!compact || isCur || inRoute || isKey) && (
                   <text
                     x={a.x} y={a.y - r - 4}
                     textAnchor="middle"

@@ -5,7 +5,7 @@ import { MatChip, UnitImg } from "@/components/ui";
 import JsonLd from "@/components/JsonLd";
 import WorldMap from "@/components/WorldMap";
 import { cities, cityBySlug, citySlug, data, enemiesByCity, iconFor } from "@/lib/data";
-import { START, areaByCity, routeTo } from "@/lib/world";
+import { START, areaByCity, opensAfter, routeTo, unlockChain } from "@/lib/world";
 import { GAME, breadcrumbs, pageMeta } from "@/lib/seo";
 
 const moldIcon = (m: string) =>
@@ -58,6 +58,17 @@ export default async function CityPage({ params }: PageProps<"/cities/[slug]">) 
     .sort((a, b) => b.n - a.n || b.u.rank - a.u.rank);
   const maxRank = Math.max(0, ...foes.map((f) => f.u.rank));
   const route = routeTo.get(c.name)!;
+  const chain = unlockChain(c.name);
+  const opens = opensAfter.get(c.name) ?? [];
+  const bossChip = (city: string, hl = false) => (
+    <Link
+      key={city}
+      href={`/cities/${citySlug(city)}`}
+      className={`chip !py-1 ${hl ? "border-gold/60 text-gold" : "hover:border-accent"}`}
+    >
+      {city} <span className="font-mono text-[10px] text-muted">{areaByCity.get(city)!.vp} VP</span>
+    </Link>
+  );
 
   return (
     <article className="space-y-4">
@@ -78,11 +89,49 @@ export default async function CityPage({ params }: PageProps<"/cities/[slug]">) 
         sub={
           route.path.length === 1
             ? "Your kingdom starts here."
-            : `Follow the paths from ${START}. Each area opens once your kingdom has its Victory Points (VP); you need ${route.vpNeeded} VP to reach ${c.name}.`
+            : `Areas open when you beat the bosses they need; then walk the paths from ${START} (you need ${route.vpNeeded} VP along the way).`
         }
       >
         <div className="grid gap-4 lg:grid-cols-[1fr_minmax(300px,520px)]">
           <div className="space-y-4">
+            <div className="rounded-lg border border-gold/40 bg-gold/5 p-3">
+              <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-gold">How it opens</div>
+              {area.requires.length ? (
+                <>
+                  <p className="mb-2 text-sm">
+                    {c.name} opens once you beat the area boss of{" "}
+                    {area.requires.map((r, i) => (
+                      <span key={r}>
+                        {i > 0 && (i === area.requires.length - 1 ? " and " : ", ")}
+                        <Link href={`/cities/${citySlug(r)}`} className="font-semibold text-gold hover:underline">{r}</Link>
+                      </span>
+                    ))}
+                    , and your kingdom has {area.vp} VP.
+                  </p>
+                  {chain.length > area.requires.length && (
+                    <>
+                      <div className="mb-1 text-xs text-muted">All the bosses to beat first, in order ({chain.length}):</div>
+                      <ol className="flex flex-wrap items-center gap-1.5">
+                        {chain.map((b, i) => (
+                          <li key={b} className="flex items-center gap-1.5">
+                            {i > 0 && <span className="text-muted">→</span>}
+                            {bossChip(b, area.requires.includes(b))}
+                          </li>
+                        ))}
+                      </ol>
+                    </>
+                  )}
+                </>
+              ) : (
+                <p className="text-sm">Open from the start.</p>
+              )}
+              {opens.length > 0 && (
+                <div className="mt-2 border-t border-gold/20 pt-2">
+                  <div className="mb-1 text-xs text-muted">Beating the boss here opens:</div>
+                  <div className="flex flex-wrap gap-1.5">{opens.map((o) => bossChip(o))}</div>
+                </div>
+              )}
+            </div>
             {route.path.length > 1 && (
               <ol className="flex flex-wrap items-center gap-1.5">
                 {route.path.map((city, i) => {
@@ -121,7 +170,7 @@ export default async function CityPage({ params }: PageProps<"/cities/[slug]">) 
               </ul>
             </div>
           </div>
-          <WorldMap slugOf={citySlug} current={c.name} route={route.path} compact />
+          <WorldMap slugOf={citySlug} current={c.name} route={route.path} unlock={area.requires} compact />
         </div>
       </Section>
 

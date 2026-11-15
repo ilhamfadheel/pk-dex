@@ -7,6 +7,7 @@
   "y": 18,
   "vp": 0,
   "terrain": "sea",
+  "requires": [],
   "links": [
    "Cressence"
   ]
@@ -19,6 +20,9 @@
   "y": 100,
   "vp": 10,
   "terrain": "plains",
+  "requires": [
+   "Elynotis"
+  ],
   "links": [
    "Elfaria",
    "Elynotis",
@@ -34,6 +38,9 @@
   "y": 165,
   "vp": 20,
   "terrain": "farmland",
+  "requires": [
+   "Cressence"
+  ],
   "links": [
    "Beast Lair",
    "Cressence"
@@ -47,6 +54,9 @@
   "y": 175,
   "vp": 100,
   "terrain": "forest",
+  "requires": [
+   "Pirate Island"
+  ],
   "links": [
    "Cressence",
    "Tiwana Ruins"
@@ -60,6 +70,9 @@
   "y": 80,
   "vp": 40,
   "terrain": "forest",
+  "requires": [
+   "Pirate Island"
+  ],
   "links": [
    "Cressence",
    "Spirits Forest"
@@ -73,6 +86,9 @@
   "y": 240,
   "vp": 30,
   "terrain": "jungle",
+  "requires": [
+   "Gulldria"
+  ],
   "links": [
    "Deserted Ruins",
    "Gulldria",
@@ -87,6 +103,9 @@
   "y": 290,
   "vp": 40,
   "terrain": "jungle",
+  "requires": [
+   "Beast Lair"
+  ],
   "links": [
    "Altar of the Spirits",
    "Beast Lair",
@@ -101,6 +120,9 @@
   "y": 300,
   "vp": 40,
   "terrain": "jungle",
+  "requires": [
+   "Beast Lair"
+  ],
   "links": [
    "Beast Lair",
    "Ilyumine",
@@ -115,6 +137,9 @@
   "y": 315,
   "vp": 60,
   "terrain": "mountains",
+  "requires": [
+   "Earl's Castle"
+  ],
   "links": [
    "Gate of Recollection",
    "Thick Forest"
@@ -128,6 +153,9 @@
   "y": 230,
   "vp": 150,
   "terrain": "mountains",
+  "requires": [
+   "Ruins Road"
+  ],
   "links": [
    "Ruins Road"
   ]
@@ -140,6 +168,10 @@
   "y": 435,
   "vp": 50,
   "terrain": "farmland",
+  "requires": [
+   "Thick Forest",
+   "Deserted Ruins"
+  ],
   "links": [
    "Deeva Volcano",
    "Deserted Ruins",
@@ -154,6 +186,9 @@
   "y": 520,
   "vp": 120,
   "terrain": "volcano",
+  "requires": [
+   "Pirate Island"
+  ],
   "links": [
    "Ilyumine"
   ]
@@ -166,6 +201,9 @@
   "y": 560,
   "vp": 60,
   "terrain": "sea",
+  "requires": [
+   "Ilyumine"
+  ],
   "links": [
    "Ilyumine",
    "Pirate Island",
@@ -180,6 +218,9 @@
   "y": 610,
   "vp": 70,
   "terrain": "mountains",
+  "requires": [
+   "Distaria"
+  ],
   "links": [
    "Distaria",
    "Donam"
@@ -193,6 +234,9 @@
   "y": 610,
   "vp": 100,
   "terrain": "sea",
+  "requires": [
+   "Pirate Island"
+  ],
   "links": [
    "Distaria"
   ]
@@ -205,6 +249,9 @@
   "y": 130,
   "vp": 60,
   "terrain": "forest",
+  "requires": [
+   "Elfaria"
+  ],
   "links": [
    "Earl's Castle",
    "Elfaria"
@@ -218,6 +265,9 @@
   "y": 80,
   "vp": 80,
   "terrain": "mountains",
+  "requires": [
+   "Spirits Forest"
+  ],
   "links": [
    "Dark Elf Settlement",
    "Spirits Forest"
@@ -231,6 +281,10 @@
   "y": 110,
   "vp": 100,
   "terrain": "forest",
+  "requires": [
+   "Tiwana Ruins",
+   "Yggdrasill"
+  ],
   "links": [
    "Earl's Castle",
    "Echigo"
@@ -244,6 +298,9 @@
   "y": 155,
   "vp": 200,
   "terrain": "forest",
+  "requires": [
+   "Mizuchi Shrine"
+  ],
   "links": [
    "Mizuchi Shrine"
   ]
@@ -256,6 +313,9 @@
   "y": 280,
   "vp": 100,
   "terrain": "mountains",
+  "requires": [
+   "Altar of the Spirits"
+  ],
   "links": [
    "Altar of the Spirits",
    "Water City"
@@ -269,6 +329,10 @@
   "y": 220,
   "vp": 140,
   "terrain": "sea",
+  "requires": [
+   "Water Shrine",
+   "Gate of Recollection"
+  ],
   "links": [
    "Gate of Recollection",
    "Mizuchi Shrine"
@@ -282,6 +346,9 @@
   "y": 220,
   "vp": 180,
   "terrain": "sea",
+  "requires": [
+   "Water City"
+  ],
   "links": [
    "Water City",
    "Yggdrasill"
@@ -295,6 +362,9 @@
   "y": 340,
   "vp": 260,
   "terrain": "mountains",
+  "requires": [
+   "Gate of Oblivion"
+  ],
   "links": [
    "Gate of Oblivion",
    "Mountaintop Shrine"
@@ -308,6 +378,9 @@
   "y": 260,
   "vp": 300,
   "terrain": "mountains",
+  "requires": [
+   "Forgotten Village"
+  ],
   "links": [
    "Forgotten Village"
   ]
@@ -320,6 +393,9 @@
   "y": 535,
   "vp": 80,
   "terrain": "sea",
+  "requires": [
+   "Pirate Island"
+  ],
   "links": [
    "Pirate Island",
    "Runeheim",
@@ -334,6 +410,9 @@
   "y": 580,
   "vp": 100,
   "terrain": "valley",
+  "requires": [
+   "Donam"
+  ],
   "links": [
    "Donam",
    "Seles"
@@ -347,6 +426,9 @@
   "y": 485,
   "vp": 90,
   "terrain": "sea",
+  "requires": [
+   "Donam"
+  ],
   "links": [
    "Donam",
    "Nomad",
@@ -361,6 +443,10 @@
   "y": 535,
   "vp": 110,
   "terrain": "desert",
+  "requires": [
+   "Runeheim",
+   "Seles"
+  ],
   "links": [
    "Pyramid",
    "Seles"
@@ -374,6 +460,9 @@
   "y": 35,
   "vp": 120,
   "terrain": "valley",
+  "requires": [
+   "Dark Elf Settlement"
+  ],
   "links": [
    "Dark Elf Settlement",
    "Edo",
@@ -388,6 +477,9 @@
   "y": 50,
   "vp": 150,
   "terrain": "plains",
+  "requires": [
+   "Echigo"
+  ],
   "links": [
    "Echigo",
    "Shalom"
@@ -401,6 +493,9 @@
   "y": 170,
   "vp": 180,
   "terrain": "farmland",
+  "requires": [
+   "Echigo"
+  ],
   "links": [
    "Echigo",
    "Shalom"
@@ -414,6 +509,10 @@
   "y": 115,
   "vp": 200,
   "terrain": "valley",
+  "requires": [
+   "Yamato",
+   "Edo"
+  ],
   "links": [
    "Edo",
    "Mikado Mausoleum",
@@ -428,6 +527,11 @@
   "y": 220,
   "vp": 250,
   "terrain": "plains",
+  "requires": [
+   "Yamato",
+   "Edo",
+   "Shalom"
+  ],
   "links": [
    "Shalom"
   ]
@@ -440,6 +544,9 @@
   "y": 375,
   "vp": 150,
   "terrain": "desert",
+  "requires": [
+   "Bedouin"
+  ],
   "links": [
    "Bedouin",
    "Huge Swamp"
@@ -453,6 +560,10 @@
   "y": 270,
   "vp": 200,
   "terrain": "swamp",
+  "requires": [
+   "Treasure Island",
+   "Mikado Mausoleum"
+  ],
   "links": [
    "Desert Road",
    "Gate of Oblivion",
@@ -467,6 +578,9 @@
   "y": 275,
   "vp": 170,
   "terrain": "swamp",
+  "requires": [
+   "Huge Swamp"
+  ],
   "links": [
    "Huge Swamp"
   ]
@@ -479,6 +593,9 @@
   "y": 280,
   "vp": 220,
   "terrain": "mountains",
+  "requires": [
+   "Huge Swamp"
+  ],
   "links": [
    "Forgotten Village",
    "Huge Swamp"
@@ -492,6 +609,9 @@
   "y": 500,
   "vp": 120,
   "terrain": "desert",
+  "requires": [
+   "Nomad"
+  ],
   "links": [
    "Ishtal",
    "Nomad"
@@ -505,6 +625,9 @@
   "y": 475,
   "vp": 130,
   "terrain": "desert",
+  "requires": [
+   "Pyramid"
+  ],
   "links": [
    "Bedouin",
    "Pyramid",
@@ -520,6 +643,9 @@
   "y": 580,
   "vp": 150,
   "terrain": "valley",
+  "requires": [
+   "Ishtal"
+  ],
   "links": [
    "Ishtal"
   ]
@@ -532,6 +658,9 @@
   "y": 510,
   "vp": 160,
   "terrain": "desert",
+  "requires": [
+   "Ishtal"
+  ],
   "links": [
    "Ishtal"
   ]
@@ -544,6 +673,9 @@
   "y": 430,
   "vp": 140,
   "terrain": "mountains",
+  "requires": [
+   "Ishtal"
+  ],
   "links": [
    "Desert Road",
    "Ishtal"

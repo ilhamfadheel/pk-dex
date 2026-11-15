@@ -10,6 +10,9 @@ Tables found in 6RAH.APP (all little-endian u32), indexed in the game's area ord
                                     x/y = position on the world map
   0x96654  44 x (a, b)              links between areas (paths on the world map)
   0xAC704  42 x (vp, vp)            Victory Points needed to enter the area
+  0x7E86C  42 x (a, b, c)            areas whose boss must be beaten before this area opens
+                                    (0xFF = none). VA 0x1007E7F0; checked at 0x10001A90 after
+                                    every boss win (an area is "cleared" at 0x100019C8)
   0x9630C  42 x terrain              0 plains, 1 desert, 2 sea, 3 mountains, 4 forest lake,
                                     5 jungle, 6 volcano, 7 swamp, 8 valley, 9 farmland
                                     (the order of the 10 scenery pictures in pokekin.mbm)
@@ -26,11 +29,12 @@ N = 42
 move = open(os.path.join(game, "english", "move.dat"), "rb").read()
 names = [move[i * 48:(i + 1) * 48].decode("utf-16-le").split("\x1b")[0] for i in range(N)]
 
-POS, LINKS, NLINKS, VP, TERRAIN = 0x963B4, 0x96654, 44, 0xAC704, 0x9630C
+POS, LINKS, NLINKS, VP, TERRAIN, REQ = 0x963B4, 0x96654, 44, 0xAC704, 0x9630C, 0x7E7F0 + 0x7C
 pos = [struct.unpack_from("<4I", app, POS + i * 16) for i in range(N)]
 links = [struct.unpack_from("<2I", app, LINKS + i * 8) for i in range(NLINKS)]
 vp_pairs = [struct.unpack_from("<2I", app, VP + i * 8) for i in range(N)]
 terrain = list(struct.unpack_from("<42I", app, TERRAIN))
+req = [[x for x in struct.unpack_from("<3I", app, REQ + i * 12) if x != 0xFF] for i in range(N)]
 TERRAIN_NAMES = ["plains", "desert", "sea", "mountains", "forest", "jungle", "volcano", "swamp", "valley", "farmland"]
 
 # --- validation ---
@@ -40,6 +44,7 @@ assert all(a < N and b < N and a != b for a, b in links), "link table looks wron
 assert all(a == b and a % 10 == 0 for a, b in vp_pairs), "VP table looks wrong"
 assert vp_pairs[0][0] == 0, "start area should need 0 VP"
 assert set(terrain) == set(range(10)), "terrain table looks wrong"
+assert req[0] == [] and all(r and all(x < N and x != i for x in r) for i, r in enumerate(req) if i), "unlock table looks wrong"
 adj = {i: set() for i in range(N)}
 for a, b in links:
     adj[a].add(b); adj[b].add(a)
@@ -66,6 +71,7 @@ out = [
         "y": pos[i][2],
         "vp": vp_pairs[i][0],
         "terrain": TERRAIN_NAMES[terrain[i]],
+        "requires": [names[j] for j in req[i]],
         "links": sorted(names[j] for j in adj[i]),
     }
     for i in range(N)

@@ -10,6 +10,8 @@ export interface Area {
   y: number;
   vp: number; // Victory Points your kingdom needs to enter
   terrain: string; // plains, desert, sea, mountains, forest, jungle, volcano, swamp, valley, farmland
+  /** Areas whose boss must be beaten before this one opens (game table at 0x1007E7F0). */
+  requires: string[];
   links: string[];
 }
 
@@ -69,3 +71,25 @@ export const TERRAIN_BG: Record<string, string> = {
   valley: "town",
   farmland: "plains",
 };
+
+/** Areas that open once this area's boss is beaten. */
+export const opensAfter = new Map<string, string[]>(areas.map((a) => [a.city, areas.filter((b) => b.requires.includes(a.city)).map((b) => b.city)]));
+
+/**
+ * Every boss you have to beat to open an area, in an order you can beat them in
+ * (each area appears after the ones it needs).
+ */
+export function unlockChain(city: string): string[] {
+  const out: string[] = [];
+  const seen = new Set<string>();
+  const visit = (c: string) => {
+    for (const r of areaByCity.get(c)!.requires) {
+      if (seen.has(r)) continue;
+      seen.add(r);
+      visit(r);
+      out.push(r);
+    }
+  };
+  visit(city);
+  return out;
+}

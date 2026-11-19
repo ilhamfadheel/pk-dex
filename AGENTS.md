@@ -41,7 +41,7 @@ seems missing, look in the game data (`system/apps/6rah/` of the user's N-Gage d
 | `quest-rewards.json` | `scripts/extract-quests.py` | `questitem.dat` + reward code in `6rah.app` |
 | `item-order.json` | `scripts/extract-item-order.py` | `item0-4.dat`, `equip0-2.dat` |
 | `public/img/battle/*.png` | `scripts/extract-battle-bgs.py` (uses `scripts/mbm.py`) | `pokekin.mbm` |
-| `anims.json`, `public/img/anim` | `scripts/slice-sprites.mjs`, `build-anims.mjs` | pre-cut sprite strips, not yet an extractor. The game's own sheets are bitmaps `258 + 2*unitId` (+ mask) of `pokekin.mbm`: one sheet per unit, frames packed irregularly, facing left; the frame rectangles have not been located yet |
+| `anims.json`, `public/img/anim/<slug>.png` | `scripts/extract-sprites.py` | `pokekin.mbm` sheets (bitmap `258 + 2*unitId` + mask; lower half faces right and matches the frame table, upper half is it mirrored) and the frame tables / animation scripts in `6rah.app` (see the script's docstring for addresses). Each strip cell has the unit's feet at (`ax`, `ay`) |
 
 Every extractor takes the game folder as its argument and asserts its assumptions, so a
 different build fails loudly. Run Python with `-I` and `PYTHONIOENCODING=utf-8` on Windows.
@@ -55,8 +55,8 @@ Facts that bite:
   `unit.dat`, the dex tables still show `units.json`.
 - `unitcol.dat` is 115 x 768 bytes of palettes (256 RGB triples per unit), `action.dat` is
   115 x 8 bytes of behaviour weights; neither holds sprite frame rectangles.
-- Sprites and portraits face LEFT. The battle view mirrors a unit when its nearest enemy is to
-  its right.
+- Sprite strips and portraits face LEFT. The battle view mirrors a unit around its feet when
+  its nearest enemy is to its right.
 - One material name is garbled in `item3.dat` ("Sh??ff Rock" → `Shyff Rock`).
 
 ## Game code (6RAH.APP)

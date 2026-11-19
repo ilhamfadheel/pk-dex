@@ -6,16 +6,18 @@ export interface AnimData {
   cw: number;
   ch: number;
   n: number;
+  /** where the unit's feet are inside a cell */
+  ax: number;
+  ay: number;
   anims: Partial<Record<AnimName, number[]>>;
-  match: string;
 }
 type AnimName = "idle" | "walk" | "attack" | "defend" | "skill";
 
 const ORDER: AnimName[] = ["idle", "walk", "attack", "defend", "skill"];
-const LABEL: Record<AnimName, string> = { idle: "Idle", walk: "Walk", attack: "Attack", defend: "Defend", skill: "Skill" };
+const LABEL: Record<AnimName, string> = { idle: "Idle", walk: "Walk", attack: "Attack", defend: "Hit", skill: "Special" };
 // one-shot animations return to idle; idle and walk loop
 const LOOPS: Record<AnimName, boolean> = { idle: true, walk: true, attack: false, defend: false, skill: false };
-const SPEED: Record<AnimName, number> = { idle: 220, walk: 140, attack: 120, defend: 360, skill: 150 };
+const SPEED: Record<AnimName, number> = { idle: 220, walk: 140, attack: 110, defend: 300, skill: 110 };
 
 /**
  * Plays a unit's battle sprite from its strip image. Idle loops by default; click
@@ -44,7 +46,7 @@ export default function SpritePlayer({ src, data, name, skillName }: { src: stri
 
   const play = (a: AnimName) => { setAnim(a); setStep(0); };
   const frame = frames[Math.min(step, frames.length - 1)];
-  const scale = Math.max(1, Math.min(3, Math.floor(168 / Math.max(data.cw, data.ch))));
+  const scale = Math.max(1, Math.min(3, Math.floor(Math.min(300 / data.cw, 180 / data.ch))));
 
   return (
     <div className="flex flex-col items-center gap-3">

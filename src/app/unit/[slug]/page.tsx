@@ -157,13 +157,10 @@ export default async function UnitPage({ params }: PageProps<"/unit/[slug]">) {
               skillName={u.ability || undefined}
             />
             <div className="space-y-2 text-sm text-muted">
-              <p>Click the sprite to attack, or pick an animation. Idle and Walk loop; the others play once.</p>
-              {anim.match === "guess" && (
-                <p className="rounded-md bg-panel-2 p-2 text-xs">
-                  {u.name}&apos;s line shares one sprite in different colours, and this unit has no portrait to
-                  match against, so its colour may be swapped with another unit in the same line.
-                </p>
-              )}
+              <p>
+                Click the sprite to attack, or pick an animation. Idle and Walk loop; the others play once. Frames and
+                timing are the game&apos;s own.
+              </p>
               <p className="text-xs">Game art © SEGA.</p>
             </div>
           </div>

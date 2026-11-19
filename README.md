@@ -33,6 +33,7 @@ the game's `system/apps/6rah` folder, checks its assumptions, and writes JSON or
 |---|---|---|
 | Unit portraits (`public/img/portrait`) | `extract-portraits.py` | `pokeport.mbm` |
 | Battle backdrops (`public/img/battle`) | `extract-battle-bgs.py` | `pokekin.mbm` |
+| Battle sprites and animations (`public/img/anim`, `anims.json`) | `extract-sprites.py` | `pokekin.mbm` + frame tables in `6rah.app` |
 | Shops (`shops.json`) | `extract-shops.py` | `unitshop.dat`, `itemshop.dat`, `item*.dat` |
 | World map, paths, VP, terrain, unlocks (`world.json`) | `extract-world.py` | tables in `6rah.app` |
 | Equipment, enemy parties, unit prices, battle stats | `extract-gear-enemies.py` | `equip*.dat`, `partydata.dat`, `unit.dat` |
@@ -46,8 +47,7 @@ movement; each rule lists the code address it was read from.
 
 Still to be moved onto game-file extractors: the unit, rank-up, emblem and material tables
 (`units.json`, `emblems.json`, `materials.json`, `crafting.json`, checked against the game's
-tables where extractors exist), the battle sprite strips and the small race/category icons.
-The game's own sprite sheets are in `pokekin.mbm`; see `AGENTS.md` for what is known.
+tables where extractors exist) and the small race/category icons.
 
 The game files themselves are not part of this repository.
 

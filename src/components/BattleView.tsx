@@ -8,21 +8,28 @@ import { FIELD_H, FIELD_W, FPS, FRAME_EVERY, simulate, winRate, type BattleEvent
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const SPEEDS = [1, 2, 4, 8];
 const TICKS_PER_SEC = FPS; // 1x = the game's frame rate
-const ATTACK_TICKS = 10; // how long an attack pose shows
+const POSE_TICKS = 2; // battle ticks each animation step of an attack shows
 const HIT_TICKS = 8; // how long a hit target flinches
 const POP_TICKS = 24; // how long a damage number floats
 
 type Pose = "idle" | "walk" | "attack" | "skill" | "defend";
 
-function Sprite({ slug, anim, pose, frame, flip }: { slug: string; anim?: AnimData; pose: Pose; frame: number; flip: boolean }) {
-  if (!anim) return <div className="h-10 w-8 rounded bg-panel-2/70" />;
-  const seq = anim.anims[pose] ?? (pose === "skill" ? anim.anims.attack : undefined) ?? (pose === "walk" ? anim.anims.idle : undefined) ?? anim.anims.idle ?? [0];
-  const idx = seq[Math.max(0, frame) % seq.length];
+const poseSeq = (anim: AnimData, pose: Pose) =>
+  anim.anims[pose] ?? (pose === "skill" ? anim.anims.attack : undefined) ?? anim.anims.idle ?? [0];
+
+/** One frame of a unit's strip, placed so the unit's feet are at the parent's origin. */
+function Sprite({ slug, anim, pose, frame, flip, title }: { slug: string; anim?: AnimData; pose: Pose; frame: number; flip: boolean; title: string }) {
+  if (!anim) return <div className="absolute -top-10 -left-4 h-10 w-8 rounded bg-panel-2/70" title={title} />;
+  const seq = poseSeq(anim, pose);
+  const loops = pose === "idle" || pose === "walk";
+  const idx = seq[loops ? Math.max(0, frame) % seq.length : Math.min(seq.length - 1, Math.max(0, frame))];
   return (
     <span
-      aria-hidden
-      className="pixel block"
+      title={title}
+      className="pixel absolute block"
       style={{
+        left: flip ? anim.ax - anim.cw : -anim.ax,
+        top: -anim.ay,
         width: anim.cw,
         height: anim.ch,
         backgroundImage: `url(${BASE}/img/anim/${slug}.png)`,
@@ -131,12 +138,14 @@ export default function BattleView({
   const pose = (f: Fighter): { p: Pose; fr: number } => {
     if ((hp.get(f.key) ?? 0) <= 0) return { p: "defend", fr: 0 };
     const act = lastAct.get(f.key);
-    if (act && t - act.tick < ATTACK_TICKS) {
+    if (act) {
       const p: Pose = act.kind === "magic" || act.kind === "skill" || act.kind === "heal" ? "skill" : "attack";
-      return { p, fr: Math.floor((t - act.tick) / 3) };
+      const a = anims[f.unit.slug];
+      const fr = Math.floor((t - act.tick) / POSE_TICKS);
+      if (fr < (a ? poseSeq(a, p).length : 4)) return { p, fr };
     }
     const hitAt = lastHit.get(f.key);
-    if (hitAt != null && t - hitAt < HIT_TICKS) return { p: "defend", fr: 0 };
+    if (hitAt != null && t - hitAt < HIT_TICKS) return { p: "defend", fr: Math.floor((t - hitAt) / (HIT_TICKS / 2)) };
     if (frame.units[f.key]?.moving) return { p: "walk", fr: Math.floor(t / 4) };
     return { p: "idle", fr: Math.floor(t / 7) };
   };
@@ -173,20 +182,15 @@ export default function BattleView({
             const pos = frame.units[f.key];
             const h = hp.get(f.key) ?? 0;
             const { p, fr } = pose(f);
-            const right = facesRight(f);
-            // a short lunge toward the target during the first half of an attack
-            const act = lastAct.get(f.key);
-            const lunge = h > 0 && act && (act.kind === "attack" || act.kind === "counter") && t - act.tick < ATTACK_TICKS / 2 ? (right ? 5 : -5) : 0;
             return (
               <div
                 key={f.key}
-                className="absolute"
-                style={{ left: pos.x + lunge, top: pos.y, transform: "translate(-50%, -100%)", opacity: h > 0 ? 1 : 0.35, filter: h > 0 ? undefined : "grayscale(1)" }}
-                title={`${f.unit.name} ${h}/${f.maxHp}`}
+                className="absolute h-0 w-0"
+                style={{ left: pos.x, top: pos.y, opacity: h > 0 ? 1 : 0.35, filter: h > 0 ? undefined : "grayscale(1)" }}
               >
-                <Sprite slug={f.unit.slug} anim={anims[f.unit.slug]} pose={p} frame={fr} flip={right} />
+                <Sprite slug={f.unit.slug} anim={anims[f.unit.slug]} pose={p} frame={fr} flip={facesRight(f)} title={`${f.unit.name} ${h}/${f.maxHp}`} />
                 {h > 0 && (
-                  <div className="absolute -bottom-[3px] left-1/2 h-[2px] w-6 -translate-x-1/2 bg-black/60">
+                  <div className="absolute top-[1px] left-0 h-[2px] w-6 -translate-x-1/2 bg-black/60">
                     <div className={f.side === 0 ? "h-full bg-emerald-400" : "h-full bg-red-500"} style={{ width: `${(h / f.maxHp) * 100}%` }} />
                   </div>
                 )}

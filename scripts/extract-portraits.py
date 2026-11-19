@@ -3,7 +3,8 @@
 Usage: python scripts/extract-portraits.py <path to system/apps/6rah>
 
 pokeport.mbm holds 115 pairs of bitmaps in unit-id order: a 104 x 50 colour bitmap whose
-left 52 x 50 pixels are the portrait, followed by its 1-bit mask (0 = part of the unit).
+left 48 x 50 pixels are the portrait (the rest is four small face icons), followed by its
+1-bit mask (0 = part of the unit).
 """
 import json
 import os
@@ -13,7 +14,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from mbm import pixels, png, read_all, stride  # noqa: E402
 
-W, H = 52, 50
+W, H = 48, 50
 game = sys.argv[1]
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 units = json.load(open(os.path.join(root, "src", "data", "units.json"), encoding="utf-8"))

@@ -33,7 +33,7 @@ seems missing, look in the game data (`system/apps/6rah/` of the user's N-Gage d
 | File | Made by | From |
 |---|---|---|
 | `units.json`, `emblems.json`, `materials.json`, `crafting.json`, `effects.json` | earlier import, not yet an extractor | checked against `unit.dat`, `item*.dat`, `itemdata.dat` where extractors exist |
-| `public/img/portrait/<slug>.png` | `scripts/extract-portraits.py` | `pokeport.mbm` (115 x [104x50 colour + mask], left 52 px = portrait, mask 0 = unit) |
+| `public/img/portrait/<slug>.png` | `scripts/extract-portraits.py` | `pokeport.mbm` (115 x [104x50 colour + mask], left 48 px = portrait, the rest is four small face icons, mask 0 = unit) |
 | `searches.json` | `scripts/extract-searches.py` | `product.dat` (5 offline + 5 online finds per area) |
 | `shops.json` | `scripts/extract-shops.py` | `unitshop.dat`, `itemshop.dat`, `item*.dat`, `english/area.dat` |
 | `world.json` (positions, links, VP, terrain) | `scripts/extract-world.py` | tables in `6rah.app` |

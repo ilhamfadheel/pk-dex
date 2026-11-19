@@ -151,7 +151,7 @@ export default async function UnitPage({ params }: PageProps<"/unit/[slug]">) {
           <h2 className="mb-2 font-semibold">Battle animations</h2>
           <div className="card grid gap-4 p-4 sm:grid-cols-[minmax(240px,320px)_1fr] sm:items-center">
             <SpritePlayer
-              src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/img/anim/${u.slug}.png`}
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/img/anim/${u.slug}.png?v=2`}
               data={anim}
               name={u.name}
               skillName={u.ability || undefined}

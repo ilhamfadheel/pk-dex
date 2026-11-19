@@ -32,7 +32,7 @@ function Sprite({ slug, anim, pose, frame, flip, title }: { slug: string; anim?:
         top: -anim.ay,
         width: anim.cw,
         height: anim.ch,
-        backgroundImage: `url(${BASE}/img/anim/${slug}.png)`,
+        backgroundImage: `url(${BASE}/img/anim/${slug}.png?v=2)`,
         backgroundRepeat: "no-repeat",
         backgroundSize: `${anim.cw * anim.n}px ${anim.ch}px`,
         backgroundPosition: `${-idx * anim.cw}px 0`,

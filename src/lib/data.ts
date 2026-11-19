@@ -43,7 +43,7 @@ const raceImg = (n: number | null | undefined) => {
   return f ? `${BASE}/img/races/${f}` : null;
 };
 // Every unit's portrait comes from the game's pokeport.mbm (scripts/extract-portraits.py).
-const unitImg = (slug: string) => `${BASE}/img/portrait/${slug}.png`;
+const unitImg = (slug: string) => `${BASE}/img/portrait/${slug}.png?v=2`; // bump v when the extractor output changes, so browsers drop cached copies
 const categoryIcon: Record<string, string> = {
   Jewels: "jewels.gif",
   Ores: "ores.gif",

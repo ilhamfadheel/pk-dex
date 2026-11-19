@@ -1,0 +1,716 @@
+[
+ {
+  "city": "Elynotis",
+  "offline": [
+   "Copper",
+   "Garnet",
+   "Black Leaf",
+   "Coral Potion",
+   "Neptune Rock"
+  ],
+  "online": [
+   "Chrome",
+   "Garnet",
+   "Yellow Leaf",
+   "Coral Potion",
+   "Neptune Rock"
+  ]
+ },
+ {
+  "city": "Cressence",
+  "offline": [
+   "Copper",
+   "Black Leaf",
+   "Azulite",
+   "Griffon Blood",
+   "Mercury Rock"
+  ],
+  "online": [
+   "Chrome",
+   "Yellow Leaf",
+   "Griffon Blood",
+   "Azulite",
+   "Mercury Rock"
+  ]
+ },
+ {
+  "city": "Gulldria",
+  "offline": [
+   "Agate",
+   "Yellow Leaf",
+   "Lute",
+   "Kelpie Eye",
+   "Jupiter Rock"
+  ],
+  "online": [
+   "Lute",
+   "Kelpie Eye",
+   "Agate",
+   "Yellow Leaf",
+   "Jupiter Rock"
+  ]
+ },
+ {
+  "city": "Ruins Road",
+  "offline": [
+   "Book of Wisdom",
+   "Serpent Eye",
+   "Azulite",
+   "Yellow Leaf",
+   "Dividing Heart"
+  ],
+  "online": [
+   "Book of Wisdom",
+   "Serpent Eye",
+   "Jade",
+   "Red Leaf",
+   "Dividing Heart"
+  ]
+ },
+ {
+  "city": "Elfaria",
+  "offline": [
+   "Silver",
+   "Yellow Leaf",
+   "Vampire Blood",
+   "Garnet",
+   "Io Rock"
+  ],
+  "online": [
+   "Gold",
+   "Red Leaf",
+   "Vampire Blood",
+   "Aquamarine",
+   "Io Rock"
+  ]
+ },
+ {
+  "city": "Beast Lair",
+  "offline": [
+   "Cat's Eye",
+   "Copper",
+   "Red Leaf",
+   "Ninja Blood",
+   "Blue Potion"
+  ],
+  "online": [
+   "Cat's Eye",
+   "Chrome",
+   "Ninja Blood",
+   "Blue Potion",
+   "Yellow Leaf"
+  ]
+ },
+ {
+  "city": "Thick Forest",
+  "offline": [
+   "Copper",
+   "Tourmaline",
+   "Yellow Leaf",
+   "Gray Potion",
+   "Venus Rock"
+  ],
+  "online": [
+   "Chrome",
+   "Tourmaline",
+   "Yellow Leaf",
+   "Gray Potion",
+   "Venus Rock"
+  ]
+ },
+ {
+  "city": "Deserted Ruins",
+  "offline": [
+   "Chrome",
+   "Red Leaf",
+   "Garnet",
+   "Gold Potion",
+   "Neptune Rock"
+  ],
+  "online": [
+   "Silver",
+   "Yellow Leaf",
+   "Gold Potion",
+   "Garnet",
+   "Neptune Rock"
+  ]
+ },
+ {
+  "city": "Altar of the Spirits",
+  "offline": [
+   "Platinum",
+   "Jade",
+   "Yellow Leaf",
+   "Coral Potion",
+   "Vulcan Rock"
+  ],
+  "online": [
+   "Platinum",
+   "Ruby",
+   "Red Leaf",
+   "Coral Potion",
+   "Vulcan Rock"
+  ]
+ },
+ {
+  "city": "Tiwana Ruins",
+  "offline": [
+   "Agate",
+   "Silver",
+   "Lich Blood",
+   "Coral Potion",
+   "Yellow Leaf"
+  ],
+  "online": [
+   "Crystal",
+   "Gold",
+   "Lich Blood",
+   "Coral Potion",
+   "Red Leaf"
+  ]
+ },
+ {
+  "city": "Ilyumine",
+  "offline": [
+   "Yellow Leaf",
+   "Azulite",
+   "Kraken Eye",
+   "Harp",
+   "Naga Eye"
+  ],
+  "online": [
+   "Harp",
+   "Kraken Eye",
+   "Azulite",
+   "Red Leaf",
+   "Naga Eye"
+  ]
+ },
+ {
+  "city": "Deeva Volcano",
+  "offline": [
+   "Silver",
+   "Tourmaline",
+   "Red Leaf",
+   "Venus Rock",
+   "Chrysaor Eye"
+  ],
+  "online": [
+   "Gold",
+   "Lapis Lazuli",
+   "Green Horn",
+   "Venus Rock",
+   "Chrysaor Eye"
+  ]
+ },
+ {
+  "city": "Distaria",
+  "offline": [
+   "Agate",
+   "Chrome",
+   "Yellow Leaf",
+   "Mercury Rock",
+   "Snake Eye"
+  ],
+  "online": [
+   "Agate",
+   "Silver",
+   "Mercury Rock",
+   "Red Leaf",
+   "Snake Eye"
+  ]
+ },
+ {
+  "city": "Pirate Island",
+  "offline": [
+   "Chrome",
+   "Cat's Eye",
+   "Red Leaf",
+   "Jupiter Rock",
+   "Skylla Eye"
+  ],
+  "online": [
+   "Silver",
+   "Cat's Eye",
+   "Green Horn",
+   "Jupiter Rock",
+   "Skylla Eye"
+  ]
+ },
+ {
+  "city": "Treasure Island",
+  "offline": [
+   "Silver",
+   "Cat's Eye",
+   "Red Leaf",
+   "Blue Potion",
+   "Chaos Heart"
+  ],
+  "online": [
+   "Gold",
+   "Onyx",
+   "Green Horn",
+   "Blue Potion",
+   "Chaos Heart"
+  ]
+ },
+ {
+  "city": "Spirits Forest",
+  "offline": [
+   "Silver",
+   "Green Horn",
+   "Gray Potion",
+   "Tourmaline",
+   "Uranus Rock"
+  ],
+  "online": [
+   "Gold",
+   "Blue Horn",
+   "Gray Potion",
+   "Lapis Lazuli",
+   "Uranus Rock"
+  ]
+ },
+ {
+  "city": "Earl's Castle",
+  "offline": [
+   "Book of Conduct",
+   "Forneus Eye",
+   "Garnet",
+   "Green Horn",
+   "Mars Rock"
+  ],
+  "online": [
+   "Book of Conduct",
+   "Forneus Eye",
+   "Aquamarine",
+   "Blue Horn",
+   "Mars Rock"
+  ]
+ },
+ {
+  "city": "Dark Elf Settlement",
+  "offline": [
+   "Platinum",
+   "Ruby",
+   "Green Horn",
+   "Gold Potion",
+   "Deimos Rock"
+  ],
+  "online": [
+   "Platinum",
+   "Ruby",
+   "Blue Horn",
+   "Gold Potion",
+   "Deimos Rock"
+  ]
+ },
+ {
+  "city": "Yggdrasill",
+  "offline": [
+   "Platinum",
+   "Green Horn",
+   "Lich Blood",
+   "Crystal",
+   "Ganymede Rock"
+  ],
+  "online": [
+   "Mythril",
+   "Blue Horn",
+   "Lich Blood",
+   "Turquoise",
+   "Ganymede Rock"
+  ]
+ },
+ {
+  "city": "Gate of Recollection",
+  "offline": [
+   "Lute",
+   "Serpent Eye",
+   "Onyx",
+   "Green Horn",
+   "Mage's Book"
+  ],
+  "online": [
+   "Lute",
+   "Serpent Eye",
+   "Peridot",
+   "Blue Horn",
+   "Mage's Book"
+  ]
+ },
+ {
+  "city": "Water City",
+  "offline": [
+   "Lapis Lazuli",
+   "Platinum",
+   "Troll Blood",
+   "Blue Potion",
+   "Green Horn"
+  ],
+  "online": [
+   "Amethyst",
+   "Mythril",
+   "Troll Blood",
+   "Blue Potion",
+   "Blue Horn"
+  ]
+ },
+ {
+  "city": "Mizuchi Shrine",
+  "offline": [
+   "Platinum",
+   "Aquamarine",
+   "Green Horn",
+   "Gray Potion",
+   "Oberon Rock"
+  ],
+  "online": [
+   "Mythril",
+   "Pearl",
+   "Blue Horn",
+   "Gray Potion",
+   "Oberon Rock"
+  ]
+ },
+ {
+  "city": "Forgotten Village",
+  "offline": [
+   "Pearl",
+   "Mythril",
+   "Vampire Blood",
+   "Gala Rock",
+   "Red Claw"
+  ],
+  "online": [
+   "Opal",
+   "Orihalcon",
+   "Vampire Blood",
+   "Gala Rock",
+   "White Jewel"
+  ]
+ },
+ {
+  "city": "Mountaintop Shrine",
+  "offline": [
+   "Orihalcon",
+   "Red Claw",
+   "Gunpowder",
+   "Ruby",
+   "Gala Rock"
+  ],
+  "online": [
+   "Orihalcon",
+   "Golden Jewel",
+   "Gunpowder",
+   "Topaz",
+   "Gala Rock"
+  ]
+ },
+ {
+  "city": "Donam",
+  "offline": [
+   "Azulite",
+   "Silver",
+   "Troll Blood",
+   "Gold Potion",
+   "Green Horn"
+  ],
+  "online": [
+   "Jade",
+   "Gold",
+   "Troll Blood",
+   "Gold Potion",
+   "Blue Horn"
+  ]
+ },
+ {
+  "city": "Runeheim",
+  "offline": [
+   "Silver",
+   "Agate",
+   "Green Horn",
+   "Coral Potion",
+   "Chaos Heart"
+  ],
+  "online": [
+   "Gold",
+   "Crystal",
+   "Blue Horn",
+   "Coral Potion",
+   "Chaos Heart"
+  ]
+ },
+ {
+  "city": "Seles",
+  "offline": [
+   "Silver",
+   "Green Horn",
+   "Dullahan Blood",
+   "Cat's Eye",
+   "Uranus Rock"
+  ],
+  "online": [
+   "Gold",
+   "Blue Horn",
+   "Dullahan Blood",
+   "Onyx",
+   "Uranus Rock"
+  ]
+ },
+ {
+  "city": "Nomad",
+  "offline": [
+   "Gold",
+   "Lapis Lazuli",
+   "Blue Horn",
+   "Blue Potion",
+   "Io Rock"
+  ],
+  "online": [
+   "Platinum",
+   "Lapis Lazuli",
+   "Purple Claw",
+   "Blue Potion",
+   "Io Rock"
+  ]
+ },
+ {
+  "city": "Echigo",
+  "offline": [
+   "Platinum",
+   "Purple Claw",
+   "Dullahan Blood",
+   "Turquoise",
+   "Shyff Rock"
+  ],
+  "online": [
+   "Platinum",
+   "Red Claw",
+   "Dullahan Blood",
+   "Turquoise",
+   "Shyff Rock"
+  ]
+ },
+ {
+  "city": "Yamato",
+  "offline": [
+   "Harp",
+   "Forneus Eye",
+   "Peridot",
+   "Purple Claw",
+   "Spellbook-Sickle"
+  ],
+  "online": [
+   "Harp",
+   "Forneus Eye",
+   "Peridot",
+   "Red Claw",
+   "Spellbook-Sickle"
+  ]
+ },
+ {
+  "city": "Edo",
+  "offline": [
+   "Amethyst",
+   "Platinum",
+   "Griffon Blood",
+   "Coral Potion",
+   "Purple Claw"
+  ],
+  "online": [
+   "Amethyst",
+   "Mythril",
+   "Griffon Blood",
+   "Coral Potion",
+   "Red Claw"
+  ]
+ },
+ {
+  "city": "Shalom",
+  "offline": [
+   "Platinum",
+   "Pearl",
+   "Purple Claw",
+   "Blue Potion",
+   "Black Magic Book"
+  ],
+  "online": [
+   "Mythril",
+   "Pearl",
+   "Red Claw",
+   "Blue Potion",
+   "Black Magic Book"
+  ]
+ },
+ {
+  "city": "Mikado Mausoleum",
+  "offline": [
+   "Mythril",
+   "Purple Claw",
+   "Ninja Blood",
+   "Ruby",
+   "Nereid Rock"
+  ],
+  "online": [
+   "Mythril",
+   "Red Claw",
+   "Ninja Blood",
+   "Ruby",
+   "Nereid Rock"
+  ]
+ },
+ {
+  "city": "Desert Road",
+  "offline": [
+   "Spellbook-Shield",
+   "Kraken Eye",
+   "Aquamarine",
+   "Purple Claw",
+   "Saturn Rock"
+  ],
+  "online": [
+   "Spellbook-Shield",
+   "Kraken Eye",
+   "Aquamarine",
+   "Red Claw",
+   "Saturn Rock"
+  ]
+ },
+ {
+  "city": "Huge Swamp",
+  "offline": [
+   "Mythril",
+   "Purple Claw",
+   "Phobos Rock",
+   "Peridot",
+   "Titania Rock"
+  ],
+  "online": [
+   "Mythril",
+   "Red Claw",
+   "Phobos Rock",
+   "Sapphire",
+   "Titania Rock"
+  ]
+ },
+ {
+  "city": "Nightwalker Town",
+  "offline": [
+   "Mythril",
+   "Turquoise",
+   "Purple Claw",
+   "Titania Rock",
+   "Gunpowder"
+  ],
+  "online": [
+   "Mythril",
+   "Diamond",
+   "Red Claw",
+   "Titania Rock",
+   "Gunpowder"
+  ]
+ },
+ {
+  "city": "Gate of Oblivion",
+  "offline": [
+   "Book of Wisdom",
+   "Kelpie Eye",
+   "Amethyst",
+   "Purple Claw",
+   "Phobos Rock"
+  ],
+  "online": [
+   "Book of Wisdom",
+   "Kelpie Eye",
+   "Emerald",
+   "Red Claw",
+   "Phobos Rock"
+  ]
+ },
+ {
+  "city": "Pyramid",
+  "offline": [
+   "Gold",
+   "Blue Horn",
+   "Griffon Blood",
+   "Aquamarine",
+   "Naga Eye"
+  ],
+  "online": [
+   "Platinum",
+   "Purple Claw",
+   "Griffon Blood",
+   "Aquamarine",
+   "Naga Eye"
+  ]
+ },
+ {
+  "city": "Ishtal",
+  "offline": [
+   "Gold",
+   "Onyx",
+   "Blue Horn",
+   "Gold Potion",
+   "Chaos Heart"
+  ],
+  "online": [
+   "Platinum",
+   "Onyx",
+   "Purple Claw",
+   "Gold Potion",
+   "Chaos Heart"
+  ]
+ },
+ {
+  "city": "Water Shrine",
+  "offline": [
+   "Spellbook-Sword",
+   "Kelpie Eye",
+   "Jade",
+   "Blue Horn",
+   "Snake Eye"
+  ],
+  "online": [
+   "Spellbook-Sword",
+   "Kelpie Eye",
+   "Jade",
+   "Purple Claw",
+   "Snake Eye"
+  ]
+ },
+ {
+  "city": "Royal Tomb",
+  "offline": [
+   "Crystal",
+   "Gold",
+   "Ninja Blood",
+   "Gray Potion",
+   "Blue Horn"
+  ],
+  "online": [
+   "Crystal",
+   "Platinum",
+   "Ninja Blood",
+   "Gray Potion",
+   "Purple Claw"
+  ]
+ },
+ {
+  "city": "Bedouin",
+  "offline": [
+   "Gold",
+   "Blue Horn",
+   "Vampire Blood",
+   "Lapis Lazuli",
+   "Pluto Rock"
+  ],
+  "online": [
+   "Platinum",
+   "Purple Claw",
+   "Vampire Blood",
+   "Lapis Lazuli",
+   "Pluto Rock"
+  ]
+ }
+]

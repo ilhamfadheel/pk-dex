@@ -115,6 +115,19 @@ export default function BattleView({
     .flatMap(({ e, i }) => e.hits.map((h, j) => ({ key: `${i}-${j}`, h, age: t - e.tick })));
   const fighters = [...battle.start].sort((a, b) => (frame.units[a.key]?.y ?? 0) - (frame.units[b.key]?.y ?? 0));
 
+  // Sprites are drawn facing left (as in the game's sheets). A unit faces the nearest living
+  // enemy; the left-hand party therefore starts mirrored to face right.
+  const facesRight = (f: Fighter) => {
+    const me = frame.units[f.key];
+    let best: number | null = null;
+    for (const o of battle.start) {
+      if (o.side === f.side || (hp.get(o.key) ?? 0) <= 0) continue;
+      const dx = frame.units[o.key].x - me.x;
+      if (best === null || Math.abs(dx) < Math.abs(best)) best = dx;
+    }
+    return best === null || best === 0 ? f.side === 0 : best > 0;
+  };
+
   const pose = (f: Fighter): { p: Pose; fr: number } => {
     if ((hp.get(f.key) ?? 0) <= 0) return { p: "defend", fr: 0 };
     const act = lastAct.get(f.key);
@@ -160,14 +173,18 @@ export default function BattleView({
             const pos = frame.units[f.key];
             const h = hp.get(f.key) ?? 0;
             const { p, fr } = pose(f);
+            const right = facesRight(f);
+            // a short lunge toward the target during the first half of an attack
+            const act = lastAct.get(f.key);
+            const lunge = h > 0 && act && (act.kind === "attack" || act.kind === "counter") && t - act.tick < ATTACK_TICKS / 2 ? (right ? 5 : -5) : 0;
             return (
               <div
                 key={f.key}
                 className="absolute"
-                style={{ left: pos.x, top: pos.y, transform: "translate(-50%, -100%)", opacity: h > 0 ? 1 : 0.35, filter: h > 0 ? undefined : "grayscale(1)" }}
+                style={{ left: pos.x + lunge, top: pos.y, transform: "translate(-50%, -100%)", opacity: h > 0 ? 1 : 0.35, filter: h > 0 ? undefined : "grayscale(1)" }}
                 title={`${f.unit.name} ${h}/${f.maxHp}`}
               >
-                <Sprite slug={f.unit.slug} anim={anims[f.unit.slug]} pose={p} frame={fr} flip={f.side === 1} />
+                <Sprite slug={f.unit.slug} anim={anims[f.unit.slug]} pose={p} frame={fr} flip={right} />
                 {h > 0 && (
                   <div className="absolute -bottom-[3px] left-1/2 h-[2px] w-6 -translate-x-1/2 bg-black/60">
                     <div className={f.side === 0 ? "h-full bg-emerald-400" : "h-full bg-red-500"} style={{ width: `${(h / f.maxHp) * 100}%` }} />

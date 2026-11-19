@@ -88,10 +88,10 @@ export default async function UnitPage({ params }: PageProps<"/unit/[slug]">) {
 
   return (
     <article className="space-y-6">
-      <JsonLd data={breadcrumbs([{ name: "Units", path: "/" }, { name: u.name, path: `/unit/${u.slug}` }])} />
+      <JsonLd data={breadcrumbs([{ name: "Units", path: "/units" }, { name: u.name, path: `/unit/${u.slug}` }])} />
       <nav className="flex items-center gap-2 text-xs text-muted">
         <span>
-          <Link href="/" className="hover:underline">Units</Link> / {u.name}
+          <Link href="/units" className="hover:underline">Units</Link> / {u.name}
         </span>
         <Link href={`/compare?u=${u.slug}`} className="chip ml-auto !py-1 !text-xs hover:border-accent hover:text-ink">
           ⇄ Compare with other units
@@ -128,7 +128,7 @@ export default async function UnitPage({ params }: PageProps<"/unit/[slug]">) {
           </dl>
           {notInGuide && (
             <p className="mt-3 rounded-md bg-panel-2 p-2 text-xs text-muted">
-              Secret unit. It isn&apos;t in the GameFAQs rank-up guide; data comes from the archived warcry database.
+              Secret unit. It ranks up from Primitive Cell and no shop sells it.
             </p>
           )}
         </div>
@@ -164,9 +164,7 @@ export default async function UnitPage({ params }: PageProps<"/unit/[slug]">) {
                   match against, so its colour may be swapped with another unit in the same line.
                 </p>
               )}
-              <p className="text-xs">
-                Sprites ripped by CrimsonPenguin (The Spriters Resource). Game art © SEGA.
-              </p>
+              <p className="text-xs">Game art © SEGA.</p>
             </div>
           </div>
         </section>

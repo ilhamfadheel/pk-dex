@@ -7,7 +7,7 @@ import type { SearchItem } from "@/lib/types";
 import { BASE, TYPE_LABEL, cachedIndex, loadIndex, searchItems } from "@/lib/searchIndex";
 
 const PAGES: { n: string; s: string; h: string }[] = [
-  { n: "Units", s: "All 115 units, filters and the Shop table", h: "/" },
+  { n: "Units", s: "All 115 units, filters and the Shop table", h: "/units" },
   { n: "Rank-up Planner", s: "Materials to evolve any unit", h: "/planner" },
   { n: "Compare units", s: "Up to 4 units side by side", h: "/compare" },
   { n: "Party builder", s: "Up to 4 units / 6 slots: totals, price and enemy match-ups", h: "/party" },

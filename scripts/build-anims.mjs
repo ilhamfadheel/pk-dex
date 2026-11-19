@@ -94,7 +94,7 @@ for (const [fam, names] of Object.entries(FAMILIES)) {
 }
 
 // write cropped strips, plus a still (first idle frame, trimmed) used as the unit
-// picture for units with no archived portrait
+// idle-frame picture per unit
 const outFace = path.join(root, "public/img/sprite-face");
 fs.mkdirSync(outFace, { recursive: true });
 for (const [slug, a] of Object.entries(anims)) {

@@ -38,7 +38,7 @@ const siteJsonLd = {
 };
 
 const nav = [
-  { href: "/", label: "Units" },
+  { href: "/units", label: "Units" },
   { href: "/planner", label: "Planner" },
   { href: "/compare", label: "Compare" },
   { href: "/party", label: "Party" },
@@ -83,9 +83,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </header>
         <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6">{children}</main>
         <footer className="border-t border-line py-4 text-center text-xs text-muted">
-          Fan reference for Pocket Kingdom: Own the World (SEGA, N-Gage, 2004). Data and portraits
-          from archived pk.warcry.com pages via the Pocket-Kingdom-Compendium project. Game assets ©
-          SEGA.
+          Fan reference for Pocket Kingdom: Own the World (SEGA, N-Gage, 2004). Not affiliated with
+          SEGA or Nokia; game names, data and art © their owners. Site code is open source (MIT).
         </footer>
       </body>
     </html>

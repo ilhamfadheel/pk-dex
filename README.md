@@ -1,65 +1,87 @@
 # Pocket Kingdom Dex
 
-A fast fan reference for **Pocket Kingdom: Own the World** (SEGA, N-Gage, 2004): unit dex,
-evolution tree, emblem recipes, materials, and a rank-up planner that totals every material
-you need to get from one unit to another.
+A fast, searchable fan guide and database for **Pocket Kingdom: Own the World** (SEGA, Nokia
+N-Gage, 2004): every unit, rank-up, emblem, material, piece of equipment and area, plus a
+rank-up planner, a party builder and a battle simulator.
 
-**Live: <https://ilhamfadheel.github.io/pk-dex/>**
+**Live site: https://ilhamfadheel.github.io/pk-dex/**
 
-Built with Next.js 16 (App Router) as a fully static export. All game data is static JSON, so
-every page (211 routes) is prerendered HTML served from GitHub Pages' CDN; filtering and planning
-run in the browser. Every push to `main` redeploys via `.github/workflows/pages.yml`.
+## What's in it
 
-## Pages
-
-| Route | What |
+| Page | What you get |
 |---|---|
-| `/` | Unit dex: sortable stats table or grid; filter by race, rank, move, slots, ability, stage, **material needed to evolve into the unit**, or material it drops |
-| `/unit/[slug]` | Stats, evolves from/into with emblem recipe, evolution line, drops, built-in planner |
-| `/planner?from=&to=` | Every rank-up path between two units, per-step emblem + recipe choice, total materials, battles and VP |
-| `/emblems` | All 31 emblems / 70 recipes and which rank-ups use each |
-| `/materials`, `/materials/[slug]` | Ores, jewels, items: shops, drops, area searches, dungeons, crafting recipes, units they unlock |
+| `/` | Introduction to the game, how it works and an FAQ |
+| `/units` | All 115 units: sortable stats, filters (race, rank, movement, slots, ability, materials needed or dropped), and the 9 units shops sell |
+| `/unit/<name>` | Stats, portrait, battle animations, evolution tree, rank-up requirements, where it's sold or fought |
+| `/planner` | Every route to a unit and the total materials, levels and VP it takes |
+| `/compare` | Up to 4 units side by side |
+| `/party` | Party builder (4 units, 6 slots) with a battle simulator on the game's own battlefields |
+| `/emblems` | All 31 emblems, their 70 Lab recipes and which quests reward them |
+| `/equipment`, `/crafting` | 138 weapons, armor and accessories; 70 named-item recipes and what their effects do |
+| `/materials` | 89 ores, jewels and items: shops, area searches, dungeons, drops, uses |
+| `/cities` | World map of Ulgress: each area's shop, enemy parties, searches, dungeons and the bosses that unlock it |
 
-## Planner rules
+Press <kbd>Ctrl</kbd>+<kbd>F</kbd> (or <kbd>/</kbd>) anywhere for the search palette. Filters and
+selections are kept in the URL, so links and the Back button restore them.
 
-From the Unit Rankup Guide by Gearb0x (GameFAQs):
+## Where the data comes from
 
-- Each rank-up consumes one emblem; each emblem combine uses ore + jewel + item + one **RankUp Mold**.
-- Units reset to level 0 after ranking up and gain 1 level per battle, so **battles = sum of level requirements**.
-- VP is a kingdom total you must have, not spend, so the path needs the **max** VP, not the sum.
-- "Budget for failed combines" multiplies each emblem's materials by `100 / success%`.
+The site is built from the game's own files. Each extractor in `scripts/` takes the path to
+the game's `system/apps/6rah` folder, checks its assumptions, and writes JSON or images:
 
-## Data and assets
+| Output | Script | Game file |
+|---|---|---|
+| Unit portraits (`public/img/portrait`) | `extract-portraits.py` | `pokeport.mbm` |
+| Battle backdrops (`public/img/battle`) | `extract-battle-bgs.py` | `pokekin.mbm` |
+| Shops (`shops.json`) | `extract-shops.py` | `unitshop.dat`, `itemshop.dat`, `item*.dat` |
+| World map, paths, VP, terrain, unlocks (`world.json`) | `extract-world.py` | tables in `6rah.app` |
+| Equipment, enemy parties, unit prices, battle stats | `extract-gear-enemies.py` | `equip*.dat`, `partydata.dat`, `unit.dat` |
+| Area searches (`searches.json`) | `extract-searches.py` | `product.dat` |
+| Quest rewards (`quest-rewards.json`) | `extract-quests.py` | `questitem.dat` + code in `6rah.app` |
+| In-game item order (`item-order.json`) | `extract-item-order.py` | `item0-4.dat`, `equip0-2.dat` |
 
-- `src/data/shops.json` (each city's shop: units, ore, jewel, molds) is read from the game's own
-  `unitshop.dat` / `itemshop.dat` with `python scripts/extract-shops.py <path to system/apps/6rah>`.
-  Its ores and jewels match the archived fan-site shop lists for all 42 cities.
-- `src/data/world.json` (world map: each area's region and position, the 44 paths between
-  areas, and the VP needed to enter each) is read from tables inside the game program with
-  `python scripts/extract-world.py <path to system/apps/6rah>`; the script documents the offsets
-  and validates them. City pages use it for "How to get here" routes.
+`scripts/mbm.py` decodes the game's Symbian bitmap files. The battle simulator
+(`src/lib/battle.ts`) follows the game program's rules for hit chance, damage, timing and
+movement; each rule lists the code address it was read from.
 
-- `src/data/*.json` comes from [Apihplays/Pocket-Kingdom-Compendium](https://github.com/Apihplays/Pocket-Kingdom-Compendium)
-  (scraped from archived pk.warcry.com). Its 109 rank-up edges were checked against the GameFAQs
-  Unit Rankup Guide and match exactly; it adds the secret unit O'Rosam.
-- `public/img` holds unit portraits, race and item-category icons from archived pk.warcry.com pages
-  (Internet Archive). 20 units have no archived portrait and fall back to their race icon.
-- Game names, data and art © SEGA. The GameFAQs guides' text is not reproduced.
+Still to be moved onto game-file extractors: the unit, rank-up, emblem and material tables
+(`units.json`, `emblems.json`, `materials.json`, `crafting.json`, checked against the game's
+tables where extractors exist), the battle sprite strips and the small race/category icons.
+The game's own sprite sheets are in `pokekin.mbm`; see `AGENTS.md` for what is known.
 
-## Search engines
-
-- Every page has its own title, description, canonical URL, Open Graph / Twitter card and
-  JSON-LD (site + breadcrumbs); `src/lib/seo.ts` holds the helpers.
-- `/sitemap.xml` lists all pages. A GitHub Pages project site can't serve `robots.txt` at the
-  domain root, so submit `https://ilhamfadheel.github.io/pk-dex/sitemap.xml` in Google Search Console.
-- Search Console ownership: add the HTML-tag token as a repo variable `GOOGLE_SITE_VERIFICATION`
-  (Settings → Secrets and variables → Actions → Variables) and redeploy.
-- Social images: `node scripts/make-og.mjs` (public/og). Check all pages: `npm run build && node scripts/check-seo.mjs`.
+The game files themselves are not part of this repository.
 
 ## Develop
 
 ```bash
 npm install
-npm run dev     # http://localhost:3000
-npm run build   # static site in ./out
+npm run dev        # http://localhost:3000
+npm run build      # static site in ./out
 ```
+
+Before a pull request:
+
+```bash
+npx tsc --noEmit && npx eslint src
+node scripts/check-battle.ts
+npm run build && node scripts/check-seo.mjs out
+```
+
+The site is a static export (Next.js App Router, React, Tailwind) deployed to GitHub Pages by
+`.github/workflows/pages.yml` on every push to `main`. `AGENTS.md` has the conventions and the
+notes on the game's file formats.
+
+## Contributing
+
+Contributions are welcome: corrections, new extractors, translations, UI improvements. See
+[CONTRIBUTING.md](CONTRIBUTING.md). If something on the site disagrees with the game, please
+open an issue with the area, unit or item and what the game shows.
+
+## License
+
+The code in this repository is released under the [MIT License](LICENSE): free to use, change
+and share.
+
+Pocket Kingdom: Own the World, its names, data and artwork belong to SEGA and their
+respective owners. They are shown here for reference by fans and are not covered by the MIT
+License. This project is not affiliated with or endorsed by SEGA or Nokia.

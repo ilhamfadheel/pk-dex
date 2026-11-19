@@ -18,10 +18,8 @@ const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replac
 const FONT = "Segoe UI, Helvetica, Arial, sans-serif";
 
 function portraitFile(u) {
-  const face = path.join(root, "public/img/units", `face${String(u.id).padStart(3, "0")}.gif`);
-  if (fs.existsSync(face)) return face;
-  const sprite = path.join(root, "public/img/sprite-face", `${slugify(u.name)}.png`);
-  return fs.existsSync(sprite) ? sprite : null;
+  const face = path.join(root, "public/img/portrait", `${slugify(u.name)}.png`);
+  return fs.existsSync(face) ? face : null;
 }
 
 // pixel art scaled with nearest-neighbour to fit a box

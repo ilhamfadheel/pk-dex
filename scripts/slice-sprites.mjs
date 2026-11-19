@@ -1,4 +1,4 @@
-// Cuts The Spriters Resource sheets (sprites on magenta, green background) into
+// Cuts sprite sheets (sprites on magenta, green background) into
 // frames, groups them into rows, and writes one strip PNG per sheet plus an index.
 //
 // Frames are found from the sprite pixels themselves (the magenta boxes touch each

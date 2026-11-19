@@ -89,7 +89,7 @@ export default function CompareView({ data }: { data: PlannerData }) {
 
       {units.length === 0 ? (
         <p className="card p-6 text-center text-sm text-muted">
-          Add units above, tick them in the <Link href="/" className="underline">unit list</Link>, or use Compare on any unit page.
+          Add units above, tick them in the <Link href="/units" className="underline">unit list</Link>, or use Compare on any unit page.
         </p>
       ) : (
         <div className="card overflow-x-auto">

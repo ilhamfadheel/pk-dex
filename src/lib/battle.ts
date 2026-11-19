@@ -26,8 +26,8 @@ export type Side = 0 | 1;
 export const FIELD_W = 352;
 export const FIELD_H = 124;
 const X_MIN = 20, X_MAX = 332;
-const GROUND_TOP = 78; // feet y of the back lane
-const LANE = 11;
+const GROUND_TOP = 74; // feet y of the top lane
+const LANE = 14; // 4 lanes: 74, 88, 102, 116
 const LEVEL = 1;
 
 interface GameStats { size: number; hp: number; atk: number; def: number; agi: number; dex: number; wis: number; int: number; acc: number }
@@ -135,13 +135,15 @@ function role(u: UnitLite, s: GameStats): Fighter["role"] {
 function fighter(u: UnitLite, side: Side, pos: number, count: number): Fighter {
   const s = STATS[u.name] ?? { size: u.slots >= 3 ? 4 : u.slots, hp: u.hp, atk: u.atk, def: u.def, agi: u.agi, dex: u.dex, wis: u.wis, int: u.int, acc: u.hit };
   const r = role(u, s);
-  const back = r === "melee" ? 0 : 30;
-  const lane = count <= 1 ? 1.5 : (pos * 3) / (count - 1);
+  // Formation: melee in the front rank, archers/casters/healers behind; each unit has its
+  // own lane and alternate lanes are staggered so sprites don't stack on one spot.
+  const back = (r === "melee" ? 0 : 34) + (pos % 2 ? 10 : 0);
+  const lane = count <= 1 ? 1.5 : count === 2 ? 1 + pos : count === 3 ? pos * 1.5 : pos;
   const size = s.size >= 4 ? "large" : s.size === 2 ? "medium" : "small";
   return {
     key: `${side}-${pos}`, side, pos, unit: u, maxHp: s.hp, hp: s.hp,
     atk: s.atk, def: s.def, agi: s.agi, dex: s.dex, wis: s.wis, int: s.int, acc: s.acc, size, role: r,
-    x: side === 0 ? 60 - back : FIELD_W - 60 + back,
+    x: side === 0 ? 70 - back : FIELD_W - 70 + back,
     y: GROUND_TOP + lane * LANE,
     speed: u.move === "Fly" ? 3 : 2,
     // melee reach: the most common value in the game's unit routines (25); ranged/casters modelled
@@ -270,11 +272,13 @@ export function simulate(a: UnitLite[], b: UnitLite[], seed = 1, record = true):
       }
 
       if (!inReach(f, t)) {
-        // walk toward the target at the unit's speed; drift into its lane
+        // walk toward the target at the unit's speed. Units keep their own lane and only
+        // close the vertical gap as far as their reach needs, so a melee line stays a line.
         const dir = t.x > f.x ? 1 : -1;
         const room = gap(f, t) - stopAt(f, t);
-        f.x = Math.min(X_MAX, Math.max(X_MIN, f.x + dir * (room > 0 ? Math.min(f.speed, room) : f.speed)));
-        if (Math.abs(t.y - f.y) > 2) f.y += Math.sign(t.y - f.y);
+        if (room > 0) f.x = Math.min(X_MAX, Math.max(X_MIN, f.x + dir * Math.min(f.speed, room)));
+        const lanesApart = f.role === "melee" ? 20 : 56;
+        if (Math.abs(t.y - f.y) > lanesApart) f.y += Math.sign(t.y - f.y);
         moving.add(f.key);
         continue;
       }

@@ -1,5 +1,5 @@
-// Builds 16x16 race icons (head busts, like the archived ones) for races whose
-// icon was never archived, by cropping the head out of a unit portrait.
+// Builds 16x16 race icons (head busts) for races that have no icon, by cropping
+// the head out of a unit portrait.
 // Usage: node scripts/make-race-icons.mjs
 import sharp from "sharp";
 import fs from "node:fs";

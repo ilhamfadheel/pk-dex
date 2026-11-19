@@ -13,6 +13,7 @@ import equipmentRaw from "@/data/equipment.json";
 import enemiesRaw from "@/data/enemies.json";
 import unitPricesRaw from "@/data/unit-prices.json";
 import itemOrderRaw from "@/data/item-order.json";
+import searchesRaw from "@/data/searches.json";
 import type { Edge, MaterialLite, PlannerData, Recipe, UnitLite } from "./types";
 import { RANKUP_MOLD } from "./plan";
 
@@ -21,7 +22,7 @@ export const slugify = (s: string) =>
 
 const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
 
-// ---- images (downloaded from archived pk.warcry.com) ----
+// ---- images ----
 const pub = path.join(process.cwd(), "public", "img");
 const listDir = (d: string) => {
   try {
@@ -30,27 +31,19 @@ const listDir = (d: string) => {
     return new Set<string>();
   }
 };
-const unitImgs = listDir("units");
 const raceImgs = listDir("races");
 const iconImgs = listDir("icons");
 
 // Plain <img> tags don't get basePath applied automatically, so prefix here.
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-// Archived icons are .gif; ones we generated (scripts/make-race-icons.mjs) are .png.
+// Race icons are .gif or .png.
 const raceImg = (n: number | null | undefined) => {
   if (n == null) return null;
   const f = [`${n}.gif`, `${n}.png`].find((x) => raceImgs.has(x));
   return f ? `${BASE}/img/races/${f}` : null;
 };
-const spriteFaces = listDir("sprite-face");
-// Archived portrait if there is one; otherwise the unit's own battle sprite (idle
-// frame); the race icon only as a last resort.
-const unitImg = (id: number, slug: string, race: number | null | undefined) => {
-  const f = `face${String(id).padStart(3, "0")}.gif`;
-  if (unitImgs.has(f)) return `${BASE}/img/units/${f}`;
-  if (spriteFaces.has(`${slug}.png`)) return `${BASE}/img/sprite-face/${slug}.png`;
-  return raceImg(race) ?? `${BASE}/img/placeholder.svg`;
-};
+// Every unit's portrait comes from the game's pokeport.mbm (scripts/extract-portraits.py).
+const unitImg = (slug: string) => `${BASE}/img/portrait/${slug}.png`;
 const categoryIcon: Record<string, string> = {
   Jewels: "jewels.gif",
   Ores: "ores.gif",
@@ -140,9 +133,17 @@ const ITEM_NAME_FIX: Record<string, string> = {
 };
 
 const rawUnits = unitsRaw as unknown as RawUnit[];
+// Area-search finds come from the game's product.dat (scripts/extract-searches.py).
+const searches = searchesRaw as { city: string; offline: string[]; online: string[] }[];
+const searchesOf = (name: string) =>
+  searches.flatMap((a) => [
+    ...(a.offline.includes(name) ? [{ area: a.city, status: "Offline" }] : []),
+    ...(a.online.includes(name) ? [{ area: a.city, status: "Online" }] : []),
+  ]);
 export const rawMaterials = (materialsRaw as unknown as RawMaterial[]).map((m) => ({
   ...m,
   effect: m.effect === "-" ? "" : m.effect, // "-" means none in the source
+  area_searches: searchesOf(m.name),
 }));
 export const crafting: CraftRecipe[] = (
   craftingRaw as unknown as (Omit<CraftRecipe, "effectInfo"> & { effect_ids: number[] })[]
@@ -229,7 +230,7 @@ const units: UnitLite[] = rawUnits.map((u) => {
     wis: u.wis,
     int: u.int,
     hit: u.hit,
-    img: unitImg(u.id, slugify(u.name), u.race_icon),
+    img: unitImg(slugify(u.name)),
     raceImg: raceImg(u.race_icon),
     next: u.advances.map((a) => a.id),
     prev: incoming.map((e) => e.from),
@@ -253,7 +254,7 @@ export const emblemsUsing = (name: string) =>
     .filter(([, rs]) => rs.some((r) => [r.ore, r.item1, r.item2].includes(name)))
     .map(([e]) => e);
 
-// ---- cities / areas (from each material's shops, area searches and dungeons) ----
+// ---- cities / areas ----
 export interface City {
   name: string;
   slug: string;

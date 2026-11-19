@@ -32,14 +32,16 @@ seems missing, look in the game data (`system/apps/6rah/` of the user's N-Gage d
 
 | File | Made by | From |
 |---|---|---|
-| `units.json`, `emblems.json`, `materials.json`, `crafting.json`, `effects.json` | earlier import | GameFAQs guides, Apihplays gist, compendium project |
+| `units.json`, `emblems.json`, `materials.json`, `crafting.json`, `effects.json` | earlier import, not yet an extractor | checked against `unit.dat`, `item*.dat`, `itemdata.dat` where extractors exist |
+| `public/img/portrait/<slug>.png` | `scripts/extract-portraits.py` | `pokeport.mbm` (115 x [104x50 colour + mask], left 52 px = portrait, mask 0 = unit) |
+| `searches.json` | `scripts/extract-searches.py` | `product.dat` (5 offline + 5 online finds per area) |
 | `shops.json` | `scripts/extract-shops.py` | `unitshop.dat`, `itemshop.dat`, `item*.dat`, `english/area.dat` |
 | `world.json` (positions, links, VP, terrain) | `scripts/extract-world.py` | tables in `6rah.app` |
 | `equipment.json`, `enemies.json`, `unit-prices.json`, `unit-battle.json` | `scripts/extract-gear-enemies.py` | `equip*.dat`, `partydata.dat`, `unit.dat` |
 | `quest-rewards.json` | `scripts/extract-quests.py` | `questitem.dat` + reward code in `6rah.app` |
 | `item-order.json` | `scripts/extract-item-order.py` | `item0-4.dat`, `equip0-2.dat` |
 | `public/img/battle/*.png` | `scripts/extract-battle-bgs.py` (uses `scripts/mbm.py`) | `pokekin.mbm` |
-| `anims.json`, `public/img/anim` | `scripts/slice-sprites.mjs`, `build-anims.mjs` | Spriters Resource sheets |
+| `anims.json`, `public/img/anim` | `scripts/slice-sprites.mjs`, `build-anims.mjs` | pre-cut sprite strips, not yet an extractor. The game's own sheets are bitmaps `258 + 2*unitId` (+ mask) of `pokekin.mbm`: one sheet per unit, frames packed irregularly, facing left; the frame rectangles have not been located yet |
 
 Every extractor takes the game folder as its argument and asserts its assumptions, so a
 different build fails loudly. Run Python with `-I` and `PYTHONIOENCODING=utf-8` on Windows.
@@ -49,8 +51,12 @@ Facts that bite:
   (e.g. emblems: 64-byte UTF-16 records in `english/itemdata.dat` from 0x23B0).
 - Item references in game tables are `(category, index)` byte pairs: 0 molds, 1 ores,
   2 jewels, 3 other materials, 4 emblems, 5 weapons, 6 armor, 7 accessories.
-- `unit.dat` battle stats differ from the GameFAQs numbers for 58 units; the battle
-  simulator uses `unit.dat`, the dex tables still show the guide's.
+- `unit.dat` battle stats differ from `units.json` for 58 units; the battle simulator uses
+  `unit.dat`, the dex tables still show `units.json`.
+- `unitcol.dat` is 115 x 768 bytes of palettes (256 RGB triples per unit), `action.dat` is
+  115 x 8 bytes of behaviour weights; neither holds sprite frame rectangles.
+- Sprites and portraits face LEFT. The battle view mirrors a unit when its nearest enemy is to
+  its right.
 - One material name is garbled in `item3.dat` ("Sh??ff Rock" → `Shyff Rock`).
 
 ## Game code (6RAH.APP)
@@ -66,6 +72,7 @@ claimed from the game names the address it came from.
   name is only an explicit user choice.
 - A party holds at most **4 units** and their slots add up to at most **6**.
 - Filters and selections that should survive Back live in the URL (`src/lib/urlState.ts`).
+- The unit list is `/units`; `/` is the landing page about the game.
 - `<img>` paths need the base path prefix (`BASE` in `src/lib/data.ts` / `searchIndex.ts`).
 - Each page sets metadata through `pageMeta()` in `src/lib/seo.ts`; new pages go in
   `src/app/sitemap.ts` and the search palette's page list.
